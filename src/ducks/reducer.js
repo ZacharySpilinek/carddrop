@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 const initialState = {
     cust_id: null,
     first_name: '',
@@ -13,6 +15,8 @@ const initialState = {
 const SET_USER_ID = "SET_USER_ID"
 const GET_USER = "GET_USER"
 const CLEAR_STATE = "CLEAR_STATE"
+// const REGISTER_USER = "REGISTER_USER"
+const GET_TREE = "GET_TREE"
 
 export const setUserId = (userInfo) => {
     return {
@@ -34,7 +38,23 @@ export const clearState = () => {
     }
 }
 
+export const getTree = () => {
+    // let tree = axios.post
+    return {
+        type: GET_TREE
+    }
+}
+
+// export const registerUser = (newUser) => {
+//     let returnNewUser = axios.post(`/auth/register`, newUser).then(res => res.data)
+//     return {
+//         type: REGISTER_USER,
+//         payload: returnNewUser
+//     }
+// }
+
 const reducer = (state = initialState, action) => {
+    console.log(action.type)
     switch(action.type){
         case GET_USER:
             return {...state,
@@ -60,6 +80,23 @@ const reducer = (state = initialState, action) => {
                 last_name: '',
                 sub_id: null,
                 sub_interval: ''}
+        case GET_TREE:
+            return {...state}
+        // case REGISTER_USER + '_PENDING':
+        //     return {...state, loading: true}
+        // case REGISTER_USER + '_REJECTED':
+        //     alert('Email already in use. Please try a different one.')
+        //     return {...state}
+        // case REGISTER_USER + '_FULFILLED':
+        //     this.props.history.push('/tree')
+        //     return {...state,
+        //         loading: false,
+        //         cust_id: action.payload.cust_id,
+        //         email: action.payload.email,
+        //         first_name: action.payload.first_name,
+        //         last_name: action.payload.last_name,
+        //         sub_id: action.payload.sub_id,
+        //         sub_interval: action.payload.sub_interval}
         default:
             return state
     }

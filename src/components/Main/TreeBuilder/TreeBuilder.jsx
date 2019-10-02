@@ -1,6 +1,17 @@
 import React, {Component} from 'react'
 
 class TreeBuilder extends Component {
+    state = {
+        canGoNext: false
+    }
+
+    componentDidMount = () => {
+
+    }
+
+    getTree = () => {
+        
+    }
 
     render(){
         return(

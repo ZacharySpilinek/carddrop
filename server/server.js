@@ -6,6 +6,7 @@ const massive = require('massive')
 const session = require('express-session')
 const authCtrl = require('./Controllers/authController')
 const userCtrl = require('./Controllers/userController')
+const treeCtrl = require('./Controllers/treeController')
 
 app.use(express.json())
 app.use(session({
@@ -19,6 +20,8 @@ app.post('/auth/register', authCtrl.register)
 app.post('/auth/logout', authCtrl.logout)
 
 app.get('/user', userCtrl.getUser)
+
+app.get('/tree', treeCtrl.getTree)
 
 massive(CONNECTION_STRING).then(db => {
     app.set('db', db)
