@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {setUserId} from '../../ducks/reducer'
+import {setUserId, clearState} from '../../ducks/reducer'
 import {connect} from 'react-redux'
 
 class Nav extends Component {
@@ -12,7 +12,6 @@ class Nav extends Component {
     }
 
     componentDidMount = () => {
-        console.log(this.props)
         if (this.props.cust_id && this.props.email){
             console.log('it works!')
         }
@@ -23,6 +22,11 @@ class Nav extends Component {
         let res = await axios.post('/auth/login', {email, password})
         if (!res.data.cust_id) return alert(res.data.message)
         this.props.setUserId(res.data)
+    }
+
+    logout = async () => {
+        await axios.post('/auth/logout')
+        this.props.clearState()
     }
 
     toggleLogin = () => {
@@ -42,17 +46,33 @@ class Nav extends Component {
             <>
                 <nav>
                     <h3>Logo</h3>
-                    <button onClick={this.toggleLogin}>Login</button>
-                        {this.state.showLogin ?
-                            <div>
-                                <input onChange={e => this.handleChange(e, 'email')} type="text" placeholder="Email"/>
-                                <input onChange={e => this.handleChange(e, 'password')} type="password" placeholder="Password"/>
-                                <button onClick={this.login}>Login</button>
-                            </div>
-                         : 
-                         <></>
-                         }
-                    <button>Logout</button>
+                    {/* {!this.props.cust_id ? 
+                        <button onClick={this.toggleLogin}>Login</button>
+                            this.state.showLogin ?
+                                <div>
+                                    <input onChange={e => this.handleChange(e, 'email')} type="text" placeholder="Email"/>
+                                    <input onChange={e => this.handleChange(e, 'password')} type="password" placeholder="Password"/>
+                                    <button onClick={this.login}>Login</button>
+                                </div>
+                            : 
+                            <></>
+                        : 
+                        <button>Logout</button>
+                        } */}
+                    {this.props.cust_id ? 
+                        <button onClick={this.logout}>Logout</button> :
+                        <>
+                        <button onClick={this.toggleLogin}>Login</button>
+                            {this.state.showLogin ?
+                                <div>
+                                    <input onChange={e => this.handleChange(e, 'email')} type="text" placeholder="Email"/>
+                                    <input onChange={e => this.handleChange(e, 'password')} type="password" placeholder="Password"/>
+                                    <button onClick={this.login}>Login</button>
+                                </div>
+                                : <></>}
+                        </>
+                    }
+
                 </nav>
             </>
         )
@@ -64,4 +84,4 @@ const mapStateToProps = reduxState => {
     return {cust_id}
 }
 
-export default connect(mapStateToProps, {setUserId})(Nav)
+export default connect(mapStateToProps, {setUserId, clearState})(Nav)
