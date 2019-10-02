@@ -49,7 +49,7 @@ export const getTree = (cust_id) => {
 }
 
 export const getCategories = () => {
-    let categories = axios.get('/api/card/categories').then(res => res.data)
+    let categories = axios.get('/api/cards/categories').then(res => res.data)
     return {
         type: GET_CATEGORIES,
         payload: categories

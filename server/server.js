@@ -7,6 +7,7 @@ const session = require('express-session')
 const authCtrl = require('./Controllers/authController')
 const userCtrl = require('./Controllers/userController')
 const treeCtrl = require('./Controllers/treeController')
+const cardCtrl = require('./Controllers/cardController')
 
 app.use(express.json())
 app.use(session({
@@ -22,6 +23,8 @@ app.post('/auth/logout', authCtrl.logout)
 app.get('/user', userCtrl.getUser)
 
 app.get('/api/tree/:cust_id', treeCtrl.getTree)
+
+app.get('/api/cards/categories', cardCtrl.getCategories)
 
 massive(CONNECTION_STRING).then(db => {
     app.set('db', db)
