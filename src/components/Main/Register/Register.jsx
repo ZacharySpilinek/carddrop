@@ -48,9 +48,8 @@ class Register extends Component {
             loading: false
         })
         if (!res.data.cust_id) return alert(res.data.message)
-        this.props.setUserId(res.data)
+        await this.props.setUserId(res.data)
         this.props.history.push('/tree')
-        console.log('124124124')
     }
 
     toggleLogin = () => {

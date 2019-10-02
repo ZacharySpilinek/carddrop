@@ -37,3 +37,7 @@ CREATE TABLE cards(
 
 INSERT INTO customer(first_name, last_name, email, sub_interval)
 VALUES('Zachary', 'Spilinek', 'zach@thecarddrop.com', null);
+
+INSERT INTO customer_tree(cust_id, rel_name, rel_bday, rel_relationship, rel_delivery, tree_rel_id)
+VALUES(1, 'McKay', '2019-09-01', 'friend', 'mail', 0),
+    (2, 'Spencer', '2019-09-01', 'coworker', 'in-person', 1);

@@ -9,7 +9,8 @@ const initialState = {
     sub_interval: '',
     categories: [],
     selected_cards: [],
-    tree: []
+    tree: [],
+    treeLoading: false
 }
 
 const SET_USER_ID = "SET_USER_ID"
@@ -17,6 +18,7 @@ const GET_USER = "GET_USER"
 const CLEAR_STATE = "CLEAR_STATE"
 // const REGISTER_USER = "REGISTER_USER"
 const GET_TREE = "GET_TREE"
+const GET_CATEGORIES = "GET_CATEGORIES"
 
 export const setUserId = (userInfo) => {
     return {
@@ -38,10 +40,19 @@ export const clearState = () => {
     }
 }
 
-export const getTree = () => {
-    // let tree = axios.post
+export const getTree = (cust_id) => {
+    let tree = axios.get(`/api/tree/${cust_id}`).then(res => res.data)
     return {
-        type: GET_TREE
+        type: GET_TREE,
+        payload: tree
+    }
+}
+
+export const getCategories = () => {
+    let categories = axios.get('/api/card/categories').then(res => res.data)
+    return {
+        type: GET_CATEGORIES,
+        payload: categories
     }
 }
 
@@ -79,9 +90,14 @@ const reducer = (state = initialState, action) => {
                 first_name: '',
                 last_name: '',
                 sub_id: null,
-                sub_interval: ''}
-        case GET_TREE:
-            return {...state}
+                sub_interval: '',
+                categories: [],
+                selected_cards: [],
+                tree: []}
+        case GET_TREE + '_PENDING':
+            return {...state, treeLoading: true}
+        case GET_TREE + '_FULFILLED':
+            return {...state, tree: action.payload, treeLoading: false}
         // case REGISTER_USER + '_PENDING':
         //     return {...state, loading: true}
         // case REGISTER_USER + '_REJECTED':

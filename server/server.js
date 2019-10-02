@@ -21,7 +21,7 @@ app.post('/auth/logout', authCtrl.logout)
 
 app.get('/user', userCtrl.getUser)
 
-app.get('/tree', treeCtrl.getTree)
+app.get('/api/tree/:cust_id', treeCtrl.getTree)
 
 massive(CONNECTION_STRING).then(db => {
     app.set('db', db)
