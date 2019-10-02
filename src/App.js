@@ -4,6 +4,7 @@ import Nav from './components/Nav/Nav'
 import {getUser} from './ducks/reducer'
 import {connect} from 'react-redux'
 import axios from 'axios'
+import routes from './routes'
 
 class App extends React.Component {
 
@@ -18,6 +19,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Nav />
+        {routes}
       </div>
     );
   }

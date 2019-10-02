@@ -7,14 +7,7 @@ class Nav extends Component {
     state = {
         email: '',
         password: '',
-        // password2: '',
         showLogin: false
-    }
-
-    componentDidMount = () => {
-        if (this.props.cust_id && this.props.email){
-            console.log('it works!')
-        }
     }
 
     login = async () => {
@@ -25,6 +18,9 @@ class Nav extends Component {
     }
 
     logout = async () => {
+        this.setState({
+            showLogin: false
+        })
         await axios.post('/auth/logout')
         this.props.clearState()
     }
