@@ -17,8 +17,9 @@ class TreeBuilder extends Component {
         this.props.getTree(this.props.cust_id)
     }
 
-    componentWillUnmount = () => {
-
+    next = () => {
+        this.props.saveTree(this.props.cust_id, this.props.tree)
+        this.props.history.push(`/cards/${this.props.tree[0].tree_rel_id}`)
     }
 
     render(){
@@ -46,6 +47,7 @@ class TreeBuilder extends Component {
                     </div>
                     <button onClick={this.props.addTreeItem}>Add</button>
                     <button onClick={() => this.props.saveTree(this.props.cust_id, this.props.tree)}>Save All, delete later</button>
+                    <button disabled={this.props.tree.length === 0} onClick={() => this.next()}>Next</button>
                 </div>}
             </div>
         )
