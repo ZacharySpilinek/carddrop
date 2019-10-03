@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 
 class TreeItem extends Component {
-    state = {
+    /* state = {
         month: '',
         day: ''
     }
@@ -21,44 +22,49 @@ class TreeItem extends Component {
         this.setState({
             [key]: e.target.value
         })
-    }
+    } */
 
     render(){
         return(
-            <div className="TreeItem">
+            <div className="tree-item">
                 <h3>{this.props.rel_name}</h3>
-                <p>{this.props.rel_relationship}</p>
-                <p>{this.props.rel_bday}</p>
-                <p>{this.props.rel_delivery}</p>
-                <input placeholder="Name"/>
-                    <input placeholder="Relationship"/>
-                    <select onChange={e => this.selectChange(e, 'month')} value={this.state.month} name="DOBMonth">
+                <select defaultValue={this.props.tree[this.props.tree_rel_id].rel_relationship}>
+                        <option key={0} value="">- Relationship -</option>
+                    {this.props.categories.map((el, i) => (
+                        <option key={i + 1} value={el}>{el}</option>
+                    ))}
+                </select>
+                <div>
+                    In-Peron<input type="radio" name={`delivery ${this.props.tree_rel_id}`} value="in-peron" defaultChecked={this.props.tree[this.props.tree_rel_id].rel_delivery === "in-person"}/>
+                    Mail<input type="radio" name={`delivery ${this.props.tree_rel_id}`} value="mail"  defaultChecked={this.props.tree[this.props.tree_rel_id].rel_delivery === "mail"}/>
+                </div>
+                    <select /* onChange={e => this.selectChange(e, 'month')} */ defaultValue={this.props.tree[this.props.tree_rel_id].rel_bday_mo} name="DOBMonth">
                         <option>- Month -</option>
-                        <option value="01">January</option>
-                        <option value="02">Febuary</option>
-                        <option value="03">March</option>
-                        <option value="04">April</option>
-                        <option value="05">May</option>
-                        <option value="06">June</option>
-                        <option value="07">July</option>
-                        <option value="08">August</option>
-                        <option value="09">September</option>
+                        <option value="1">January</option>
+                        <option value="2">Febuary</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
                         <option value="10">October</option>
                         <option value="11">November</option>
                         <option value="12">December</option>
                     </select>
-                    <select onChange={e => this.selectChange(e, 'day')} value={this.state.day} name="DOBDAY">
+                    <select /* onChange={e => this.selectChange(e, 'day')} */ defaultValue={this.props.tree[this.props.tree_rel_id].rel_bday_day} name="DOBDAY">
                         <option>- Day -</option>
-                            <option value="01">1</option>
-                            <option value="02">2</option>
-                            <option value="03">3</option>
-                            <option value="04">4</option>
-                            <option value="05">5</option>
-                            <option value="06">6</option>
-                            <option value="07">7</option>
-                            <option value="08">8</option>
-                            <option value="09">9</option>
-                            <option value="10">10</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="0">10</option>
                             <option value="11">11</option>
                             <option value="12">12</option>
                             <option value="13">13</option>
@@ -86,4 +92,9 @@ class TreeItem extends Component {
     }
 }
 
-export default TreeItem
+const mapStateToProps = reduxState => {
+    const {categories, tree} = reduxState
+    return {categories, tree}
+}
+
+export default connect(mapStateToProps)(TreeItem)

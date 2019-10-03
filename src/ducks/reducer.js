@@ -10,7 +10,8 @@ const initialState = {
     categories: [],
     selected_cards: [],
     tree: [],
-    treeLoading: false
+    treeLoading: false,
+    tree_rel_id_index: null
 }
 
 const SET_USER_ID = "SET_USER_ID"
@@ -19,6 +20,8 @@ const CLEAR_STATE = "CLEAR_STATE"
 // const REGISTER_USER = "REGISTER_USER"
 const GET_TREE = "GET_TREE"
 const GET_CATEGORIES = "GET_CATEGORIES"
+const ADD_TREE_ITEM = "ADD_TREE_ITEM"
+const SAVE_TREE = "SAVE_TREE"
 
 export const setUserId = (userInfo) => {
     return {
@@ -56,6 +59,16 @@ export const getCategories = () => {
     }
 }
 
+export const addTreeItem = () => {
+    return {
+        type: ADD_TREE_ITEM
+    }
+}
+
+export const saveTree = () => {
+    let result = axios.post('/api/tree/save/1').then(res => res.data)
+}
+
 // export const registerUser = (newUser) => {
 //     let returnNewUser = axios.post(`/auth/register`, newUser).then(res => res.data)
 //     return {
@@ -65,7 +78,6 @@ export const getCategories = () => {
 // }
 
 const reducer = (state = initialState, action) => {
-    console.log(action.type)
     switch(action.type){
         case GET_USER:
             return {...state,
@@ -97,7 +109,24 @@ const reducer = (state = initialState, action) => {
         case GET_TREE + '_PENDING':
             return {...state, treeLoading: true}
         case GET_TREE + '_FULFILLED':
+            // let num = action.payload[action.payload.length - 1].tree_rel_id
+            // let newNum = 1 + num
+            // console.log(newNum)
             return {...state, tree: action.payload, treeLoading: false}
+        case GET_CATEGORIES + '_FULFILLED':
+            return {...state, categories: action.payload}
+        case ADD_TREE_ITEM:
+            // console.log(state.tree[state.tree.length - 1].tree_rel_id)
+            let nextId = state.tree[state.tree.length - 1].tree_rel_id + 1
+            return {...state, tree: [...state.tree, {
+                tree_rel_id: nextId,
+                rel_name: '',
+                rel_relationship: '',
+                rel_delivery: '',
+                card_id: null,
+                rel_bday_mo: null,
+                rel_bday_day: null
+            }]}
         // case REGISTER_USER + '_PENDING':
         //     return {...state, loading: true}
         // case REGISTER_USER + '_REJECTED':

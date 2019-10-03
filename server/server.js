@@ -23,6 +23,7 @@ app.post('/auth/logout', authCtrl.logout)
 app.get('/user', userCtrl.getUser)
 
 app.get('/api/tree/:cust_id', treeCtrl.getTree)
+app.post('/api/tree/save/:cust_id', treeCtrl.saveTree)
 
 app.get('/api/cards/categories', cardCtrl.getCategories)
 

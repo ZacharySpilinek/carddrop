@@ -6,7 +6,6 @@ module.exports = {
         categories.forEach(el => {
             filteredCategories.push(el.relationship)
         })
-        console.log(filteredCategories)
         res.status(200).send(filteredCategories)
     }
 }
