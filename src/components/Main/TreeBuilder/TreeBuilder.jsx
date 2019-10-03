@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {getTree, getCategories, addTreeItem} from '../../../ducks/reducer'
+import {getTree, getCategories, addTreeItem, saveTree} from '../../../ducks/reducer'
 import {connect} from 'react-redux'
 import TreeItem from './TreeItem/TreeItem'
 
@@ -26,7 +26,7 @@ class TreeBuilder extends Component {
             return (
                 <div key={index}>
                     <TreeItem
-                        tree_rel_id={index}
+                        tree_rel_id={el.tree_rel_id}
                         rel_name={el.rel_name}
                         rel_relationship={el.rel_relationship}
                         rel_bday={el.rel_bday}
@@ -45,7 +45,7 @@ class TreeBuilder extends Component {
                         {treeList}
                     </div>
                     <button onClick={this.props.addTreeItem}>Add</button>
-                    <button>Save, delete later</button>
+                    <button onClick={() => this.props.saveTree(this.props.cust_id, this.props.tree)}>Save All, delete later</button>
                 </div>}
             </div>
         )
@@ -57,4 +57,4 @@ const mapStateToProps = reduxState => {
     return {cust_id, treeLoading, tree}
 }
 
-export default connect(mapStateToProps, {getTree, getCategories, addTreeItem})(TreeBuilder)
+export default connect(mapStateToProps, {getTree, getCategories, addTreeItem, saveTree})(TreeBuilder)

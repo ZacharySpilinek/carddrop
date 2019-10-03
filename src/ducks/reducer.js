@@ -22,6 +22,8 @@ const GET_TREE = "GET_TREE"
 const GET_CATEGORIES = "GET_CATEGORIES"
 const ADD_TREE_ITEM = "ADD_TREE_ITEM"
 const SAVE_TREE = "SAVE_TREE"
+const DELETE_TREE = "DELETE_TREE"
+const HANDLE_TREE_CHANGE = "HANDLE_TREE_CHANGE"
 
 export const setUserId = (userInfo) => {
     return {
@@ -65,8 +67,28 @@ export const addTreeItem = () => {
     }
 }
 
-export const saveTree = () => {
-    let result = axios.post('/api/tree/save/1').then(res => res.data)
+export const saveTree = (cust_id, tree) => {
+    let result = axios.post(`/api/tree/save/${cust_id}`, tree).then(res => res.data)
+    return {
+        type: SAVE_TREE,
+        payload: result
+    }
+}
+
+export const deleteTree = (cust_id, tree_rel_id) => {
+    let result = axios.post('/api/tree/delete', {cust_id, tree_rel_id}).then(res => res.data)
+    return {
+        type: DELETE_TREE,
+        payload: result
+    }
+}
+
+export const handleTreeChange = (e, key, tree_rel_id) => {
+    let change = {e, key, tree_rel_id}
+    return {
+        type: HANDLE_TREE_CHANGE,
+        payload: change
+    }
 }
 
 // export const registerUser = (newUser) => {
@@ -127,6 +149,32 @@ const reducer = (state = initialState, action) => {
                 rel_bday_mo: null,
                 rel_bday_day: null
             }]}
+        case SAVE_TREE + '_FULFILLED':
+            return {...state, tree: action.payload}
+        case DELETE_TREE + '_FULFILLED':
+            return {...state, tree: action.payload}
+        case HANDLE_TREE_CHANGE:
+            let index = state.tree.findIndex(el => el.tree_rel_id === action.payload.tree_rel_id)
+            // state.tree[index].rel_name = 'asdfadsf'
+            // console.log(state.tree[index])
+            /* let updatedTree = {
+                tree_rel_id: state.tree[index].tree_rel_id,
+                rel_name: action.payload.e || state.tree[index].rel_name,
+                rel_relationship: action.payload.e || state.tree[index].rel_relationship,
+                rel_delivery: action.payload.e || state.tree[index].rel_delivery,
+                card_id: state.tree[index].card_id,
+                rel_bday_mo: action.payload.e || state.tree[index].rel_bday_mo,
+                rel_bday_day: action.payload.e || state.tree[index].rel_bday_day
+            } */
+            // let updatedTree = {
+            //     tree_rel_id: state.tree[index].tree_rel_id,
+            //     card_id: state.tree[index].card_id,
+            //     [action.payload.key]: action.payload.e
+            // }
+            let oldTree = [...state.tree]
+            oldTree[index][action.payload.key] = action.payload.e
+            return {...state, tree: oldTree}
+            // return {...state}
         // case REGISTER_USER + '_PENDING':
         //     return {...state, loading: true}
         // case REGISTER_USER + '_REJECTED':

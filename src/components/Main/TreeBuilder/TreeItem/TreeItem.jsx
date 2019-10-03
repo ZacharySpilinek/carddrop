@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {deleteTree, handleTreeChange} from '../../../../ducks/reducer'
 
 class TreeItem extends Component {
     /* state = {
@@ -28,17 +29,18 @@ class TreeItem extends Component {
         return(
             <div className="tree-item">
                 <h3>{this.props.rel_name}</h3>
-                <select defaultValue={this.props.tree[this.props.tree_rel_id].rel_relationship}>
+                <input onChange={(e) => this.props.handleTreeChange(e.target.value, 'rel_name', this.props.tree_rel_id)} value={this.props.rel_name} placeholder={this.props.rel_name}/>
+                <select onChange={(e) => this.props.handleTreeChange(e.target.value, 'rel_relationship', this.props.tree_rel_id)} value={this.props.tree[this.props.tree_rel_id].rel_relationship}>
                         <option key={0} value="">- Relationship -</option>
                     {this.props.categories.map((el, i) => (
                         <option key={i + 1} value={el}>{el}</option>
                     ))}
                 </select>
                 <div>
-                    In-Peron<input type="radio" name={`delivery ${this.props.tree_rel_id}`} value="in-peron" defaultChecked={this.props.tree[this.props.tree_rel_id].rel_delivery === "in-person"}/>
-                    Mail<input type="radio" name={`delivery ${this.props.tree_rel_id}`} value="mail"  defaultChecked={this.props.tree[this.props.tree_rel_id].rel_delivery === "mail"}/>
+                    In-Person<input onChange={(e) => this.props.handleTreeChange(e.target.value, 'rel_delivery', this.props.tree_rel_id)} type="radio" name={`delivery ${this.props.tree_rel_id}`} value="in-person" defaultChecked={this.props.tree[this.props.tree_rel_id].rel_delivery === "in-person"}/>
+                    Mail<input onChange={(e) => this.props.handleTreeChange(e.target.value, 'rel_delivery', this.props.tree_rel_id)} type="radio" name={`delivery ${this.props.tree_rel_id}`} value="mail"  defaultChecked={this.props.tree[this.props.tree_rel_id].rel_delivery === "mail"}/>
                 </div>
-                    <select /* onChange={e => this.selectChange(e, 'month')} */ defaultValue={this.props.tree[this.props.tree_rel_id].rel_bday_mo} name="DOBMonth">
+                    <select onChange={(e) => this.props.handleTreeChange(parseInt(e.target.value, 10), 'rel_bday_mo', this.props.tree_rel_id)} value={this.props.tree[this.props.tree_rel_id].rel_bday_mo} name="DOBMonth">
                         <option>- Month -</option>
                         <option value="1">January</option>
                         <option value="2">Febuary</option>
@@ -53,7 +55,7 @@ class TreeItem extends Component {
                         <option value="11">November</option>
                         <option value="12">December</option>
                     </select>
-                    <select /* onChange={e => this.selectChange(e, 'day')} */ defaultValue={this.props.tree[this.props.tree_rel_id].rel_bday_day} name="DOBDAY">
+                    <select onChange={(e) => this.props.handleTreeChange(parseInt(e.target.value, 10), 'rel_bday_day', this.props.tree_rel_id)} value={this.props.tree[this.props.tree_rel_id].rel_bday_day} name="DOBDAY">
                         <option>- Day -</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -87,14 +89,15 @@ class TreeItem extends Component {
                             <option value="30">30</option>
                             <option value="31">31</option>
                     </select>
+                    <button onClick={() => this.props.deleteTree(this.props.cust_id, this.props.tree_rel_id)}>Delete</button>
             </div>
         )
     }
 }
 
 const mapStateToProps = reduxState => {
-    const {categories, tree} = reduxState
-    return {categories, tree}
+    const {categories, tree, cust_id} = reduxState
+    return {categories, tree, cust_id}
 }
 
-export default connect(mapStateToProps)(TreeItem)
+export default connect(mapStateToProps, {deleteTree, handleTreeChange})(TreeItem)
