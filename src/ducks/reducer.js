@@ -117,6 +117,12 @@ export const getSelectedCards = (cust_id) => {
     }
 }
 
+export const deleteSelectedCard = () => {
+    // make axios request to delete card
+    // in the return, replace selected_cards on reduxstate with the return
+    // check order to make sure it came back right.
+}
+
 const reducer = (state = initialState, action) => {
     switch(action.type){
         case GET_USER:

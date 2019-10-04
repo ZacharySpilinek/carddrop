@@ -42,6 +42,7 @@ class Cart extends Component {
                 This is Cart.
                 {this.mappedCart()}
                 <button onClick={() => this.previous()}>Previous</button>
+                
             </div>
         )
     }
