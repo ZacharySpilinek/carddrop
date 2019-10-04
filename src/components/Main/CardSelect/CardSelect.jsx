@@ -57,13 +57,14 @@ class CardSelect extends Component {
     }
 
     next = () => {
-        this.props.saveSelectedCard(this.props.cust_id, this.props.selected_cards[this.props.match.params.tree_rel_id])
+        // problem with below code. If someone deletes a card in cart and comes back to the person in question, this will send the correct cust_id, BUT the second arg is null (the card is gone, hence nothing to grab)
+        this.props.saveSelectedCard(this.props.cust_id, this.props.selected_cards[this.props.match.params.tree_rel_id], this.props.match.params.tree_rel_id)
         this.props.history.push(`/cards/${this.props.tree[+this.props.match.params.tree_rel_id + 1].tree_rel_id}`)
     }
 
     previous = () => {
         if (this.props.tree[+this.props.match.params.tree_rel_id - 1]) {
-            this.props.saveSelectedCard(this.props.cust_id, this.props.selected_cards[this.props.match.params.tree_rel_id])
+            this.props.saveSelectedCard(this.props.cust_id, this.props.selected_cards[this.props.match.params.tree_rel_id], this.props.match.params.tree_rel_id)
             this.props.history.push(`/cards/${this.props.tree[+this.props.match.params.tree_rel_id - 1].tree_rel_id}`)
         } else {
             this.props.history.push(`/tree`)
@@ -71,6 +72,7 @@ class CardSelect extends Component {
     }
 
     finish = () => {
+        this.props.saveSelectedCard(this.props.cust_id, this.props.selected_cards[this.props.match.params.tree_rel_id], this.props.match.params.tree_rel_id)
         this.props.history.push('/cart')
     }
 

@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import CartItem from './CartItem/CartItem'
 
 class Cart extends Component {
     previous = () => {
@@ -25,12 +26,16 @@ class Cart extends Component {
             })
             return mapArr.map(el => {
                 return (
-                    <div key={el.tree_rel_id}>
-                        <h4>{el.rel_name}</h4>
-                        <img width="200px" alt={el.rel_name} src={el.img_out}/>
-                        <p>${el.price}</p>
-                        <p>{el.rel_delivery}</p>
-                    </div>
+                    <CartItem
+                        key={el.tree_rel_id}
+                        rel_name={el.rel_name}
+                        rel_delivery={el.rel_delivery}
+                        img_out={el.img_out}
+                        price={el.price}
+                        card_id={el.card_id}
+                        relationship={el.relationship}
+                        tree_rel_id={el.tree_rel_id}
+                    />
                 )
             })
         }

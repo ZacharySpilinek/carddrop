@@ -31,6 +31,10 @@ app.get('/api/cards/categories', cardCtrl.getCategories)
 app.put('/api/card/save', cardCtrl.saveCard)
 app.get('/api/cards/saved/:cust_id', cardCtrl.savedCards)
 
+app.get('/session', (req, res, next) => {
+    res.status(200).send(req.session)
+})
+
 massive(CONNECTION_STRING).then(db => {
     app.set('db', db)
     console.log('db is connected')

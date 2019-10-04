@@ -16,8 +16,11 @@ module.exports = {
     },
     saveCard: async (req, res, next) => {
         const db = req.app.get('db')
-        const {cust_id, selected_cards} = req.body
-        const {card_id, tree_rel_id} = selected_cards
+        const {cust_id, selected_cards, tree_rel_id} = req.body
+        if (!selected_cards) {
+            await db.save_card([null, cust_id, tree_rel_id])
+        }
+        const {card_id} = selected_cards
         let tree = await db.save_card([card_id, cust_id, tree_rel_id])
         res.sendStatus(200)
     },

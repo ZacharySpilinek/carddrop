@@ -1,8 +1,19 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {deleteTree, handleTreeChange} from '../../../../ducks/reducer'
+import {deleteTree, handleTreeChange, deleteSelectedCard} from '../../../../ducks/reducer'
 
 class TreeItem extends Component {
+    delete = () => {
+        let selectedCardIndex = this.props.selected_cards.findIndex(el => el.tree_rel_id === this.props.tree_rel_id)
+        if (selectedCardIndex === -1){
+            this.props.deleteTree(this.props.cust_id, this.props.tree_rel_id)
+        } else {
+            this.props.deleteSelectedCard(selectedCardIndex)
+            this.props.deleteTree(this.props.cust_id, this.props.tree_rel_id)
+        }
+        // this.props.deleteTree(this.props.cust_id, this.props.tree_rel_id)
+        // this.props.deleteSelectedCard(this.props.cust_id, this.props.tree_rel_id, this.props.selected_cards)
+    }
     render(){
         return(
             <div className="tree-item">
@@ -67,15 +78,15 @@ class TreeItem extends Component {
                             <option value="30">30</option>
                             <option value="31">31</option>
                     </select>
-                    <button onClick={() => this.props.deleteTree(this.props.cust_id, this.props.tree_rel_id)}>Delete</button>
+                    <button onClick={() => this.delete()}>Delete</button>
             </div>
         )
     }
 }
 
 const mapStateToProps = reduxState => {
-    const {categories, tree, cust_id} = reduxState
-    return {categories, tree, cust_id}
+    const {categories, tree, cust_id, selected_cards} = reduxState
+    return {categories, tree, cust_id, selected_cards}
 }
 
-export default connect(mapStateToProps, {deleteTree, handleTreeChange})(TreeItem)
+export default connect(mapStateToProps, {deleteTree, handleTreeChange, deleteSelectedCard})(TreeItem)

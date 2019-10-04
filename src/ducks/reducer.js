@@ -26,6 +26,7 @@ const HANDLE_TREE_CHANGE = "HANDLE_TREE_CHANGE"
 const CARD_SELECTED = "CARD_SELECTED"
 const SAVE_SELECTED_CARD = "SAVE_SELECTED_CARD"
 const GET_SELECTED_CARDS = "GET_SELECTED_CARDS"
+const DELETE_SELECTED_CARD = "DELETE_SELECTED_CARD"
 
 export const setUserId = (userInfo) => {
     return {
@@ -101,8 +102,8 @@ export const cardSelected = (card_id, tree_rel_id, price, img_out, card_relation
     }
 }
 
-export const saveSelectedCard = (cust_id, selected_cards) => {
-    let test = {cust_id, selected_cards}
+export const saveSelectedCard = (cust_id, selected_cards, tree_rel_id) => {
+    let test = {cust_id, selected_cards, tree_rel_id}
     axios.put('/api/card/save', test).then(res => res.data)
     return {
         type: SAVE_SELECTED_CARD
@@ -117,10 +118,21 @@ export const getSelectedCards = (cust_id) => {
     }
 }
 
-export const deleteSelectedCard = () => {
+export const deleteSelectedCard = (selectedCardIndex, selected_cards, tree_rel_id) => {
     // make axios request to delete card
     // in the return, replace selected_cards on reduxstate with the return
     // check order to make sure it came back right.
+    if (selectedCardIndex === null){
+        let selectedCardIndex2 = selected_cards.findIndex(el => el.tree_rel_id === tree_rel_id)
+        return {
+            type: DELETE_SELECTED_CARD,
+            payload: selectedCardIndex2
+        }
+    }
+    return {
+        type: DELETE_SELECTED_CARD,
+        payload: selectedCardIndex
+    }
 }
 
 const reducer = (state = initialState, action) => {
@@ -206,6 +218,10 @@ const reducer = (state = initialState, action) => {
             return {...state, selectedCardLoading: true}
         case GET_SELECTED_CARDS + '_FULFILLED':
             return {...state, selectedCardLoading: false, selected_cards: action.payload.data}
+        case DELETE_SELECTED_CARD:
+            let treeCopy = [...state.selected_cards]
+            treeCopy.splice(action.payload, 1)
+            return {...state, selected_cards: treeCopy}
         default:
             return state
     }
