@@ -13,5 +13,12 @@ module.exports = {
         const {category} = req.query
         let result = await db.get_cards_by_category(category)
         res.status(200).send(result)
+    },
+    saveCard: async (req, res, next) => {
+        const db = req.app.get('db')
+        const {cust_id, selected_cards} = req.body
+        const {card_id, tree_rel_id} = selected_cards
+        let tree = await db.save_card([card_id, cust_id, tree_rel_id])
+        res.sendStatus(200)
     }
 }

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import axios from 'axios'
 import Card from './Card/Card'
-import {cardSelected} from '../../../ducks/reducer'
+import {cardSelected, saveSelectedCard} from '../../../ducks/reducer'
 
 class CardSelect extends Component {
     state = {
@@ -19,6 +19,10 @@ class CardSelect extends Component {
         }
     }
 
+    componentWillUnmount = () => {
+        this.props.saveSelectedCard(this.props.cust_id, this.props.selected_cards[this.props.match.params.tree_rel_id])
+    }
+
     getCardsByCategory = async () => {
         let result = await axios.get(`/api/cards/category?category=${this.props.tree[this.props.match.params.tree_rel_id].rel_relationship}`)
         this.setState({
@@ -27,11 +31,15 @@ class CardSelect extends Component {
     }
 
     next = () => {
+        // console.log(this.props.selected_cards[this.props.match.params.tree_rel_id])
+        // console.log(this.props.match.params.tree_rel_id)
+        this.props.saveSelectedCard(this.props.cust_id, this.props.selected_cards[this.props.match.params.tree_rel_id])
         this.props.history.push(`/cards/${this.props.tree[+this.props.match.params.tree_rel_id + 1].tree_rel_id}`)
     }
 
     previous = () => {
         if (this.props.tree[+this.props.match.params.tree_rel_id - 1]) {
+            this.props.saveSelectedCard(this.props.cust_id, this.props.selected_cards[this.props.match.params.tree_rel_id])
             this.props.history.push(`/cards/${this.props.tree[+this.props.match.params.tree_rel_id - 1].tree_rel_id}`)
         } else {
             this.props.history.push(`/tree`)
@@ -64,8 +72,8 @@ class CardSelect extends Component {
 }
 
 const mapStateToProps = reduxState => {
-    const {cust_id, tree} = reduxState
-    return {cust_id, tree}
+    const {cust_id, tree, selected_cards} = reduxState
+    return {cust_id, tree, selected_cards}
 }
 
-export default connect(mapStateToProps, {cardSelected})(CardSelect)
+export default connect(mapStateToProps, {cardSelected, saveSelectedCard})(CardSelect)

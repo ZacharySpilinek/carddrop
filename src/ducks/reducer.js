@@ -24,6 +24,7 @@ const SAVE_TREE = "SAVE_TREE"
 const DELETE_TREE = "DELETE_TREE"
 const HANDLE_TREE_CHANGE = "HANDLE_TREE_CHANGE"
 const CARD_SELECTED = "CARD_SELECTED"
+const SAVE_SELECTED_CARD = "SAVE_SELECTED_CARD"
 
 export const setUserId = (userInfo) => {
     return {
@@ -96,6 +97,14 @@ export const cardSelected = (card_id, tree_rel_id, price, img_out, card_relation
     return {
         type: CARD_SELECTED,
         payload: matchObj
+    }
+}
+
+export const saveSelectedCard = (cust_id, selected_cards) => {
+    let test = {cust_id, selected_cards}
+    let result = axios.put('/api/card/save', test).then(res => res.data)
+    return {
+        type: SAVE_SELECTED_CARD
     }
 }
 
@@ -176,6 +185,8 @@ const reducer = (state = initialState, action) => {
                 })
             }
             return {...state, selected_cards: selectedCardsArr}
+        case SAVE_SELECTED_CARD + '_FULFILLED':
+            return {...state}
         default:
             return state
     }

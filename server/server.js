@@ -28,6 +28,7 @@ app.post('/api/tree/delete', treeCtrl.deleteTree)
 
 app.get('/api/cards/category', cardCtrl.getCardsByCategory)
 app.get('/api/cards/categories', cardCtrl.getCategories)
+app.put('/api/card/save', cardCtrl.saveCard)
 
 massive(CONNECTION_STRING).then(db => {
     app.set('db', db)
