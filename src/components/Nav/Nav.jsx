@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {setUserId, clearState} from '../../ducks/reducer'
+import {setUserId, clearState, getTree, getSelectedCards} from '../../ducks/reducer'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 
@@ -15,7 +15,9 @@ class Nav extends Component {
         const {email, password} = this.state
         let res = await axios.post('/auth/login', {email, password})
         if (!res.data.cust_id) return alert(res.data.message)
-        this.props.setUserId(res.data)
+        await this.props.setUserId(res.data)
+        await this.props.getTree(res.data.cust_id)
+        await this.props.getSelectedCards(res.data.cust_id)
     }
 
     logout = async () => {
@@ -25,6 +27,14 @@ class Nav extends Component {
         })
         await axios.post('/auth/logout')
         this.props.clearState()
+    }
+
+    userProfile = () => {
+        this.props.history.push('/profile')
+    }
+
+    home = () => {
+        this.props.history.push('/')
     }
 
     toggleLogin = () => {
@@ -44,6 +54,7 @@ class Nav extends Component {
             <>
                 <nav>
                     <h3>Logo</h3>
+                    <button onClick={this.home}>Home</button>
                     {/* {!this.props.cust_id ? 
                         <button onClick={this.toggleLogin}>Login</button>
                             this.state.showLogin ?
@@ -58,7 +69,7 @@ class Nav extends Component {
                         <button>Logout</button>
                         } */}
                     {this.props.cust_id ? 
-                        <button onClick={this.logout}>Logout</button> :
+                        <><button onClick={this.logout}>Logout</button> <button onClick={this.userProfile}>My Profile</button></> :
                         <>
                         <button onClick={this.toggleLogin}>Login</button>
                             {this.state.showLogin ?
@@ -70,7 +81,6 @@ class Nav extends Component {
                                 : <></>}
                         </>
                     }
-
                 </nav>
             </>
         )
@@ -82,4 +92,4 @@ const mapStateToProps = reduxState => {
     return {cust_id}
 }
 
-export default connect(mapStateToProps, {setUserId, clearState})(withRouter(Nav))
+export default connect(mapStateToProps, {setUserId, clearState, getTree, getSelectedCards})(withRouter(Nav))
