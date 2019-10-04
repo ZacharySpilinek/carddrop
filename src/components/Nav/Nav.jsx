@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import {setUserId, clearState} from '../../ducks/reducer'
 import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
 
 class Nav extends Component {
     state = {
@@ -18,6 +19,7 @@ class Nav extends Component {
     }
 
     logout = async () => {
+        this.props.history.push('/')
         this.setState({
             showLogin: false
         })
@@ -80,4 +82,4 @@ const mapStateToProps = reduxState => {
     return {cust_id}
 }
 
-export default connect(mapStateToProps, {setUserId, clearState})(Nav)
+export default connect(mapStateToProps, {setUserId, clearState})(withRouter(Nav))

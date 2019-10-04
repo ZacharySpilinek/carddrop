@@ -25,11 +25,25 @@ class CardSelect extends Component {
     }
 
     getCardsByCategory = async () => {
-        console.log(this.props.tree[this.props.match.params.tree_rel_id].rel_relationship)
-        let result = await axios.get(`/api/cards/category?category=${this.props.tree[this.props.match.params.tree_rel_id].rel_relationship}`)
-        this.setState({
-            cards: result.data
-        })
+        if (this.props.tree[this.props.match.params.tree_rel_id]){
+            let result = await axios.get(`/api/cards/category?category=${this.props.tree[this.props.match.params.tree_rel_id].rel_relationship}`)
+            this.setState({
+                cards: result.data
+            })
+        }
+    }
+
+    mapCards = () => {
+        return this.state.cards.map(el => (
+            <Card
+                key={el.card_id + this.props.match.params.tree_rel_id + this.props.tree[this.props.match.params.tree_rel_id].rel_name}
+                card_relationship={el.relationship}
+                img_out={el.img_out}
+                tree_rel_id={this.props.match.params.tree_rel_id}
+                price={el.price}
+                card_id={el.card_id}
+            />
+        ))
     }
 
     testFn = () => {
@@ -43,8 +57,6 @@ class CardSelect extends Component {
     }
 
     next = () => {
-        // console.log(this.props.selected_cards[this.props.match.params.tree_rel_id])
-        // console.log(this.props.match.params.tree_rel_id)
         this.props.saveSelectedCard(this.props.cust_id, this.props.selected_cards[this.props.match.params.tree_rel_id])
         this.props.history.push(`/cards/${this.props.tree[+this.props.match.params.tree_rel_id + 1].tree_rel_id}`)
     }
@@ -58,31 +70,25 @@ class CardSelect extends Component {
         }
     }
 
+    finish = () => {
+        this.props.history.push('/cart')
+    }
+
     render(){
-        // let {tree_rel_id} = this.props.match.params
-        // let {tree} = this.props
-        let list = this.state.cards.map(el => (
-            <Card
-                key={el.card_id + this.props.match.params.tree_rel_id + this.props.tree[this.props.match.params.tree_rel_id].rel_name}
-                card_relationship={el.relationship}
-                img_out={el.img_out}
-                tree_rel_id={this.props.match.params.tree_rel_id}
-                price={el.price}
-                card_id={el.card_id}
-            />
-        ))
         return(
             <div className="cardselect">
                 This is CardSelect.
-                {this.props.selectedCardLoading === true ? <h1>Loading...</h1>
+                {this.props.selectedCardLoading === true || !this.props.tree ? <h1>Loading...</h1>
                 : 
                 <>
                 {this.state.test}
                 {this.testFn()}
                 <h2>Select card for: {this.props.tree[this.props.match.params.tree_rel_id].rel_name}</h2>
-                {list}
+                {this.mapCards()}
                 <button onClick={() => this.previous()}>Previous</button>
                 <button onClick={() => this.next()} disabled={!this.props.tree[+this.props.match.params.tree_rel_id + 1]}>Next</button>
+                {!this.props.tree[+this.props.match.params.tree_rel_id + 1] ? <button onClick={() => this.finish()}>Finish</button> : <></>}
+                
                 </>
                  }
             </div>
@@ -91,8 +97,8 @@ class CardSelect extends Component {
 }
 
 const mapStateToProps = reduxState => {
-    const {cust_id, tree, selected_cards, selectedCardLoading} = reduxState
-    return {cust_id, tree, selected_cards, selectedCardLoading}
+    const {cust_id, tree, selected_cards, selectedCardLoading, treeLoading} = reduxState
+    return {cust_id, tree, selected_cards, selectedCardLoading, treeLoading}
 }
 
 export default connect(mapStateToProps, {cardSelected, saveSelectedCard})(CardSelect)
