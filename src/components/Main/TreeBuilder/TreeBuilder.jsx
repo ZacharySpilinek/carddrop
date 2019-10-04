@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {getTree, getCategories, addTreeItem, saveTree} from '../../../ducks/reducer'
+import {getTree, getCategories, addTreeItem, saveTree, getSelectedCards} from '../../../ducks/reducer'
 import {connect} from 'react-redux'
 import TreeItem from './TreeItem/TreeItem'
 
@@ -11,6 +11,7 @@ class TreeBuilder extends Component {
     componentDidMount = () => {
         this.getTree()
         this.props.getCategories()
+        this.props.getSelectedCards(this.props.cust_id)
     }
 
     getTree = () => {
@@ -59,4 +60,4 @@ const mapStateToProps = reduxState => {
     return {cust_id, treeLoading, tree}
 }
 
-export default connect(mapStateToProps, {getTree, getCategories, addTreeItem, saveTree})(TreeBuilder)
+export default connect(mapStateToProps, {getTree, getCategories, addTreeItem, saveTree, getSelectedCards})(TreeBuilder)

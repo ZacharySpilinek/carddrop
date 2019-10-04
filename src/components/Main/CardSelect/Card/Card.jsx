@@ -4,55 +4,46 @@ import {cardSelected} from '../../../../ducks/reducer'
 
 class Card extends React.Component{
     state = {
-        selected: false
-    }
-
-    handleSelection = () => {
-        this.setState(prevState => ({
-            selected: !prevState.selected
-        }))
+        ind: null
     }
 
     componentDidMount = () => {
-        if (this.props.selected_cards[+this.props.tree_rel_id].card_id === this.props.card_id){
-            this.setState({
-                selected: true
-            })
-        }
+        let ind = this.props.selected_cards.findIndex(el => el.tree_rel_id === +this.props.tree_rel_id)
+        if (ind === -1) return
+        this.setState({
+            ind: ind
+        })
+    }
+
+    cardSelect = () => {
+        this.props.cardSelected(
+            this.props.card_id,
+            +this.props.tree_rel_id,
+            this.props.price,
+            this.props.img_out,
+            this.props.card_relationship
+        )
     }
 
     render(){
         return(
             <div className="card">
-                {!this.props.selected_cards[+this.props.tree_rel_id] ?
+                {this.state.ind === null ?
                 <>
-                    <input onClick={() => this.props.cardSelected(
-                        this.props.card_id,
-                        +this.props.tree_rel_id,
-                        this.props.price,
-                        this.props.img_out,
-                        this.props.card_relationship
-                        )}
+                    <input onClick={() => this.cardSelect()}
                         type="radio"
                         name="same"
                         />
-                    <img width="200px" alt={this.props.relationship} height="auto" src={this.props.img_out}/>
+                    <img onClick={() => this.cardSelect()} width="200px" alt={this.props.relationship} height="auto" src={this.props.img_out}/>
                 </>
                 :
                 <>
-                    <input onClick={() => this.props.cardSelected(
-                        this.props.card_id,
-                        +this.props.tree_rel_id,
-                        this.props.price,
-                        this.props.img_out,
-                        this.props.card_relationship
-                        )}
+                    <input onClick={() => this.cardSelect()}
                         type="radio"
                         name="same"
-                        // defaultChecked={this.props.selected_cards[+this.props.tree_rel_id].card_id === this.props.card_id}
-                        defaultChecked={this.state.selected}                        
+                        defaultChecked={this.props.selected_cards[this.state.ind].card_id === this.props.card_id}                     
                         />
-                    <img onClick={() => this.handleSelection()} width="200px" alt={this.props.relationship} height="auto" src={this.props.img_out}/>
+                    <img onClick={() => this.cardSelect()} width="200px" alt={this.props.relationship} height="auto" src={this.props.img_out}/>
                 </>
                 }
             </div>

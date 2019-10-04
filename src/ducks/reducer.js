@@ -11,7 +11,7 @@ const initialState = {
     selected_cards: [],
     tree: [],
     treeLoading: false,
-    tree_rel_id_index: null
+    selectedCardLoading: true
 }
 
 const SET_USER_ID = "SET_USER_ID"
@@ -25,6 +25,7 @@ const DELETE_TREE = "DELETE_TREE"
 const HANDLE_TREE_CHANGE = "HANDLE_TREE_CHANGE"
 const CARD_SELECTED = "CARD_SELECTED"
 const SAVE_SELECTED_CARD = "SAVE_SELECTED_CARD"
+const GET_SELECTED_CARDS = "GET_SELECTED_CARDS"
 
 export const setUserId = (userInfo) => {
     return {
@@ -102,9 +103,17 @@ export const cardSelected = (card_id, tree_rel_id, price, img_out, card_relation
 
 export const saveSelectedCard = (cust_id, selected_cards) => {
     let test = {cust_id, selected_cards}
-    let result = axios.put('/api/card/save', test).then(res => res.data)
+    axios.put('/api/card/save', test).then(res => res.data)
     return {
         type: SAVE_SELECTED_CARD
+    }
+}
+
+export const getSelectedCards = (cust_id) => {
+    let result = axios.get(`/api/cards/saved/${cust_id}`)
+    return {
+        type: GET_SELECTED_CARDS,
+        payload: result
     }
 }
 
@@ -187,6 +196,10 @@ const reducer = (state = initialState, action) => {
             return {...state, selected_cards: selectedCardsArr}
         case SAVE_SELECTED_CARD + '_FULFILLED':
             return {...state}
+        case GET_SELECTED_CARDS + '_PENDING':
+            return {...state, selectedCardLoading: true}
+        case GET_SELECTED_CARDS + '_FULFILLED':
+            return {...state, selectedCardLoading: false, selected_cards: action.payload.data}
         default:
             return state
     }

@@ -20,5 +20,12 @@ module.exports = {
         const {card_id, tree_rel_id} = selected_cards
         let tree = await db.save_card([card_id, cust_id, tree_rel_id])
         res.sendStatus(200)
+    },
+    savedCards: async (req, res, next) => {
+        const db = req.app.get('db')
+        const {cust_id} = req.params
+        let selectedCards = await db.get_selected_cards(cust_id)
+        req.session.user.selected_cards = selectedCards
+        res.status(200).send(selectedCards)
     }
 }
