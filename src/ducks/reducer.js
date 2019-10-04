@@ -23,6 +23,7 @@ const ADD_TREE_ITEM = "ADD_TREE_ITEM"
 const SAVE_TREE = "SAVE_TREE"
 const DELETE_TREE = "DELETE_TREE"
 const HANDLE_TREE_CHANGE = "HANDLE_TREE_CHANGE"
+const CARD_SELECTED = "CARD_SELECTED"
 
 export const setUserId = (userInfo) => {
     return {
@@ -90,6 +91,14 @@ export const handleTreeChange = (e, key, tree_rel_id) => {
     }
 }
 
+export const cardSelected = (card_id, tree_rel_id, price, img_out, card_relationship) => {
+    let matchObj = {card_id, tree_rel_id, price, img_out, card_relationship}
+    return {
+        type: CARD_SELECTED,
+        payload: matchObj
+    }
+}
+
 const reducer = (state = initialState, action) => {
     switch(action.type){
         case GET_USER:
@@ -145,6 +154,30 @@ const reducer = (state = initialState, action) => {
             let oldTree = [...state.tree]
             oldTree[index][action.payload.key] = action.payload.e
             return {...state, tree: oldTree}
+        case CARD_SELECTED:
+            console.log(action.payload)
+            // let selected_cards_edit_arr = [...state.selected_cards]
+            // let index2 = selected_cards_edit_arr.findIndex(el => el.tree_rel_id === action.payload.tree_rel_id)
+            // if (index2 === -1) {
+            //     // this if statement below adds to the end of selected_cards. Hopefully not a problem.
+            //     selected_cards_edit_arr.push({
+            //         tree_rel_id: action.payload.tree_rel_id,
+            //         card_id: action.payload.card_id,
+            //         price: action.payload.price,
+            //         img_out: action.payload.img_out,
+            //         card_relationship: action.payload.relationship
+            //     })
+            // } else if (index2 !== -1){
+            //     selected_cards_edit_arr.splice(index2, 1, {
+            //         tree_rel_id: action.payload.tree_rel_id,
+            //         card_id: action.payload.card_id,
+            //         price: action.payload.price,
+            //         img_out: action.payload.img_out,
+            //         card_relationship: action.payload.relationship
+            //     })
+            // }
+            // return {...state, selected_cards: selected_cards_edit_arr}
+            return {...state}
         default:
             return state
     }
