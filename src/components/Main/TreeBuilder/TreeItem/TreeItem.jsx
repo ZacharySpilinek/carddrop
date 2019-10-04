@@ -3,28 +3,6 @@ import {connect} from 'react-redux'
 import {deleteTree, handleTreeChange} from '../../../../ducks/reducer'
 
 class TreeItem extends Component {
-    /* state = {
-        month: '',
-        day: ''
-    }
-
-    componentDidMount = () => {
-        let date = this.props.rel_bday
-        let date2 = date.substr(5)
-        let date3 = date2.substring(0, 5)
-        let date4 = date3.split('-')
-        this.setState({
-            month: date4[0],
-            day: date4[1]
-        })
-    }
-
-    selectChange = (e, key) => {
-        this.setState({
-            [key]: e.target.value
-        })
-    } */
-
     render(){
         return(
             <div className="tree-item">

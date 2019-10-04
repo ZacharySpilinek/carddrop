@@ -155,29 +155,27 @@ const reducer = (state = initialState, action) => {
             oldTree[index][action.payload.key] = action.payload.e
             return {...state, tree: oldTree}
         case CARD_SELECTED:
-            console.log(action.payload)
-            // let selected_cards_edit_arr = [...state.selected_cards]
-            // let index2 = selected_cards_edit_arr.findIndex(el => el.tree_rel_id === action.payload.tree_rel_id)
-            // if (index2 === -1) {
-            //     // this if statement below adds to the end of selected_cards. Hopefully not a problem.
-            //     selected_cards_edit_arr.push({
-            //         tree_rel_id: action.payload.tree_rel_id,
-            //         card_id: action.payload.card_id,
-            //         price: action.payload.price,
-            //         img_out: action.payload.img_out,
-            //         card_relationship: action.payload.relationship
-            //     })
-            // } else if (index2 !== -1){
-            //     selected_cards_edit_arr.splice(index2, 1, {
-            //         tree_rel_id: action.payload.tree_rel_id,
-            //         card_id: action.payload.card_id,
-            //         price: action.payload.price,
-            //         img_out: action.payload.img_out,
-            //         card_relationship: action.payload.relationship
-            //     })
-            // }
-            // return {...state, selected_cards: selected_cards_edit_arr}
-            return {...state}
+            let selectedCardsArr = [...state.selected_cards]
+            let indexSelectedCard = selectedCardsArr.findIndex(el => el.tree_rel_id === action.payload.tree_rel_id)
+            if (indexSelectedCard === -1) {
+                // this if statement below adds to the end of selected_cards. Hopefully not a problem.
+                selectedCardsArr.push({
+                    tree_rel_id: action.payload.tree_rel_id,
+                    card_id: action.payload.card_id,
+                    price: action.payload.price,
+                    img_out: action.payload.img_out,
+                    card_relationship: action.payload.card_relationship
+                })
+            } else if (indexSelectedCard !== -1){
+                selectedCardsArr.splice(indexSelectedCard, 1, {
+                    tree_rel_id: action.payload.tree_rel_id,
+                    card_id: action.payload.card_id,
+                    price: action.payload.price,
+                    img_out: action.payload.img_out,
+                    card_relationship: action.payload.card_relationship
+                })
+            }
+            return {...state, selected_cards: selectedCardsArr}
         default:
             return state
     }

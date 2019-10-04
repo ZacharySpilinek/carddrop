@@ -41,25 +41,6 @@ class CardSelect extends Component {
     render(){
         let {tree_rel_id} = this.props.match.params
         let {tree} = this.props
-        // let list = this.state.cards.map(el => {
-        //     return (<div key={el.card_id + this.props.match.params.tree_rel_id + this.props.tree[this.props.match.params.tree_rel_id].rel_name}>
-        //         <img width="200px" alt={el.relationship} height="auto" src={el.img_out}/>
-        //     </div>)
-        // })
-        // let list2 = this.state.cards.map(el => {
-        //     return (<div key={el.card_id + this.props.match.params.tree_rel_id + this.props.tree[this.props.match.params.tree_rel_id].rel_name}>
-        //         <input onClick={() => this.props.cardSelected(
-        //             el.card_id,
-        //             this.props.match.params.tree_rel_id,
-        //             el.price,
-        //             el.img_out,
-        //             el.relationship
-        //             )}
-        //             type="radio"
-        //             name="same"
-        //             /* checked={true} *//>
-        //     </div>)
-        // })
         let list = this.state.cards.map(el => (
             <Card
                 key={el.card_id + this.props.match.params.tree_rel_id + this.props.tree[this.props.match.params.tree_rel_id].rel_name}
@@ -73,10 +54,8 @@ class CardSelect extends Component {
         return(
             <div className="cardselect">
                 This is CardSelect.
-                The current id is: {this.props.match.params.tree_rel_id}
-                <h2>Buying cards for: {tree[tree_rel_id].rel_name}</h2>
+                <h2>Select card for: {tree[tree_rel_id].rel_name}</h2>
                 {list}
-                {/* {list2} */}
                 <button onClick={() => this.previous()}>Previous</button>
                 <button onClick={() => this.next()} disabled={!tree[+tree_rel_id + 1]}>Next</button>
             </div>
