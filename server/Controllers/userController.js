@@ -11,7 +11,6 @@ module.exports = {
             first_name: result[0].first_name,
             last_name: result[0].last_name,
             email: result[0].email}
-        console.log(req.session.user)
         res.sendStatus(200)
     }
 }

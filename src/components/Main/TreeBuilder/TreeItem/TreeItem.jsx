@@ -15,6 +15,7 @@ class TreeItem extends Component {
         // this.props.deleteSelectedCard(this.props.cust_id, this.props.tree_rel_id, this.props.selected_cards)
     }
     render(){
+        // console.log(this.props.tree[this.props.tree_rel_id].rel_relationship)
         return(
             <div className="tree-item">
                 <h3>{this.props.rel_name}</h3>

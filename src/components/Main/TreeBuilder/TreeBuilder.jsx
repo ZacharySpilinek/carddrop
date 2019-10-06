@@ -8,10 +8,10 @@ class TreeBuilder extends Component {
         canGoNext: false
     }
 
-    componentDidMount = () => {
-        this.getTree()
+    componentDidUpdate = (prevProps) => {
         this.props.getCategories()
-        this.props.getSelectedCards(this.props.cust_id)
+        // this.getTree() // already getting tree in App.js
+        // this.props.getSelectedCards(this.props.cust_id) // already getting tree in App.js
     }
 
     getTree = () => {

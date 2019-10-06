@@ -189,7 +189,10 @@ const reducer = (state = initialState, action) => {
         case GET_CATEGORIES + '_FULFILLED':
             return {...state, categories: action.payload}
         case ADD_TREE_ITEM:
-            let nextId = state.tree[state.tree.length - 1].tree_rel_id + 1
+            let nextId = 0
+            if (state.tree.length !== 0){
+                nextId = state.tree[state.tree.length - 1].tree_rel_id + 1
+            }
             return {...state, tree: [...state.tree, {
                 tree_rel_id: nextId,
                 rel_name: '',

@@ -12,9 +12,9 @@ class App extends React.Component {
   componentDidMount = async () => {
     let res = await axios.get('/user')
     if (res.data.cust_id){
-      await this.props.getUser(res.data)
-      await this.props.getTree(res.data.cust_id)
-      await this.props.getSelectedCards(res.data.cust_id)
+      this.props.getUser(res.data)
+      this.props.getTree(res.data.cust_id)
+      this.props.getSelectedCards(res.data.cust_id)
     } else if (this.props.location.pathname !== '/') {
       this.props.history.push('/')
     }
