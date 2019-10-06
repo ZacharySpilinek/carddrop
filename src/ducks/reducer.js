@@ -27,6 +27,8 @@ const CARD_SELECTED = "CARD_SELECTED"
 const SAVE_SELECTED_CARD = "SAVE_SELECTED_CARD"
 const GET_SELECTED_CARDS = "GET_SELECTED_CARDS"
 const DELETE_SELECTED_CARD = "DELETE_SELECTED_CARD"
+const HANDLE_USER_CHANGE = "HANDLE_USER_CHANGE"
+const SAVE_USER_CHANGE = "SAVE_USER_CHANGE"
 
 export const setUserId = (userInfo) => {
     return {
@@ -135,6 +137,22 @@ export const deleteSelectedCard = (selectedCardIndex, selected_cards, tree_rel_i
     }
 }
 
+export const handleUserChange = (firstName, lastName, email) => {
+    let newInfo = {firstName, lastName, email}
+    return {
+        type: HANDLE_USER_CHANGE,
+        payload: newInfo
+    }
+}
+
+export const saveUserChange = (firstName, lastName, email, cust_id) => {
+    let newInfo = {firstName, lastName, email, cust_id}
+    axios.put('/user/save', newInfo).then(res => res.data)
+    return {
+        type: SAVE_USER_CHANGE
+    }
+}
+
 const reducer = (state = initialState, action) => {
     switch(action.type){
         case GET_USER:
@@ -222,6 +240,14 @@ const reducer = (state = initialState, action) => {
             let treeCopy = [...state.selected_cards]
             treeCopy.splice(action.payload, 1)
             return {...state, selected_cards: treeCopy}
+        case HANDLE_USER_CHANGE:
+            return {...state,
+                first_name: action.payload.firstName || state.first_name,
+                last_name: action.payload.lastName || state.last_name,
+                email: action.payload.email || state.email
+            }
+        case SAVE_USER_CHANGE:
+            return {...state}
         default:
             return state
     }

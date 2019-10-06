@@ -11,6 +11,21 @@ class Nav extends Component {
         showLogin: false
     }
 
+/*     componentDidMount = () => {
+        document.addEventListener("keydown", this.handleKeyPress)
+    }
+
+    componentWillUnmount = () => {
+        document.removeEventListener("keydown", this.handleKeyPress)
+    }
+ */
+    handleKeyPress = (e) => {
+        if (e.keyCode === 13){
+            // alert('Enter was pressed')
+            this.login()
+        }
+    }
+
     login = async () => {
         const {email, password} = this.state
         let res = await axios.post('/auth/login', {email, password})
@@ -74,8 +89,8 @@ class Nav extends Component {
                         <button onClick={this.toggleLogin}>Login</button>
                             {this.state.showLogin ?
                                 <div>
-                                    <input onChange={e => this.handleChange(e, 'email')} type="text" placeholder="Email"/>
-                                    <input onChange={e => this.handleChange(e, 'password')} type="password" placeholder="Password"/>
+                                    <input autoFocus onChange={e => this.handleChange(e, 'email')} type="text" placeholder="Email"/>
+                                    <input onChange={e => this.handleChange(e, 'password')} onKeyDown={(e) => this.handleKeyPress(e)} type="password" placeholder="Password"/>
                                     <button onClick={this.login}>Login</button>
                                 </div>
                                 : <></>}

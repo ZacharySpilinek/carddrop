@@ -18,7 +18,7 @@ class TreeItem extends Component {
         return(
             <div className="tree-item">
                 <h3>{this.props.rel_name}</h3>
-                <input onChange={(e) => this.props.handleTreeChange(e.target.value, 'rel_name', this.props.tree_rel_id)} value={this.props.rel_name} placeholder={this.props.rel_name}/>
+                <input autoFocus onChange={(e) => this.props.handleTreeChange(e.target.value, 'rel_name', this.props.tree_rel_id)} value={this.props.rel_name} placeholder={this.props.rel_name}/>
                 <select onChange={(e) => this.props.handleTreeChange(e.target.value, 'rel_relationship', this.props.tree_rel_id)} value={this.props.tree[this.props.tree_rel_id].rel_relationship}>
                         <option key={0} value="neutral">- Relationship -</option>
                     {this.props.categories.map((el, i) => (
