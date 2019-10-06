@@ -31,7 +31,7 @@ class TreeItem extends Component {
                     Mail<input onChange={(e) => this.props.handleTreeChange(e.target.value, 'rel_delivery', this.props.tree_rel_id)} type="radio" name={`delivery ${this.props.tree_rel_id}`} value="mail"  defaultChecked={this.props.tree[this.props.tree_rel_id].rel_delivery === "mail"}/>
                 </div>
                     <select onChange={(e) => this.props.handleTreeChange(parseInt(e.target.value, 10), 'rel_bday_mo', this.props.tree_rel_id)} value={this.props.tree[this.props.tree_rel_id].rel_bday_mo} name="DOBMonth">
-                        <option>- Month -</option>
+                        <option value="null">- Month -</option>
                         <option value="1">January</option>
                         <option value="2">Febuary</option>
                         <option value="3">March</option>

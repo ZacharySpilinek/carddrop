@@ -12,8 +12,6 @@ class User extends Component {
 
     componentDidUpdate = (prevProps) => {
         if (prevProps.first_name !== this.props.first_name || prevProps.last_name !== this.props.last_name || prevProps.email !== this.props.email){
-            // console.log(prevProps.first_name)
-            console.log(this.props.first_name)
             this.props.saveUserChange(this.props.first_name, this.props.last_name, this.props.email, this.props.cust_id)
         }
     }

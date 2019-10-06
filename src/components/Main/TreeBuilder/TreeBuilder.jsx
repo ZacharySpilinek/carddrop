@@ -8,10 +8,23 @@ class TreeBuilder extends Component {
         canGoNext: false
     }
 
+    componentDidMount = () => {
+        this.autoSave()
+    }
+
     componentDidUpdate = (prevProps) => {
         this.props.getCategories()
         // this.getTree() // already getting tree in App.js
         // this.props.getSelectedCards(this.props.cust_id) // already getting tree in App.js
+    }
+
+    autoSave = () => {
+        let autosave = setInterval(() => {
+            if (this.props.tree.length )
+            this.props.saveTree(this.props.cust_id, this.props.tree)
+            console.log('saved')
+        }, 10000)
+        setTimeout(() => {clearInterval(autosave); console.log('autosave stopped')}, 300000)
     }
 
     getTree = () => {
@@ -21,6 +34,11 @@ class TreeBuilder extends Component {
     next = () => {
         this.props.saveTree(this.props.cust_id, this.props.tree)
         this.props.history.push(`/cards/${this.props.tree[0].tree_rel_id}`)
+    }
+
+    add = async () => {
+        await this.props.addTreeItem()
+        await this.props.saveTree(this.props.cust_id, this.props.tree)
     }
 
     render(){
@@ -46,7 +64,7 @@ class TreeBuilder extends Component {
                     <div className="tree-list">
                         {treeList}
                     </div>
-                    <button onClick={this.props.addTreeItem}>Add</button>
+                    <button onClick={this.add}>Add</button>
                     <button onClick={() => this.props.saveTree(this.props.cust_id, this.props.tree)}>Save All, delete later</button>
                     <button disabled={this.props.tree.length === 0} onClick={() => this.next()}>Next</button>
                 </div>}
