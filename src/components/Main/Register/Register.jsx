@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {setUserId} from '../../../ducks/reducer'
+import {setUserId, getTree} from '../../../ducks/reducer'
 import {connect} from 'react-redux'
 import axios from 'axios'
 
@@ -39,7 +39,6 @@ class Register extends Component {
         this.setState({
             loading: false
         })
-        console.log(returnNewUser.data)
         if (!returnNewUser.data.cust_id) return alert(returnNewUser.data.message)
         this.props.setUserId(returnNewUser.data)
         this.props.history.push('/tree')
@@ -57,6 +56,7 @@ class Register extends Component {
         })
         if (!res.data.cust_id) return alert(res.data.message)
         await this.props.setUserId(res.data)
+        await this.props.getTree(res.data.cust_id)
         this.props.history.push('/tree')
     }
 
@@ -68,10 +68,11 @@ class Register extends Component {
 
     render(){
         return(
-            <div className="Register">
+            <div className="register">
                 {!this.state.showLogin ? 
                     <div>
                         <h2>Signup To Build Your Tree!</h2>
+                        <p>Don't worry, the account is free.</p>
                             <form>
                                 <input onChange={e => this.handleChange(e, 'email')} placeholder="email" type="text"/>
                                 <input onChange={e => this.handleChange(e, 'first_name')} placeholder="First Name"/>
@@ -83,18 +84,21 @@ class Register extends Component {
                     </div>
                     :
                     <div>
-                        <h2>Sign In</h2>
+                        <h2>Welcome back! Sign in here.</h2>
                             <form>
                                 <input onChange={e => this.handleChange(e, 'email')} type="text"/>
                                 <input onChange={e => this.handleChange(e, 'password')} type="password"/>
                                 <button onClick={e => this.login(e)}>Login</button>
                             </form>
                     </div>}
-                <button onClick={this.toggleLogin}>Toggle</button>
+                {!this.state.showLogin ? 
+                    <span onClick={this.toggleLogin}>Or, sign in instead</span>
+                :
+                    <span onClick={this.toggleLogin}>Or, sign up here</span>}
                 {this.state.loading ? <h1>Loading</h1> : <></>}
             </div>
         )
     }
 }
 
-export default connect(null, {setUserId})(Register)
+export default connect(null, {setUserId, getTree})(Register)

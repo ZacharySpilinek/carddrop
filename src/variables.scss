@@ -1,0 +1,14 @@
+@import './colors.scss';
+
+@mixin inputFieldCD {
+    padding: 10px 20px;
+    border: 0 solid #00000000;
+    border-bottom: 2px solid $primaryRed;
+    font-size: 16px;
+    font-family: Lora, Helvetica, sans-serif;
+    text-align: center;
+    &:focus {
+        outline: none;
+        // background: orange;
+    }
+}

@@ -15,9 +15,10 @@ class Landing extends Component {
     render(){
         return(
             <div className="Landing">
-                This is Landing.
-                <button onClick={this.next}>Get Started</button>
                 <Hero />
+                <h3>Signed by you. Not a machine.</h3>
+                <p>Our cards are sent to you to sign because we believe personal connections aren't made by a robot. They're made when you pick up a pen and take the time to write a note to the ones you care about.</p>
+                <button onClick={this.next}>Get Started</button>
             </div>
         )
     }

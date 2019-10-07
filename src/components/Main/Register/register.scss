@@ -1,0 +1,26 @@
+@import "../../../colors.scss";
+@import "../../../variables.scss";
+@import "../../../buttons.scss";
+
+.register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    h2 {
+
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        input {
+            @include inputFieldCD;
+            width: 90%;
+        }
+        button {
+            
+        }
+    }
+}
