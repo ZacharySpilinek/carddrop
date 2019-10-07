@@ -9,7 +9,8 @@ class Nav extends Component {
     state = {
         email: '',
         password: '',
-        showLogin: false
+        showLogin: false,
+        dropdownClass: 'dropdown hide'
     }
 
 /*     componentDidMount = () => {
@@ -50,6 +51,9 @@ class Nav extends Component {
     }
 
     home = () => {
+        this.setState({
+            dropdownClass: 'dropdown hide'
+        })
         this.props.history.push('/')
     }
 
@@ -65,39 +69,57 @@ class Nav extends Component {
         })
     }
 
+    dropDownTrigger = () => {
+        if (this.state.dropdownClass.includes('hide')){
+            this.setState({
+                dropdownClass: 'dropdown'
+            })
+        } else {
+            this.setState({
+                dropdownClass: 'dropdown hide'
+            })
+        }
+    }
+
+    mobileLogin = () => {
+        this.setState({
+            dropdownClass: 'dropdown hide'
+        })
+        this.props.history.push('/register/login')
+    }
+
     render(){
         return(
             <>
+            <header>
+                <img onClick={this.home} alt="Card Drop Company Logo. A box of envelopes against orange. The words 'Card Drop' in black to the right." src={Logo}/>
                 <nav>
-                    <img alt="Card Drop Company Logo. A box of envelopes against orange. The words 'Card Drop' in black to the right." src={Logo}/>
-                    <button onClick={this.home}>Home</button>
-                    {/* {!this.props.cust_id ? 
-                        <button onClick={this.toggleLogin}>Login</button>
-                            this.state.showLogin ?
-                                <div>
-                                    <input onChange={e => this.handleChange(e, 'email')} type="text" placeholder="Email"/>
-                                    <input onChange={e => this.handleChange(e, 'password')} type="password" placeholder="Password"/>
-                                    <button onClick={this.login}>Login</button>
-                                </div>
-                            : 
-                            <></>
-                        : 
-                        <button>Logout</button>
-                        } */}
-                    {this.props.cust_id ? 
-                        <><button onClick={this.logout}>Logout</button> <button onClick={this.userProfile}>My Profile</button></> :
-                        <>
-                        <button onClick={this.toggleLogin}>Login</button>
-                            {this.state.showLogin ?
-                                <div>
-                                    <input autoFocus onChange={e => this.handleChange(e, 'email')} type="text" placeholder="Email"/>
-                                    <input onChange={e => this.handleChange(e, 'password')} onKeyDown={(e) => this.handleKeyPress(e)} type="password" placeholder="Password"/>
-                                    <button onClick={this.login}>Login</button>
-                                </div>
-                                : <></>}
-                        </>
-                    }
+                    <i onClick={this.dropDownTrigger} className="fas fa-bars fa-2x"></i>
+                    <div className="menu">
+                        <button onClick={this.home}>Home</button>
+                        {this.props.cust_id ? 
+                            <><button onClick={this.logout}>Logout</button> <button onClick={this.userProfile}>My Profile</button></> :
+                            <>
+                            <button onClick={this.toggleLogin}>Login</button>
+                                {this.state.showLogin ?
+                                    <div>
+                                        <input autoFocus onChange={e => this.handleChange(e, 'email')} type="text" placeholder="Email"/>
+                                        <input onChange={e => this.handleChange(e, 'password')} onKeyDown={(e) => this.handleKeyPress(e)} type="password" placeholder="Password"/>
+                                        <button onClick={this.login}>Login</button>
+                                    </div>
+                                    : <></>}
+                            </>
+                        }
+                    </div>
                 </nav>
+                <div id="dropdown" className={this.state.dropdownClass}>
+                    <div className="container">
+                        <h2 onClick={this.dropDownTrigger}>X</h2>
+                        <h1 onClick={() => this.home()}>Home</h1>
+                        <h1 onClick={() => this.mobileLogin()}>Login</h1>
+                    </div>
+                </div>
+            </header>
             </>
         )
     }

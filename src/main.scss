@@ -1,14 +1,22 @@
-@import "./Components/Nav/nav.scss";
-@import "./colors.scss";
 @import "./reset";
+@import "./colors.scss";
+@import "./Components/Nav/nav.scss";
+@import "./components/Main/Landing/Hero/hero.scss";
+@import url('https://fonts.googleapis.com/css?family=Lora|Montserrat:500&display=swap');
 
 .App {
+    h1, h2, h3, h4, h5, h6 {
+        font-family: Montserrat, Geneva, Verdana, sans-serif;
+    }
+    font-family: Lora, Georgia, 'Times New Roman', Times, serif;
     background: $background;
     display: flex;
     justify-content: center;
     .app-container {
         margin: 10px 10px 0px 10px;
-        background: red;
+        // padding: 10px;
+        background: white;
         width: 100vw;
+        border-radius: 20px;
     }
 }

@@ -16,7 +16,7 @@ class App extends React.Component {
       this.props.getUser(res.data)
       this.props.getTree(res.data.cust_id)
       this.props.getSelectedCards(res.data.cust_id)
-    } else if (this.props.location.pathname !== '/') {
+    } else if (this.props.location.pathname.includes('/tree') || this.props.location.pathname.includes('/cards') || this.props.location.pathname.includes('/cart') || this.props.location.pathname.includes('/checkout')) {
       this.props.history.push('/')
     }
   }

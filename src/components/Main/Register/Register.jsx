@@ -14,6 +14,14 @@ class Register extends Component {
         loading: false
     }
 
+    componentDidMount = () => {
+        if (this.props.location.pathname.includes('login')){
+            this.setState({
+                showLogin: true
+            })
+        }
+    }
+
     handleChange = (e, key) => {
         this.setState({
             [key]: e.target.value
