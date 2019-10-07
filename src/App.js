@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 import axios from 'axios'
 import routes from './routes'
 import {withRouter} from 'react-router-dom'
+import './main.scss'
 
 class App extends React.Component {
 
@@ -23,8 +24,10 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-        <Nav />
-        {routes}
+        <div className="app-container">
+          <Nav />
+          {routes}
+        </div>
       </div>
     );
   }

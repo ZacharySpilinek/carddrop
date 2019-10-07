@@ -3,6 +3,7 @@ import axios from 'axios'
 import {setUserId, clearState, getTree, getSelectedCards} from '../../ducks/reducer'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
+import Logo from '../../assets/CardDrop-Logo1-625px.png'
 
 class Nav extends Component {
     state = {
@@ -68,7 +69,7 @@ class Nav extends Component {
         return(
             <>
                 <nav>
-                    <h3>Logo</h3>
+                    <img alt="Card Drop Company Logo. A box of envelopes against orange. The words 'Card Drop' in black to the right." src={Logo}/>
                     <button onClick={this.home}>Home</button>
                     {/* {!this.props.cust_id ? 
                         <button onClick={this.toggleLogin}>Login</button>

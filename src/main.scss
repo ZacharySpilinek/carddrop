@@ -1,0 +1,14 @@
+@import "./Components/Nav/nav.scss";
+@import "./colors.scss";
+@import "./reset";
+
+.App {
+    background: $background;
+    display: flex;
+    justify-content: center;
+    .app-container {
+        margin: 10px 10px 0px 10px;
+        background: red;
+        width: 100vw;
+    }
+}
