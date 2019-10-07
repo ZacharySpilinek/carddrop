@@ -1,6 +1,10 @@
 module.exports = {
     getUser: (req, res, next) => {
-        res.status(200).send(req.session.user)
+        if (!req.session.user) return res.sendStatus(200)
+        let {cust_id, first_name, last_name, email, sub_id, sub_interval} = req.session.user
+        let currentUser = {cust_id, first_name, last_name, email, sub_id, sub_interval}
+        // res.status(200).send(req.session.user)
+        res.status(200).send(currentUser)
     },
     saveUser: async (req, res, next) => {
         const db = req.app.get('db')

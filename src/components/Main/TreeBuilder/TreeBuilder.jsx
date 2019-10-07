@@ -5,15 +5,16 @@ import TreeItem from './TreeItem/TreeItem'
 
 class TreeBuilder extends Component {
     state = {
-        canGoNext: false
+        canGoNext: false,
+        loading: true
     }
 
     componentDidMount = () => {
-        this.autoSave()
+        // this.autoSave()
+        this.props.getCategories()
     }
 
     componentDidUpdate = (prevProps) => {
-        this.props.getCategories()
         // this.getTree() // already getting tree in App.js
         // this.props.getSelectedCards(this.props.cust_id) // already getting tree in App.js
     }
@@ -43,9 +44,11 @@ class TreeBuilder extends Component {
 
     render(){
         let treeList = this.props.tree.map((el, index) => {
+
             return (
-                <div key={index}>
+                <div key={el.tree_rel_id}>
                     <TreeItem
+                        tree_rel_id_index={index}
                         tree_rel_id={el.tree_rel_id}
                         rel_name={el.rel_name}
                         rel_relationship={el.rel_relationship}
