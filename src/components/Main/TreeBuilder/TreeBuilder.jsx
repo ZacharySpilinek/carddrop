@@ -59,12 +59,20 @@ class TreeBuilder extends Component {
             )
         })
         return(
-            <div className="TreeBuilder">
+            <>
+            {this.props.treeLoading ? 
+                <div className="loading">
+                    <i className="loading-icon fas fa-spinner"></i>
+                </div>
+                :
+                <></>
+            }
+            <div className="tree-builder">
                 {this.props.treeLoading ? 
-                <h1>Loading</h1> 
+                <></>
                 :
                 <div>
-                    This is TreeBuilder.
+                    <h2>This is TreeBuilder.</h2>
                     <div className="tree-list">
                         {treeList}
                     </div>
@@ -73,6 +81,7 @@ class TreeBuilder extends Component {
                     <button disabled={this.props.tree.length === 0} onClick={() => this.next()}>Next</button>
                 </div>}
             </div>
+            </>
         )
     }
 }

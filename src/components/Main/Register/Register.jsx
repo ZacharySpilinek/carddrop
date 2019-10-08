@@ -68,17 +68,25 @@ class Register extends Component {
 
     render(){
         return(
+            <>
+            {this.state.loading ? 
+                <div className="loading">
+                    <i className="loading-icon fas fa-spinner"></i>
+                </div>
+                :
+                <></>
+            }
             <div className="register">
                 {!this.state.showLogin ? 
                     <div>
                         <h2>Signup To Build Your Tree!</h2>
                         <p>Don't worry, the account is free.</p>
                             <form>
-                                <input onChange={e => this.handleChange(e, 'email')} placeholder="email" type="text"/>
+                                <input onChange={e => this.handleChange(e, 'email')} placeholder="Email" type="text"/>
                                 <input onChange={e => this.handleChange(e, 'first_name')} placeholder="First Name"/>
                                 <input onChange={e => this.handleChange(e, 'last_name')} placeholder="Last Name"/>
-                                <input onChange={e => this.handleChange(e, 'password')} placeholder="create a password" type="password"/>
-                                <input onChange={e => this.handleChange(e, 'password2')} placeholder="re-type your password" type="password"/>
+                                <input onChange={e => this.handleChange(e, 'password')} placeholder="Create a password" type="password"/>
+                                <input onChange={e => this.handleChange(e, 'password2')} placeholder="Re-type your password" type="password"/>
                                 <button onClick={this.register}>Register</button>
                             </form>
                     </div>
@@ -86,8 +94,8 @@ class Register extends Component {
                     <div>
                         <h2>Welcome back! Sign in here.</h2>
                             <form>
-                                <input onChange={e => this.handleChange(e, 'email')} type="text"/>
-                                <input onChange={e => this.handleChange(e, 'password')} type="password"/>
+                                <input onChange={e => this.handleChange(e, 'email')} placeholder="Email" type="text"/>
+                                <input onChange={e => this.handleChange(e, 'password')} placeholder="Password" type="password"/>
                                 <button onClick={e => this.login(e)}>Login</button>
                             </form>
                     </div>}
@@ -95,8 +103,8 @@ class Register extends Component {
                     <span onClick={this.toggleLogin}>Or, sign in instead</span>
                 :
                     <span onClick={this.toggleLogin}>Or, sign up here</span>}
-                {this.state.loading ? <h1>Loading</h1> : <></>}
             </div>
+            </>
         )
     }
 }

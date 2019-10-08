@@ -7,20 +7,25 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    h2 {
-
-    }
     form {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        line-height: 12px;
         input {
             @include inputFieldCD;
             width: 90%;
+            margin-top: 20px;
         }
         button {
-            
+            margin-top: 25px;
+            @include buttonSolid($primaryRed);
         }
+    }
+    span {
+        margin: 18px 0px 20px 0px;
+        text-decoration: underline;
+        font-size: 0.9rem;
     }
 }

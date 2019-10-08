@@ -1,9 +1,24 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import Select from 'react-select'
 
 class Stamps extends React.Component{
     state = {
-        mailCount: 0
+        mailCount: 0,
+        list: [
+            {value:'chocolate', label: 'Chocolate'},
+            { value: 'strawberry', label: 'Strawberry' },
+            { value: 'vanilla', label: 'Vanilla' }
+        ],
+        selectedOption: null
+    }
+
+    handleChange = selectedOption => {
+        this.setState({
+            selectedOption: selectedOption
+        }, () => {
+            console.log(`Option selected:`, this.state.selectedOption)
+        })
     }
 
     componentDidMount = () => {
@@ -33,6 +48,20 @@ class Stamps extends React.Component{
                 <h2>You can edit your stamps in checkout.</h2>
                 <button onClick={this.noStamps}>Yes, please!</button> {/* IMPORTANT: this needs to add the right quantity of stamps to their cart. It must also NOT pull up the cart. Then it will send them to the cart page. */}
                 <button onClick={this.yesStamps}>No, thank you</button>
+                <Select 
+                    // className="react-select-container"
+                    value={this.state.selectedOption}
+                    onChange={this.handleChange}
+                    options={this.state.list}
+                    theme={theme => ({
+                        ...theme,
+                        borderRadius: 5,
+                        colors: {
+                            ...theme.colors,
+                            primary: 'orange'
+                        }
+                    })}
+                />
             </div>
         )
     }

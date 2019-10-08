@@ -6,8 +6,7 @@ import {cardSelected, saveSelectedCard} from '../../../ducks/reducer'
 
 class CardSelect extends Component {
     state = {
-        cards: [],
-        test: <h1>asdfasdf</h1>
+        cards: []
     }
 
     componentDidMount = () => {
@@ -46,16 +45,6 @@ class CardSelect extends Component {
         ))
     }
 
-    testFn = () => {
-        return (
-            <>
-            <p>Poopity Woop</p>
-            <h2>Scoopity Poop</h2>
-            <p>Poopity woop poop</p>
-            </>
-        )
-    }
-
     next = () => {
         // problem with below code. If someone deletes a card in cart and comes back to the person in question, this will send the correct cust_id, BUT the second arg is null (the card is gone, hence nothing to grab)
         this.props.saveSelectedCard(this.props.cust_id, this.props.selected_cards[this.props.match.params.tree_rel_id], this.props.match.params.tree_rel_id)
@@ -79,18 +68,14 @@ class CardSelect extends Component {
     render(){
         return(
             <div className="cardselect">
-                This is CardSelect.
                 {this.props.selectedCardLoading === true || !this.props.tree ? <h1>Loading...</h1>
                 : 
                 <>
-                {this.state.test}
-                {this.testFn()}
                 <h2>Select card for: {this.props.tree[this.props.match.params.tree_rel_id].rel_name}</h2>
                 {this.mapCards()}
                 <button onClick={() => this.previous()}>Previous</button>
                 <button onClick={() => this.next()} disabled={!this.props.tree[+this.props.match.params.tree_rel_id + 1]}>Next</button>
                 {!this.props.tree[+this.props.match.params.tree_rel_id + 1] ? <button onClick={() => this.finish()}>Finish</button> : <></>}
-                
                 </>
                  }
             </div>
