@@ -19,9 +19,9 @@ class CardSelect extends Component {
         }
     }
 
-    componentWillUnmount = () => {
+    /* componentWillUnmount = () => {
         this.props.saveSelectedCard(this.props.cust_id, this.props.selected_cards[this.props.match.params.tree_rel_id])
-    }
+    } */
 
     getCardsByCategory = async () => {
         if (this.props.tree[this.props.match.params.tree_rel_id]){
@@ -38,6 +38,7 @@ class CardSelect extends Component {
                 key={el.card_id + this.props.match.params.tree_rel_id + this.props.tree[this.props.match.params.tree_rel_id].rel_name}
                 card_relationship={el.relationship}
                 img_out={el.img_out}
+                img_in={el.img_in}
                 tree_rel_id={this.props.match.params.tree_rel_id}
                 price={el.price}
                 card_id={el.card_id}

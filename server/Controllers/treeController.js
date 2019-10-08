@@ -5,7 +5,6 @@ module.exports = {
         if (req.session.user.tree/*  && cust_id !== 'null' */) return res.status(200).send(req.session.user.tree)
         if (cust_id === 'null') return res.sendStatus(200)
         let tree = await db.get_tree(cust_id)
-        console.log(tree)
         req.session.user.tree = tree
         res.status(200).send(tree)
     },
