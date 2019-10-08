@@ -1,0 +1,29 @@
+@import "../../../colors.scss";
+
+.user {
+    // background: blue;
+    h2 {
+        text-align: center;
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+    div {
+        margin-bottom: 20px;
+        // background: orange;
+        padding: 0 10px;
+    }
+    .user-info {
+        line-height: 30px;
+        // display: flex;
+        // flex-direction: column;
+        .user-info-edit-inputs {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            input {
+                margin-bottom: 10px;
+                @include inputFieldCD;
+            }
+        }
+    }
+}

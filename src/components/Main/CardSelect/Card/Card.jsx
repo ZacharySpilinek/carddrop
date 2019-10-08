@@ -8,7 +8,9 @@ class Card extends React.Component{
         tagColor: '#7A7A7A',
         tagName: '',
         img: this.props.img_out,
-        selectedCardClass: "card-item"
+        imgView: 'out',
+        selectedCardClass: "card-item",
+        backgroundColor: {backgroundColor: ""}
     }
 
     componentDidMount = () => {
@@ -29,7 +31,7 @@ class Card extends React.Component{
         }
         if (this.props.selected_cards[ind].card_id === this.props.card_id){
             this.setState({
-                selectedCardClass: "card-item selected"
+                backgroundColor: {backgroundColor: "#FEA3AC"}
             })
         }
     }
@@ -39,11 +41,11 @@ class Card extends React.Component{
         if (prevProps.selected_cards[ind] !== this.props.selected_cards[ind]){
             if (this.props.selected_cards[ind].card_id === this.props.card_id){
                 this.setState({
-                    selectedCardClass: "card-item selected"
+                    backgroundColor: {backgroundColor: "#FEA3AC"}
                 })
             } else {
                 this.setState({
-                    selectedCardClass: "card-item"
+                    backgroundColor: {backgroundColor: ""}
                 })
             }
         }
@@ -62,19 +64,21 @@ class Card extends React.Component{
     toggleImage = () => {
         if (this.state.img === this.props.img_out){
             this.setState({
-                img: this.props.img_in
+                img: this.props.img_in,
+                imgView: 'in'
             })
         } else {
             this.setState({
-                img: this.props.img_out
+                img: this.props.img_out,
+                imgView: 'out'
             })
         }
     }
 
     render(){
         return(
-            <div className="card">
-                    <div className={this.state.selectedCardClass}>
+            <div className="card" style={this.state.backgroundColor}>
+                    <div className="card-item">
                         <div className="card-item-main">
                             {this.state.ind === null ? 
                             <label className="radio">
@@ -99,7 +103,10 @@ class Card extends React.Component{
                         </div>
                         <div className="card-item-info">
                             <span>${this.props.price / 100}</span>
-                            <button onClick={this.toggleImage}>INSIDE</button>
+                            {this.state.imgView === 'out' ? 
+                            <button onClick={this.toggleImage}>INSIDE</button> :
+                            <button onClick={this.toggleImage}>OUTSIDE</button>}
+                            {/* <button onClick={this.toggleImage}>INSIDE</button> */}
                         </div>
                     </div>
             </div>

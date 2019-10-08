@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {deleteSelectedCard, saveSelectedCard} from '../../../../ducks/reducer'
+import {withRouter} from 'react-router-dom'
 
 class CartItem extends React.Component{
     deleteItem = () => {
@@ -8,14 +9,27 @@ class CartItem extends React.Component{
         this.props.saveSelectedCard(this.props.cust_id, this.props.selected_cards, this.props.tree_rel_id)
     }
 
+    editItem = () => {
+        // console.log(selected_cards)
+        this.props.history.push(`/cards/${this.props.tree_rel_id}`)
+    }
+
     render(){
         return(
-            <div key={this.props.tree_rel_id}>
-                    <h4>{this.props.rel_name}</h4>
-                    <img width="200px" alt={this.props.rel_name} src={this.props.img_out}/>
-                    <p>${this.props.price}</p>
-                    <p>{this.props.rel_delivery}</p>
-                    <button onClick={this.deleteItem}>Delete</button>
+            <div className="cartitem" key={this.props.tree_rel_id}>
+                <div className="cartitem-left">
+                    {/* <img width="200px" alt={this.props.rel_name} src={this.props.img_out}/> */}
+                    <div className="cartitem-left-img" style={{backgroundImage: `url(${this.props.img_out})`}}/>
+                </div>
+                <div className="cartitem-right">
+                    <h4>For: {this.props.rel_name}</h4>
+                    <p>{this.props.rel_delivery} - {this.props.relationship}</p>
+                    <span>${this.props.price / 100}</span>
+                    <div className="cartitem-right-buttons">
+                        <button onClick={this.editItem}>Edit</button>
+                        <button onClick={this.deleteItem}>Delete</button>
+                    </div>
+                </div>
             </div>
         )
     }
@@ -26,4 +40,4 @@ const mapStateToProps = (reduxState) => {
     return {selected_cards, cust_id}
 }
 
-export default connect(mapStateToProps, {deleteSelectedCard, saveSelectedCard})(CartItem)
+export default connect(mapStateToProps, {deleteSelectedCard, saveSelectedCard})(withRouter(CartItem))

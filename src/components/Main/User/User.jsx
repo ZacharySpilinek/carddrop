@@ -62,29 +62,36 @@ class User extends Component {
             )
         })
         return(
-            <div className="User">
-                This is User.
-                User Info:
-                <button onClick={this.toggleEdit}>Edit</button>
-                {!this.state.toggleEdit ? 
-                    <>
-                        <h3>{this.props.first_name}</h3>
-                        <h3>{this.props.last_name}</h3>
-                        <h4>{this.props.email}</h4>
-                    </>
-                :
-                    <>
-                        <input onChange={e => this.handleChange(e, 'firstName')} placeholder="First Name" defaultValue={this.props.first_name} type="text"/>
-                        <input onChange={e => this.handleChange(e, 'lastName')} placeholder="Last Name" defaultValue={this.props.last_name} type="text"/>
-                        <input onChange={e => this.handleChange(e, 'email')} placeholder="Email" defaultValue={this.props.email} type="text"/>
-                        <button onClick={this.saveChange}>Save Changes</button>
-                        <button onClick={this.cancel}>Cancel</button>
-                    </>
-                }
-                
-                My Tree:
-                <button onClick={this.editTree}>Edit Tree</button>
-                    {treeMap}
+            <div className="user">
+                <h2>Hello, {this.props.first_name}</h2>
+                <div className="user-info">
+                    My Info:
+                    <button onClick={this.toggleEdit}>Edit</button>
+                    {!this.state.toggleEdit ? 
+                        <>
+                            <div className="user-info-info">
+                                <h3>First Name: {this.props.first_name}</h3>
+                                <h3>Last Name: {this.props.last_name}</h3>
+                                <h4>Email: {this.props.email}</h4>
+                            </div>
+                        </>
+                    :
+                        <>
+                            <div className="user-info-edit-inputs">
+                                <input onChange={e => this.handleChange(e, 'firstName')} placeholder="First Name" defaultValue={this.props.first_name} type="text"/>
+                                <input onChange={e => this.handleChange(e, 'lastName')} placeholder="Last Name" defaultValue={this.props.last_name} type="text"/>
+                                <input onChange={e => this.handleChange(e, 'email')} placeholder="Email" defaultValue={this.props.email} type="text"/>
+                            </div>
+                            <button onClick={this.saveChange}>Save Changes</button>
+                            <button onClick={this.cancel}>Cancel</button>
+                        </>
+                    }
+                </div>
+                <div className="user-tree">
+                    My Tree:
+                    <button onClick={this.editTree}>Edit Tree</button>
+                        {treeMap}
+                </div>
             </div>
         )
     }

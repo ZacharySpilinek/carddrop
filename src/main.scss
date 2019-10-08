@@ -8,7 +8,14 @@
 @import "./components/Main/TreeBuilder/TreeItem/treeitem.scss";
 @import "./components/Main/CardSelect/cardselect.scss";
 @import "./components/Main/CardSelect/Card/card.scss";
+@import "./components/Main/Cart/cart.scss";
+@import "./components/Main/Cart/CartItem/cartitem.scss";
+@import "./components/Main/User/user.scss";
 @import url('https://fonts.googleapis.com/css?family=Lora|Montserrat:500&display=swap');
+
+$radioSize: 20px;
+$radioBorder: #D1D7E3;
+$radioActive: $primaryRed;
 
 .App {
     h1, h2, h3, h4, h5, h6 {

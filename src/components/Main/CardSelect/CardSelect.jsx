@@ -3,10 +3,15 @@ import {connect} from 'react-redux'
 import axios from 'axios'
 import Card from './Card/Card'
 import {cardSelected, saveSelectedCard} from '../../../ducks/reducer'
+import {withRouter} from 'react-router-dom'
 
 class CardSelect extends Component {
-    state = {
-        cards: []
+    constructor(){
+        super()
+        this.myRef = React.createRef()
+        this.state = {
+            cards: [],
+        }
     }
 
     componentDidMount = () => {
@@ -16,8 +21,14 @@ class CardSelect extends Component {
     componentDidUpdate = (prevProps) => {
         if (prevProps !== this.props){
             this.getCardsByCategory()
+
+        }
+        if (prevProps.match.params.tree_rel_id !== this.props.match.params.tree_rel_id){
+            this.scrollToMyRef()
         }
     }
+
+    scrollToMyRef = () => window.scrollTo(0, 0)
 
     /* componentWillUnmount = () => {
         this.props.saveSelectedCard(this.props.cust_id, this.props.selected_cards[this.props.match.params.tree_rel_id])
@@ -69,10 +80,13 @@ class CardSelect extends Component {
     render(){
         return(
             <div className="cardselect">
+                {/* <h1 ref={this.myRef}>asdf</h1> */}
                 {this.props.selectedCardLoading === true || !this.props.tree ? <h1>Loading...</h1>
                 : 
                 <>
-                <h2>Select card for: {this.props.tree[this.props.match.params.tree_rel_id].rel_name}</h2>
+                <div className="cardselect-name">
+                    <h3>Select card for:</h3><h2>{this.props.tree[this.props.match.params.tree_rel_id].rel_name}</h2>
+                </div>
                 <div className="cardselect-map">
                     {this.mapCards()}
                 </div>
@@ -83,7 +97,7 @@ class CardSelect extends Component {
                  }
             </div>
         )
-    }
+    }  
 }
 
 const mapStateToProps = reduxState => {
@@ -91,4 +105,4 @@ const mapStateToProps = reduxState => {
     return {cust_id, tree, selected_cards, selectedCardLoading, treeLoading}
 }
 
-export default connect(mapStateToProps, {cardSelected, saveSelectedCard})(CardSelect)
+export default connect(mapStateToProps, {cardSelected, saveSelectedCard})(withRouter(CardSelect))

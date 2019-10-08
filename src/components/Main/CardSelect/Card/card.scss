@@ -1,22 +1,23 @@
 @import "../../../../colors.scss";
+@import "../../../../buttons.scss";
 
 .card {
-    background: red;
-    width: 275px;
-    height: 275px;
-    max-height: 300px;
-    max-width: 300px;
+    // background: red;
+    width: 300px;
+    height: 325px;
+    max-height: 400px;
+    max-width: 400px;
     margin-bottom: 10px;
     box-shadow: 0px 2px 4px #00000020;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-radius: 10px;
+    // justify-content: center;
     align-items: center;
     // position: relative;
-    .selected {
-        border: 2px solid $primaryRed;
-        border-radius: 3px;
-    }
+    transition: .3s;
     .card-item {
         // position: relative;
         // width: 100%;
@@ -25,12 +26,17 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 0 3px;
+            margin: 3px 3px 0 3px;
+            padding: 0 3px;
+        }
+        button {
+            @include buttonHollow($primaryRed);
         }
     }
     .card-img-out {
-        width: 125px;
-        height: 125px;
+        width: 290px;
+        height: 290px;
+        border-radius: 10px;
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
@@ -50,6 +56,7 @@
             bottom: 0;
             right: 0;
             padding: 0 3%;
+            border-radius: 3px;
             font-family: Montserrat, Geneva, Verdana, sans-serif;
             color: white
         }

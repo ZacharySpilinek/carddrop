@@ -43,11 +43,10 @@ class Cart extends Component {
 
     render(){
         return(
-            <div className="Cart">
-                This is Cart.
+            <div className="cart">
+                <h2>Your Cart</h2>
                 {this.mappedCart()}
                 <button onClick={() => this.previous()}>Previous</button>
-                
             </div>
         )
     }
