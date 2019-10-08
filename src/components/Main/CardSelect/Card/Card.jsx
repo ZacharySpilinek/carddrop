@@ -30,20 +30,24 @@ class Card extends React.Component{
             <div className="card">
                 {this.state.ind === null ?
                 <>
-                    <input onClick={() => this.cardSelect()}
-                        type="radio"
-                        name="same"
-                        />
-                    <img onClick={() => this.cardSelect()} width="200px" alt={this.props.relationship} height="auto" src={this.props.img_out}/>
+                    <div className="card-item">
+                        <input onClick={() => this.cardSelect()}
+                            type="radio"
+                            name="same"
+                            />
+                        <img onClick={() => this.cardSelect()} alt={this.props.relationship} height="auto" src={this.props.img_out}/>
+                    </div>
                 </>
                 :
                 <>
-                    <input onClick={() => this.cardSelect()}
-                        type="radio"
-                        name="same"
-                        defaultChecked={this.props.selected_cards[this.state.ind].card_id === this.props.card_id}                     
-                        />
-                    <img onClick={() => this.cardSelect()} width="200px" alt={this.props.relationship} height="auto" src={this.props.img_out}/>
+                    <div className="card-item">
+                        <input onClick={() => this.cardSelect()}
+                            type="radio"
+                            name="same"
+                            defaultChecked={this.props.selected_cards[this.state.ind].card_id === this.props.card_id}                     
+                            />
+                        <img onClick={() => this.cardSelect()} alt={this.props.relationship} height="auto" src={this.props.img_out}/>
+                    </div>
                 </>
                 }
             </div>

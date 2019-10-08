@@ -72,7 +72,9 @@ class CardSelect extends Component {
                 : 
                 <>
                 <h2>Select card for: {this.props.tree[this.props.match.params.tree_rel_id].rel_name}</h2>
-                {this.mapCards()}
+                <div className="cardselect-map">
+                    {this.mapCards()}
+                </div>
                 <button onClick={() => this.previous()}>Previous</button>
                 <button onClick={() => this.next()} disabled={!this.props.tree[+this.props.match.params.tree_rel_id + 1]}>Next</button>
                 {!this.props.tree[+this.props.match.params.tree_rel_id + 1] ? <button onClick={() => this.finish()}>Finish</button> : <></>}
