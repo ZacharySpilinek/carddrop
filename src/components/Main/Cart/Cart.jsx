@@ -7,6 +7,10 @@ class Cart extends Component {
         this.props.history.push(`/cards/${this.props.tree[this.props.tree.length - 1].tree_rel_id}`)
     }
 
+    componentDidMount = () => {
+
+    }
+
     componentDidUpdate = (prevProps) => {
         if (prevProps.selected_cards !== this.props.selected_cards) {
             this.mappedCart()
@@ -16,14 +20,15 @@ class Cart extends Component {
     mappedCart = () => {
         if (this.props.selected_cards){
             let mapArr = []
-            this.props.selected_cards.forEach(el => {
-                let index = this.props.tree.findIndex(treeItem => treeItem.tree_rel_id === el.tree_rel_id)
+            this.props.selected_cards.forEach((el, i) => {
                 mapArr.push({
                     ...el,
-                    rel_name: this.props.tree[index].rel_name,
-                    rel_delivery: this.props.tree[index].rel_delivery
+                    rel_name: this.props.tree[i].rel_name,
+                    rel_relationship: this.props.tree[i].rel_relationship,
+                    rel_delivery: this.props.tree[i].rel_delivery
                 })
             })
+
             return mapArr.map(el => {
                 return (
                     <CartItem
@@ -33,7 +38,7 @@ class Cart extends Component {
                         img_out={el.img_out}
                         price={el.price}
                         card_id={el.card_id}
-                        relationship={el.relationship}
+                        relationship={el.rel_relationship}
                         tree_rel_id={el.tree_rel_id}
                     />
                 )

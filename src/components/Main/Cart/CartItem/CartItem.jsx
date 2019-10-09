@@ -15,6 +15,7 @@ class CartItem extends React.Component{
     }
 
     render(){
+        // console.log(this.props.relationship)
         return(
             <div className="cartitem" key={this.props.tree_rel_id}>
                 <div className="cartitem-left">

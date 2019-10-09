@@ -10,36 +10,20 @@ class CardSelect extends Component {
         super()
         this.myRef = React.createRef()
         this.state = {
-            cards: [],
-            ind: 0
+            cards: []
         }
     }
-
+    
     componentDidMount = () => {
-        let ind = this.props.tree.findIndex(el => el.tree_rel_id === +this.props.match.params.tree_rel_id)
-        this.setState({
-            ind: ind
-        })
-        this.getCardsByCategory(ind)
+        this.getCardsByCategory()
     }
 
     componentDidUpdate = (prevProps, prevState) => {
         if (prevProps !== this.props){
-            let ind = this.props.tree.findIndex(el => el.tree_rel_id === +this.props.match.params.tree_rel_id)
-            if (ind !== -1){
-                this.setState({
-                    ind: ind
-                })
-            }
-        }
-        if (prevState.ind !== this.state.ind){
-            this.getCardsByCategory(this.state.ind)
+            this.getCardsByCategory()
         }
         if (prevProps.match.params.tree_rel_id !== this.props.match.params.tree_rel_id){
             this.scrollToMyRef()
-        }
-        if (prevState.cards === this.state.cards && prevState.ind !== this.state.ind){
-            this.getCardsByCategory(this.state.ind)
         }
     }
 
@@ -50,9 +34,8 @@ class CardSelect extends Component {
     } */
 
     getCardsByCategory = async (ind) => {
-        if (this.props.tree[ind]){
-            console.log(this.props.tree[this.state.ind].rel_relationship)
-            let result = await axios.get(`/api/cards/category?category=${this.props.tree[this.state.ind].rel_relationship}`)
+        if (this.props.tree[this.props.match.params.tree_rel_id]){
+            let result = await axios.get(`/api/cards/category?category=${this.props.tree[this.props.match.params.tree_rel_id].rel_relationship}`)
             this.setState({
                 cards: result.data
             })
@@ -62,7 +45,7 @@ class CardSelect extends Component {
     mapCards = () => {
         return this.state.cards.map(el => (
             <Card
-                key={el.card_id + this.props.match.params.tree_rel_id + this.props.tree[this.state.ind].rel_name}
+                key={el.card_id + this.props.match.params.tree_rel_id + this.props.tree[this.props.match.params.tree_rel_id].rel_name}
                 card_relationship={el.relationship}
                 img_out={el.img_out}
                 img_in={el.img_in}
@@ -75,21 +58,21 @@ class CardSelect extends Component {
 
     next = () => {
         // problem with below code. If someone deletes a card in cart and comes back to the person in question, this will send the correct cust_id, BUT the second arg is null (the card is gone, hence nothing to grab)
-        this.props.saveSelectedCard(this.props.cust_id, this.props.selected_cards[this.state.ind], +this.props.match.params.tree_rel_id)
-        this.props.history.push(`/cards/${this.props.tree[this.state.ind + 1].tree_rel_id}`)
+        this.props.saveSelectedCard(this.props.cust_id, this.props.selected_cards[+this.props.match.params.tree_rel_id], +this.props.match.params.tree_rel_id)
+        this.props.history.push(`/cards/${this.props.tree[+this.props.match.params.tree_rel_id + 1].tree_rel_id}`)
     }
 
     previous = () => {
-        if (this.props.tree[+this.state.ind - 1]) {
-            this.props.saveSelectedCard(this.props.cust_id, this.props.selected_cards[this.state.ind], +this.props.match.params.tree_rel_id)
-            this.props.history.push(`/cards/${this.props.tree[+this.state.ind - 1].tree_rel_id}`)
+        if (this.props.tree[+this.props.match.params.tree_rel_id - 1]) {
+            this.props.saveSelectedCard(this.props.cust_id, this.props.selected_cards[+this.props.match.params.tree_rel_id], +this.props.match.params.tree_rel_id)
+            this.props.history.push(`/cards/${this.props.tree[+this.props.match.params.tree_rel_id - 1].tree_rel_id}`)
         } else {
             this.props.history.push(`/tree`)
         }
     }
 
     finish = () => {
-        this.props.saveSelectedCard(this.props.cust_id, this.props.selected_cards[this.state.ind], +this.props.match.params.tree_rel_id)
+        this.props.saveSelectedCard(this.props.cust_id, this.props.selected_cards[+this.props.match.params.tree_rel_id], +this.props.match.params.tree_rel_id)
         this.props.history.push('/cart')
     }
 
@@ -101,14 +84,14 @@ class CardSelect extends Component {
                 : 
                 <>
                 <div className="cardselect-name">
-                    <h3>Select card for:</h3><h2>{this.props.tree[this.state.ind].rel_name}</h2>
+                    <h3>Select card for:</h3><h2>{this.props.tree[+this.props.match.params.tree_rel_id].rel_name}</h2>
                 </div>
                 <div className="cardselect-map">
                     {this.mapCards()}
                 </div>
                 <button onClick={() => this.previous()}>Previous</button>
-                <button onClick={() => this.next()} disabled={!this.props.tree[this.state.ind + 1]}>Next</button>
-                {!this.props.tree[this.state.ind + 1] ? <button onClick={() => this.finish()}>Finish</button> : <></>}
+                <button onClick={() => this.next()} disabled={!this.props.tree[+this.props.match.params.tree_rel_id + 1]}>Next</button>
+                {!this.props.tree[+this.props.match.params.tree_rel_id + 1] ? <button onClick={() => this.finish()}>Finish</button> : <></>}
                 </>
                  }
             </div>

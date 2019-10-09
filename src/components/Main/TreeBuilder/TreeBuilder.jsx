@@ -38,8 +38,8 @@ class TreeBuilder extends Component {
         this.props.getTree(this.props.cust_id)
     }
 
-    next = () => {
-        this.props.saveTree(this.props.cust_id, this.props.tree)
+    next = async () => {
+        await this.props.saveTree(this.props.cust_id, this.props.tree)
         this.props.getSelectedCards(this.props.cust_id)
         this.props.history.push(`/cards/${this.props.tree[0].tree_rel_id}`)
     }
