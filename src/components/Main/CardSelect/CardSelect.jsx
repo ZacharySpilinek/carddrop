@@ -19,7 +19,7 @@ class CardSelect extends Component {
     }
 
     componentDidUpdate = (prevProps, prevState) => {
-        if (prevProps !== this.props){
+        if (prevProps !== this.props && prevProps.match.params.tree_rel_id !== this.props.match.params.tree_rel_id){
             this.getCardsByCategory()
         }
         if (prevProps.match.params.tree_rel_id !== this.props.match.params.tree_rel_id){
