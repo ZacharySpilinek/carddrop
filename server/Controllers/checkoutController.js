@@ -17,7 +17,7 @@ module.exports = {
         let toSend = {
             "id": "carddrop-yearly-drop",
             "price": 7.47,
-            "url": `https://thecarddrop.com/api/checkout/yearly-drop/${cust_id}`
+            "url": "https://thecarddrop.com/api/checkout/yearly-drop/"
         }
         res.status(200).send(toSend)
     }
