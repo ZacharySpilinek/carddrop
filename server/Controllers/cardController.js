@@ -12,6 +12,7 @@ module.exports = {
         const db = req.app.get('db')
         const {category} = req.query
         let result = await db.get_cards_by_category(category)
+        console.log(category)
         res.status(200).send(result)
     },
     saveCard: async (req, res, next) => {
@@ -19,10 +20,12 @@ module.exports = {
         const {cust_id, selected_cards, tree_rel_id} = req.body
         if (!selected_cards) {
             await db.save_card([null, cust_id, tree_rel_id])
+            res.sendStatus(200)
+        } else {
+            const {card_id} = selected_cards
+            let tree = await db.save_card([card_id, cust_id, tree_rel_id])
+            res.sendStatus(200)
         }
-        const {card_id} = selected_cards
-        let tree = await db.save_card([card_id, cust_id, tree_rel_id])
-        res.sendStatus(200)
     },
     savedCards: async (req, res, next) => {
         const db = req.app.get('db')

@@ -4,9 +4,13 @@ import {connect} from 'react-redux'
 import TreeItem from './TreeItem/TreeItem'
 
 class TreeBuilder extends Component {
-    state = {
-        canGoNext: false,
-        loading: true
+    constructor(){
+        super()
+        this.myRef = React.createRef()
+        this.state = {
+            canGoNext: false,
+            loading: true
+        }
     }
 
     componentDidMount = () => {
@@ -18,6 +22,8 @@ class TreeBuilder extends Component {
         // this.getTree() // already getting tree in App.js
         // this.props.getSelectedCards(this.props.cust_id) // already getting tree in App.js
     }
+
+    scrollToBottom = () => window.scrollTo({top: this.myRef.current.offsetTop, left: 0, behavior: 'smooth'})
 
     autoSave = () => {
         let autosave = setInterval(() => {
@@ -41,6 +47,7 @@ class TreeBuilder extends Component {
     add = async () => {
         await this.props.addTreeItem()
         await this.props.saveTree(this.props.cust_id, this.props.tree)
+        this.scrollToBottom()
     }
 
     render(){
@@ -76,7 +83,7 @@ class TreeBuilder extends Component {
                     <div className="tree-list">
                         {treeList}
                         {/* <button >Add</button> */}
-                        <i onClick={this.add} class="fas fa-plus-circle"></i>
+                        <i ref={this.myRef} onClick={this.add} class="fas fa-plus-circle"></i>
                         <div c></div>
                     </div>
                     <button onClick={() => this.props.saveTree(this.props.cust_id, this.props.tree)}>Save All, delete later</button>

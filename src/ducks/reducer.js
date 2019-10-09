@@ -196,7 +196,7 @@ const reducer = (state = initialState, action) => {
             return {...state, tree: [...state.tree, {
                 tree_rel_id: nextId,
                 rel_name: '',
-                rel_relationship: '',
+                rel_relationship: 'neutral',
                 rel_delivery: '',
                 card_id: null,
                 rel_bday_mo: null,
