@@ -8,6 +8,7 @@ const authCtrl = require('./Controllers/authController')
 const userCtrl = require('./Controllers/userController')
 const treeCtrl = require('./Controllers/treeController')
 const cardCtrl = require('./Controllers/cardController')
+const checkoutCtrl = require('./Controllers/checkoutController')
 
 app.use(express.static(`${__dirname}/../build`));
 app.use(express.json())
@@ -23,6 +24,7 @@ app.post('/auth/logout', authCtrl.logout)
 
 app.get('/user', userCtrl.getUser)
 app.put('/user/save', userCtrl.saveUser)
+app.get('/session', userCtrl.getSession)
 
 app.get('/api/tree/:cust_id', treeCtrl.getTree)
 app.post('/api/tree/save/:cust_id', treeCtrl.saveTree)
@@ -32,6 +34,8 @@ app.get('/api/cards/category', cardCtrl.getCardsByCategory)
 app.get('/api/cards/categories', cardCtrl.getCategories)
 app.put('/api/card/save', cardCtrl.saveCard)
 app.get('/api/cards/saved/:cust_id', cardCtrl.savedCards)
+
+app.get('/api/checkout/yearly-drop', checkoutCtrl.getYearlyDropTotal)
 
 app.get('/session', (req, res, next) => {
     res.status(200).send(req.session)

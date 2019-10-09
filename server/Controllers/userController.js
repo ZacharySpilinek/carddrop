@@ -15,5 +15,8 @@ module.exports = {
             last_name: result[0].last_name,
             email: result[0].email}
         res.sendStatus(200)
+    },
+    getSession: (req, res, next) => {
+        res.status(200).send(req.session.user)
     }
 }
