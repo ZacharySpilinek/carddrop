@@ -20,10 +20,10 @@ class TreeItem extends Component {
     delete = () => {
         let selectedCardIndex = this.props.selected_cards.findIndex(el => el.tree_rel_id === this.props.tree_rel_id)
         if (selectedCardIndex === -1){
-            this.props.deleteTree(this.props.cust_id, this.props.tree_rel_id)
+            this.props.deleteTree(this.props.cust_id, this.props.tree_rel_id, this.props.tree)
         } else {
-            this.props.deleteSelectedCard(selectedCardIndex)
-            this.props.deleteTree(this.props.cust_id, this.props.tree_rel_id)
+            // this.props.deleteSelectedCard(selectedCardIndex)
+            this.props.deleteTree(this.props.cust_id, this.props.tree_rel_id, this.props.tree)
         }
         // this.props.deleteTree(this.props.cust_id, this.props.tree_rel_id)
         // this.props.deleteSelectedCard(this.props.cust_id, this.props.tree_rel_id, this.props.selected_cards)
@@ -141,10 +141,10 @@ class TreeItem extends Component {
                             </div>
                     </div>
                 </div>
-                <i class="fas fa-chevron-up"></i>
-                <i onClick={() => this.delete()} class="far fa-times-circle"></i>
+                <i className="fas fa-chevron-up"></i>
+                <i onClick={() => this.delete()} className="far fa-times-circle"></i>
             </div>
-            <i class="fas fa-ellipsis-v"></i>
+            <i className="fas fa-ellipsis-v"></i>
             </>
         )
     }

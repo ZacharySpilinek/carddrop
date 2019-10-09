@@ -48,11 +48,24 @@ module.exports = {
         res.status(200).send(req.session.user.tree)
     },
     deleteTree: async (req, res, next) => {
-        const db = req.app.get('db')
+        /* const db = req.app.get('db')
         const {cust_id, tree_rel_id} = req.body
         let result = await db.delete_tree([cust_id, tree_rel_id])
         req.session.user.tree = result
         let tree = await db.get_tree(cust_id)
+        res.status(200).send(tree) */
+        const db = req.app.get('db')
+        let {treeCopy, cust_id, tree_rel_id} = req.body
+        let result = await db.delete_tree([cust_id, tree_rel_id])
+        treeCopy.forEach((el, i) => {
+            db.delete_update_tree([
+                i,
+                cust_id,
+                result[i].tree_rel_id
+            ])
+        })
+        let tree = await db.get_tree(cust_id)
+        req.session.user.tree = treeCopy
         res.status(200).send(tree)
     }
 }

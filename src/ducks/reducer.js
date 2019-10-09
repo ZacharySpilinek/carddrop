@@ -80,8 +80,17 @@ export const saveTree = (cust_id, tree) => {
     }
 }
 
-export const deleteTree = (cust_id, tree_rel_id) => {
-    let result = axios.post('/api/tree/delete', {cust_id, tree_rel_id}).then(res => res.data)
+export const deleteTree = (cust_id, tree_rel_id, tree) => {
+    let treeCopy = tree
+    treeCopy.splice(tree_rel_id, 1)
+    treeCopy.forEach((el, i) => el.tree_rel_id = treeCopy.indexOf(treeCopy[i]))
+    /* let result = axios.post('/api/tree/delete', {cust_id, tree_rel_id}).then(res => res.data)
+    return {
+        type: DELETE_TREE,
+        payload: result
+    } */
+    let result = axios.post('/api/tree/delete', {cust_id, tree_rel_id, treeCopy}).then(res => res.data)
+    // console.log(result)
     return {
         type: DELETE_TREE,
         payload: result
@@ -205,6 +214,7 @@ const reducer = (state = initialState, action) => {
         case SAVE_TREE + '_FULFILLED':
             return {...state, tree: action.payload}
         case DELETE_TREE + '_FULFILLED':
+            console.log(action.payload)
             return {...state, tree: action.payload}
         case HANDLE_TREE_CHANGE:
             let index = state.tree.findIndex(el => el.tree_rel_id === action.payload.tree_rel_id)
