@@ -19,6 +19,6 @@ export default (
         <Route path='/cart' component={Cart}/>
         <Route path='/checkout' component={Checkout}/>
         <Route path='/profile' component={User}/>
-        <Route ptah='/stamps' component={Stamps}/>
+        <Route path='/stamps' component={Stamps}/>
     </Switch> 
 )

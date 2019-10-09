@@ -17,6 +17,10 @@ class Cart extends Component {
         }
     }
 
+    checkoutPage = () => {
+        this.props.history.push('/checkout')
+    }
+
     mappedCart = () => {
         if (this.props.selected_cards){
             let mapArr = []
@@ -52,6 +56,7 @@ class Cart extends Component {
                 <h2>Your Cart</h2>
                 {this.mappedCart()}
                 <button onClick={() => this.previous()}>Previous</button>
+                <button onClick={() => this.checkoutPage()}>Checkout</button>
             </div>
         )
     }

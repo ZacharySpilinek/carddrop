@@ -9,6 +9,7 @@ const userCtrl = require('./Controllers/userController')
 const treeCtrl = require('./Controllers/treeController')
 const cardCtrl = require('./Controllers/cardController')
 
+app.use(express.static(`${__dirname}/../build`));
 app.use(express.json())
 app.use(session({
     resave: false,
@@ -35,6 +36,12 @@ app.get('/api/cards/saved/:cust_id', cardCtrl.savedCards)
 app.get('/session', (req, res, next) => {
     res.status(200).send(req.session)
 })
+
+const path = require('path')
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../build/index.html'))
+})
+
 
 massive(CONNECTION_STRING).then(db => {
     app.set('db', db)
