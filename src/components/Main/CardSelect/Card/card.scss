@@ -2,26 +2,24 @@
 @import "../../../../buttons.scss";
 
 .card {
-    // background: red;
-    width: 300px;
-    height: 325px;
-    max-height: 400px;
-    max-width: 400px;
+    // width: 100%;
+    height: 100%;
+    // width: 400px;
+    // height: 425px;
     margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 5px;
     box-shadow: 0px 2px 4px #00000020;
     display: flex;
     flex-direction: column;
-    margin-top: 10px;
-    padding-top: 10px;
     border-radius: 10px;
-    // justify-content: center;
     align-items: center;
-    // position: relative;
-    transition: .3s;
+    // background: blue;
     .card-item {
         // position: relative;
         // width: 100%;
-        // height: 150px;
+        // height: 100%;
+        // background: red;
         .card-item-info {
             display: flex;
             justify-content: space-between;
@@ -32,33 +30,49 @@
         button {
             @include buttonHollow($primaryRed);
         }
-    }
-    .card-img-out {
-        width: 290px;
-        height: 290px;
-        border-radius: 10px;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-    }
-    .card-item-main {
-        position: relative;
-        // width: 100%;
-        // height: 125px;
-        display: flex;
-        label {
-            position: absolute;
-            top: 3px;
-            left: 3px;
+        .card-item-main {
+            position: relative;
+            // width: 100%;
+            // height: 125px;
+            display: flex;
+            label {
+                position: absolute;
+                top: 3px;
+                left: 3px;
+            }
+            .card-img-out {
+                // min-width: 200px;
+                // min-height: 200px;
+                width: 290px;
+                height: 290px;
+                // max-width: 400px;
+                // max-height: 400px;
+                border-radius: 10px;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+            .tag {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                padding: 0 3%;
+                border-radius: 3px;
+                font-family: Montserrat, Geneva, Verdana, sans-serif;
+                color: white
+            }
         }
-        .tag {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            padding: 0 3%;
-            border-radius: 3px;
-            font-family: Montserrat, Geneva, Verdana, sans-serif;
-            color: white
+    }
+    @media (min-width: 769px){
+        justify-content: flex-start;
+        align-items: flex-start;
+        .card-item{
+            .card-item-main{
+                .card-img-out {
+                    width: 200px;
+                    height: 200px;
+                }
+            }
         }
     }
 }

@@ -10,7 +10,7 @@ class CardSelect extends Component {
         super()
         this.myRef = React.createRef()
         this.state = {
-            cards: [],
+            cards: []
         }
     }
 

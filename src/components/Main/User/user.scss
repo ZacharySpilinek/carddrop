@@ -1,10 +1,12 @@
 @import "../../../colors.scss";
+@import "../../../buttons.scss";
 
 .user {
-    // background: blue;
+    max-width: 500px;
+    margin: 0 auto;
     h2 {
         text-align: center;
-        font-size: 1.5rem;
+        font-size: 2rem;
         margin-bottom: 15px;
     }
     div {
@@ -16,6 +18,9 @@
         line-height: 30px;
         // display: flex;
         // flex-direction: column;
+        button {
+            @include buttonSolid($primaryRed);
+        }
         .user-info-edit-inputs {
             display: flex;
             flex-direction: column;
@@ -24,6 +29,29 @@
                 margin-bottom: 10px;
                 @include inputFieldCD;
             }
+        }
+        .user-info-info{
+            span{
+                font-family: Lora, Georgia, 'Times New Roman', Times, serif;
+            }
+        }
+    }
+    .user-tree {
+        .tree-map{
+            margin-top: 10px;
+        }
+        button {
+            @include buttonSolid($primaryRed);
+        }
+    }
+    @media (min-width: 769px){
+        .user-info{
+            font-size: 1.2rem;
+            line-height: 50px;
+        }
+        .user-tree {
+            font-size: 1.2rem;
+            line-height: 50px;
         }
     }
 }

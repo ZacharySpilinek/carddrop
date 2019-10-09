@@ -13,5 +13,11 @@
     }
     button {
         @include buttonSolid($primaryRed);
+        font-size: 3rem;
+    }
+    @media (min-width: 769px){
+        button {
+            font-size: 2rem;
+        }
     }
 }

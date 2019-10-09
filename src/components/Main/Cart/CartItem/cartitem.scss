@@ -3,9 +3,12 @@
 
 .cartitem {
     // background: red;
-    margin-bottom: 10px;
+    // margin-bottom: 10px;
+    margin: 0px auto 10px auto;
+    max-width: 400px;
     display: flex;
     align-items: center;
+    // background: blue;
     .cartitem-left {
         .cartitem-left-img {
             width: 150px;
@@ -40,6 +43,7 @@
                 color: white;
                 font-size: 12px;
                 padding: 5px 18px;
+                margin-left: 5px;
                 border: 0px solid #00000000;
                 transition: .3s;
                 &:hover{
@@ -48,6 +52,12 @@
                         box-shadow: inset 0 0 0 4px $primaryRed, 0 0 1px rgba(0, 0, 0, 0);
                     }
             }
+            button:nth-of-type(2) {
+                background: #7b7b7b;
+            }
         }
+    }
+    @media (min-width: 769px){
+        max-width: 600px;
     }
 }

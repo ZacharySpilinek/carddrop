@@ -79,8 +79,8 @@ class Register extends Component {
             <div className="register">
                 {!this.state.showLogin ? 
                     <div>
-                        <h2>Signup To Build Your Tree!</h2>
-                        <p>Don't worry, the account is free.</p>
+                        <h2>Signup To Start Your Tree!</h2>
+                        <p>Building your tree is totally free</p>
                             <form>
                                 <input onChange={e => this.handleChange(e, 'email')} placeholder="Email" type="text"/>
                                 <input onChange={e => this.handleChange(e, 'first_name')} placeholder="First Name"/>

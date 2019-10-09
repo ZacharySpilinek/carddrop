@@ -75,8 +75,10 @@ class TreeBuilder extends Component {
                     <h2>This is TreeBuilder.</h2>
                     <div className="tree-list">
                         {treeList}
+                        {/* <button >Add</button> */}
+                        <i onClick={this.add} class="fas fa-plus-circle"></i>
+                        <div c></div>
                     </div>
-                    <button onClick={this.add}>Add</button>
                     <button onClick={() => this.props.saveTree(this.props.cust_id, this.props.tree)}>Save All, delete later</button>
                     <button disabled={this.props.tree.length === 0} onClick={() => this.next()}>Next</button>
                 </div>}

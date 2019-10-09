@@ -70,9 +70,9 @@ class User extends Component {
                     {!this.state.toggleEdit ? 
                         <>
                             <div className="user-info-info">
-                                <h3>First Name: {this.props.first_name}</h3>
-                                <h3>Last Name: {this.props.last_name}</h3>
-                                <h4>Email: {this.props.email}</h4>
+                                <h3>First Name: <span>{this.props.first_name}</span></h3>
+                                <h3>Last Name: <span>{this.props.last_name}</span></h3>
+                                <h4>Email: <span>{this.props.email}</span></h4>
                             </div>
                         </>
                     :
@@ -90,7 +90,9 @@ class User extends Component {
                 <div className="user-tree">
                     My Tree:
                     <button onClick={this.editTree}>Edit Tree</button>
+                    <div className="tree-map">
                         {treeMap}
+                    </div>
                 </div>
             </div>
         )

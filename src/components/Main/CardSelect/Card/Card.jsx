@@ -98,8 +98,8 @@ class Card extends React.Component{
                                 <span></span>
                             </label>
                             }
-                                <div className="card-img-out" style={{backgroundImage: `url(${this.state.img})`}} onClick={() => this.cardSelect()} alt={this.props.relationship} src={this.props.img_out}></div>
-                                <span className="tag" style={{backgroundColor: this.state.tagColor, textTransform: 'uppercase'}}>{this.state.tagName}</span>
+                            <div className="card-img-out" style={{backgroundImage: `url(${this.state.img})`}} onClick={() => this.cardSelect()} alt={this.props.relationship} src={this.props.img_out}></div>
+                            <span className="tag" style={{backgroundColor: this.state.tagColor, textTransform: 'uppercase'}}>{this.state.tagName}</span>
                         </div>
                         <div className="card-item-info">
                             <span>${this.props.price / 100}</span>

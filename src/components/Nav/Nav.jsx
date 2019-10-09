@@ -117,6 +117,10 @@ class Nav extends Component {
                         <h2 onClick={this.dropDownTrigger}>X</h2>
                         <h1 onClick={() => this.home()}>Home</h1>
                         <h1 onClick={() => this.mobileLogin()}>Login</h1>
+                        <h1>Profile</h1>
+                        <h1>Tree Builder</h1>
+                        <h1>Card Selector</h1>
+                        <h1>Cart</h1>
                     </div>
                 </div>
             </header>

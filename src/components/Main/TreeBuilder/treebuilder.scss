@@ -6,11 +6,37 @@
         text-align: center;
     }
     .tree-list{
-        background: #cccccc;
+        // background: #cccccc;
+        background-image: url('../../../assets/tree_branch_pattern.jpg');
         display: flex;
         flex-direction: column;
         width: 100%;
         height: 100%;
         border-radius: 8px;
+        max-width: 500px;
+        margin: 0 auto;
+        .fa-ellipsis-v {
+            display: flex;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 10px 0px 4px 0px;
+            color: darkgray;
+        }
+        .fa-plus-circle {
+            display: flex;
+            justify-content: center;
+            font-size: 4rem;
+            color: $primaryRed;
+            cursor: pointer;
+            margin: 10px 0 20px 0;
+            &:hover {
+                color: white;
+            }
+        }
+    }
+    @media (min-width: 769px){
+        .tree-list {
+            max-width: 700px;
+        }
     }
 }

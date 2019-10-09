@@ -51,6 +51,7 @@ class Stamps extends React.Component{
                 <Select 
                     // className="react-select-container"
                     value={this.state.selectedOption}
+                    className="react-select-container"
                     onChange={this.handleChange}
                     options={this.state.list}
                     theme={theme => ({
