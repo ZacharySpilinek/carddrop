@@ -83,7 +83,7 @@ class Cart extends Component {
                     className="snipcart-add-item"
                     data-item-name="CardDrop Yearly Drop"
                     data-item-id="carddrop-yearly-drop"
-                    data-item-url="https://thecarddrop.com/api/checkout/yearly-drop/"
+                    data-item-url={`https://thecarddrop.com/api/checkout/yearly-drop/${this.state.totalPriceBox}`}
                     data-item-price={`${this.state.totalPriceBox}`}
                     data-item-payment-interval="Year"
                     >
