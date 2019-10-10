@@ -1,18 +1,10 @@
 var testCtrl = require('./testController')
 
 module.exports = {
-    updateSubId: async (test) => {
-        console.log(test)
-        // const db = req.app.get('db')
-        // const user = await db.find_user(req.body.content.user.email)
-        // const {cust_id} = user
-        // await db.set_subscription_id()
-    },
     snipcartWebhook: (req, res, next) => {
         const db = req.app.get('db')
         if (req.body.eventName === "subscription.created"){
-            // this.updateSubId(req.body)
-            testCtrl.test(req.body, db)
+            testCtrl.updateSubId(db, req.body)
         }
         res.sendStatus(200)
     },
@@ -23,9 +15,3 @@ module.exports = {
         }).catch(err => console.log(`Error: ${err}`))
     }
 }
-
-// updateSubId = (webhook) => {
-//     const db = app.get('db')
-//     const user = await db.find_user(req.body.content.user.email)
-//     console.log(user)
-// }
