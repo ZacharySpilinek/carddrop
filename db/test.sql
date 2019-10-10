@@ -1,2 +1,2 @@
 select * from customer
-where id = 1;
+where cust_id = 1;
