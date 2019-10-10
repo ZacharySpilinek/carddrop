@@ -1,3 +1,5 @@
+var testCtrl = require('./testController')
+
 module.exports = {
     updateSubId: async (test) => {
         console.log(test)
@@ -9,7 +11,8 @@ module.exports = {
     snipcartWebhook: (req, res, next) => {
         const db = req.app.get('db')
         if (req.body.eventName === "subscription.created"){
-            this.updateSubId(req.body)
+            // this.updateSubId(req.body)
+            testCtrl.test()
         }
         res.sendStatus(200)
     },
