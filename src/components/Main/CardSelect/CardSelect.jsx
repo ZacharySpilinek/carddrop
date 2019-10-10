@@ -58,8 +58,13 @@ class CardSelect extends Component {
 
     next = () => {
         // problem with below code. If someone deletes a card in cart and comes back to the person in question, this will send the correct cust_id, BUT the second arg is null (the card is gone, hence nothing to grab)
-        this.props.saveSelectedCard(this.props.cust_id, this.props.selected_cards[+this.props.match.params.tree_rel_id], +this.props.match.params.tree_rel_id)
-        this.props.history.push(`/cards/${this.props.tree[+this.props.match.params.tree_rel_id + 1].tree_rel_id}`)
+        if (!this.props.tree[+this.props.match.params.tree_rel_id + 1]) {
+            this.props.saveSelectedCard(this.props.cust_id, this.props.selected_cards[+this.props.match.params.tree_rel_id], +this.props.match.params.tree_rel_id)
+            this.props.history.push(`/stamps`)
+        } else {
+            this.props.saveSelectedCard(this.props.cust_id, this.props.selected_cards[+this.props.match.params.tree_rel_id], +this.props.match.params.tree_rel_id)
+            this.props.history.push(`/cards/${this.props.tree[+this.props.match.params.tree_rel_id + 1].tree_rel_id}`)
+        }
     }
 
     previous = () => {
@@ -90,7 +95,7 @@ class CardSelect extends Component {
                     {this.mapCards()}
                 </div>
                 <button onClick={() => this.previous()}>Previous</button>
-                <button onClick={() => this.next()} disabled={!this.props.tree[+this.props.match.params.tree_rel_id + 1]}>Next</button>
+                <button onClick={() => this.next()} /* disabled={!this.props.tree[+this.props.match.params.tree_rel_id + 1]} */>Next</button>
                 {!this.props.tree[+this.props.match.params.tree_rel_id + 1] ? <button onClick={() => this.finish()}>Finish</button> : <></>}
                 </>
                  }

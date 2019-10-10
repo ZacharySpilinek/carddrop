@@ -1,10 +1,13 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {deleteSelectedCard, saveSelectedCard} from '../../../../ducks/reducer'
+import {deleteSelectedCard, saveSelectedCard, deleteStamp} from '../../../../ducks/reducer'
 import {withRouter} from 'react-router-dom'
 
 class CartItem extends React.Component{
     deleteItem = () => {
+        if (this.props.rel_delivery === "mail"){
+            this.props.deleteStamp()
+        }
         this.props.deleteSelectedCard(null, this.props.selected_cards, this.props.tree_rel_id)
         this.props.saveSelectedCard(this.props.cust_id, this.props.selected_cards, this.props.tree_rel_id)
     }
@@ -41,4 +44,4 @@ const mapStateToProps = (reduxState) => {
     return {selected_cards, cust_id}
 }
 
-export default connect(mapStateToProps, {deleteSelectedCard, saveSelectedCard})(withRouter(CartItem))
+export default connect(mapStateToProps, {deleteSelectedCard, saveSelectedCard, deleteStamp})(withRouter(CartItem))

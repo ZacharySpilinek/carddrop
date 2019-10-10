@@ -10,6 +10,7 @@ const initialState = {
     categories: [],
     selected_cards: [],
     tree: [],
+    stamps: 0,
     treeLoading: false,
     selectedCardLoading: true
 }
@@ -29,6 +30,9 @@ const GET_SELECTED_CARDS = "GET_SELECTED_CARDS"
 const DELETE_SELECTED_CARD = "DELETE_SELECTED_CARD"
 const HANDLE_USER_CHANGE = "HANDLE_USER_CHANGE"
 const SAVE_USER_CHANGE = "SAVE_USER_CHANGE"
+const ADD_STAMPS = "ADD_STAMPS"
+const DELETE_STAMP = "DELETE_STAMP"
+const DELETE_ALL_STAMPS = "DELETE_ALL_STAMPS"
 
 export const setUserId = (userInfo) => {
     return {
@@ -162,6 +166,25 @@ export const saveUserChange = (firstName, lastName, email, cust_id) => {
     }
 }
 
+export const addStamps = (mailCount) => {
+    return {
+        type: ADD_STAMPS,
+        payload: mailCount
+    }
+}
+
+export const deleteStamp = () => {
+    return {
+        type: DELETE_STAMP
+    }
+}
+
+export const deleteAllStamps = () => {
+    return {
+        type: DELETE_ALL_STAMPS
+    }
+}
+
 const reducer = (state = initialState, action) => {
     switch(action.type){
         case GET_USER:
@@ -261,6 +284,16 @@ const reducer = (state = initialState, action) => {
             }
         case SAVE_USER_CHANGE:
             return {...state}
+        case ADD_STAMPS:
+            return {...state, stamps: action.payload}
+        case DELETE_STAMP:
+            if (state.stamps <= 0){
+                return {...state}
+            } else {
+                return {...state, stamps: state.stamps - 1}
+            }
+        case DELETE_ALL_STAMPS:
+            return {...state, stamps: 0}
         default:
             return state
     }

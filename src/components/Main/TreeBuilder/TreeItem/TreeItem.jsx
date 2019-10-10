@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {deleteTree, handleTreeChange, deleteSelectedCard} from '../../../../ducks/reducer'
+import {deleteTree, handleTreeChange, deleteSelectedCard, deleteStamp} from '../../../../ducks/reducer'
 // import Select from 'react-select'
 
 class TreeItem extends Component {
@@ -20,9 +20,11 @@ class TreeItem extends Component {
     delete = () => {
         let selectedCardIndex = this.props.selected_cards.findIndex(el => el.tree_rel_id === this.props.tree_rel_id)
         if (selectedCardIndex === -1){
+            this.props.deleteStamp()
             this.props.deleteTree(this.props.cust_id, this.props.tree_rel_id, this.props.tree)
         } else {
-            // this.props.deleteSelectedCard(selectedCardIndex)
+            this.props.deleteStamp()
+            this.props.deleteSelectedCard(selectedCardIndex)
             this.props.deleteTree(this.props.cust_id, this.props.tree_rel_id, this.props.tree)
         }
         // this.props.deleteTree(this.props.cust_id, this.props.tree_rel_id)
@@ -47,7 +49,7 @@ class TreeItem extends Component {
         // console.log(this.props.tree_rel_id)
         return(
             <>
-
+            {!this.props.tree[this.props.tree_rel_id_index] ? <></> :
             <div className="tree-item-mobile">
                 <div className="tree-item-mobile-container">
                     <div className="tree-item-top">
@@ -124,7 +126,7 @@ class TreeItem extends Component {
                                 <option key={0} value="neutral">No Selection</option>
                             {this.props.categories.filter((el) => el !== 'neutral').map((el, i) => (
                                 <option key={i + 1} value={el}>{el}</option>
-                            ))}
+                                ))}
                         </select> 
                     </div>
                     <div className="tree-item-bottom">
@@ -144,6 +146,7 @@ class TreeItem extends Component {
                 <i className="fas fa-chevron-up"></i>
                 <i onClick={() => this.delete()} className="far fa-times-circle"></i>
             </div>
+        }
             <i className="fas fa-ellipsis-v"></i>
             </>
         )
@@ -155,4 +158,4 @@ const mapStateToProps = reduxState => {
     return {categories, tree, cust_id, selected_cards, treeLoading}
 }
 
-export default connect(mapStateToProps, {deleteTree, handleTreeChange, deleteSelectedCard})(TreeItem)
+export default connect(mapStateToProps, {deleteTree, handleTreeChange, deleteSelectedCard, deleteStamp})(TreeItem)
