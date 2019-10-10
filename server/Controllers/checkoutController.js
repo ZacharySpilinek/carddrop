@@ -10,5 +10,9 @@ module.exports = {
             "url": `https://thecarddrop.com/api/checkout/yearly-drop/${total}/${cards}/${stamps}`
         }
         res.status(200).send(toSend)
+    },
+    testFn: async (req, res, next) => {
+        console.log(req.body)
+        res.sendStatus(200)
     }
 }

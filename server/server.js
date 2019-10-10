@@ -37,6 +37,8 @@ app.get('/api/cards/saved/:cust_id', cardCtrl.savedCards)
 
 app.get('/api/checkout/yearly-drop/:total/:cards/:stamps', checkoutCtrl.getYearlyDropTotal)
 
+app.post('/api/snipcart', checkoutCtrl.testFn)
+
 app.get('/session', (req, res, next) => {
     res.status(200).send(req.session)
 })
