@@ -1,6 +1,6 @@
 
 module.exports = {
-    test: (res, res, next) => {
+    test: (req, res, next) => {
         console.log('derp! it works!')
     }
 }
