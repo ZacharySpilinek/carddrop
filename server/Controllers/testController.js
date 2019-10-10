@@ -1,8 +1,7 @@
 module.exports = {
     updateSubId: async (db, webhook) => {
         let {email} = webhook.content.user
-        console.log(email)
-        const result = await db.find_user({email})
+        const result = await db.find_user_by_email(email)
         console.log(result)
     }
 }
