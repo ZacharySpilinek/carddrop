@@ -3,7 +3,7 @@ module.exports = {
     snipcartWebhook: (req, res, next) => {
         const db = req.app.get('db')
         if (req.body.eventName === "subscription.created"){
-            thiss.updateSubId(req.body)
+            this.updateSubId(req.body)
         }
         res.sendStatus(200)
     },
