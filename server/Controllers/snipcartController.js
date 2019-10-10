@@ -7,7 +7,6 @@ module.exports = {
         if (req.body.eventName === "subscription.created"){
             snipcartWebhookCtrl.updateSubId(db, req.body)
         }
-        axios.post('https://hooks.zapier.com/hooks/catch/5857200/o2jiusk/', req.body).then(res => res.data)
         res.sendStatus(200)
     },
     getAllOrders: async (req, res, next) => {
