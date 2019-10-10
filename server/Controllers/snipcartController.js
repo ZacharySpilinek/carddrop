@@ -23,7 +23,7 @@ module.exports = {
 }
 
 updateSubId = async (webhook) => {
-    const db = req.app.get('db')
+    const db = app.get('db')
     const user = await db.find_user(req.body.content.user.email)
     console.log(user)
 }
