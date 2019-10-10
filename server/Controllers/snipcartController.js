@@ -12,18 +12,18 @@ module.exports = {
         axios.get('https://app.snipcart.com/api/orders', {auth: {username: API_KEY, password: ''}}).then(result => {
             res.status(200).send(result.data)
         }).catch(err => console.log(`Error: ${err}`))
-    }/* ,
-    updateSubId: async (req, res, next) => {
-        console.log(req)
+    },
+    updateSubId: async (test) => {
+        console.log(test)
         // const db = req.app.get('db')
         // const user = await db.find_user(req.body.content.user.email)
         // const {cust_id} = user
         // await db.set_subscription_id()
-    } */
+    }
 }
 
-updateSubId = async (webhook) => {
-    const db = app.get('db')
-    const user = await db.find_user(req.body.content.user.email)
-    console.log(user)
-}
+// updateSubId = (webhook) => {
+//     const db = app.get('db')
+//     const user = await db.find_user(req.body.content.user.email)
+//     console.log(user)
+// }
