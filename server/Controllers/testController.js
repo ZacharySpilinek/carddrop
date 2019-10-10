@@ -7,7 +7,7 @@ module.exports = {
             if (webhook.content.schedule.interval === "Year"){
                 interval = 'yearly'
             }
-            let splitUserDefinedId = webbhook.content.userDefinedId.split('-')
+            let splitUserDefinedId = webhook.content.userDefinedId.split('-')
             await db.set_subscription_id([webhook.content.id, splitUserDefinedId[splitUserDefinedId.length - 1], interval])
         } else {
             console.log('no user found under that email')
