@@ -12,7 +12,7 @@ module.exports = {
         const db = req.app.get('db')
         if (req.body.eventName === "subscription.created"){
             // this.updateSubId(req.body)
-            testCtrl.test()
+            testCtrl.test(req.body)
         }
         res.sendStatus(200)
     },
