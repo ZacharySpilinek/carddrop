@@ -9,6 +9,7 @@ const userCtrl = require('./Controllers/userController')
 const treeCtrl = require('./Controllers/treeController')
 const cardCtrl = require('./Controllers/cardController')
 const checkoutCtrl = require('./Controllers/checkoutController')
+const snipcartCtrl = require('./Controllers/snipcartController')
 
 app.use(express.static(`${__dirname}/../build`));
 app.use(express.json())
@@ -37,7 +38,9 @@ app.get('/api/cards/saved/:cust_id', cardCtrl.savedCards)
 
 app.get('/api/checkout/yearly-drop/:total/:cards/:stamps', checkoutCtrl.getYearlyDropTotal)
 
-app.post('/api/snipcart', checkoutCtrl.testFn)
+app.post('/api/snipcart', snipcartCtrl.snipcartWebhook)
+app.get('/api/snipcart/allorders', snipcartCtrl.getAllOrders)
+
 
 app.get('/session', (req, res, next) => {
     res.status(200).send(req.session)

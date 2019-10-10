@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import CartItem from './CartItem/CartItem'
 import {deleteAllStamps} from '../../../ducks/reducer'
+import axios from 'axios'
 
 class Cart extends Component {
     state = {
@@ -72,6 +73,11 @@ class Cart extends Component {
         }
     }
 
+    getAllOrders = async() => {
+        await axios.get('/api/snipcart/allorders').then(res => 
+            console.log(res.data))
+    }
+
     render(){
         return(
             <div className="cart">
@@ -90,6 +96,7 @@ class Cart extends Component {
                     >
                     Checkout Yearly Subscription
                 </button>
+                {/* <button onClick={this.testRequest}>Crazy Test Button</button> */}
                 <p>Stamps: {this.props.stamps}</p>
                 <button onClick={() => this.props.history.push('/stamps')}>Add Stamps</button>
                 <button onClick={this.props.deleteAllStamps}>Delete All Stamps</button>
