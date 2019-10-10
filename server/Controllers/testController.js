@@ -1,5 +1,6 @@
 module.exports = {
     test: async (prm, db) => {
-        console.log(db)
+        const result = db.find_user('zachary.spilinek@gmail.com')
+        console.log(result)
     }
 }
