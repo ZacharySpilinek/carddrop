@@ -22,6 +22,6 @@ module.exports = {
     } */
 }
 
-updateSubId = (webhook) => {
-    console.log(webhook)
+updateSubId = async (webhook) => {
+    console.log(webhook.content.user.email)
 }
