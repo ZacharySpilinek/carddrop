@@ -89,8 +89,8 @@ class Cart extends Component {
                 <button 
                     className="snipcart-add-item"
                     data-item-name={`CardDrop Yearly Drop (${this.props.selected_cards.length} Cards + ${this.props.stamps} Stamps)`}
-                    data-item-id={`carddrop-yearly-drop-${this.props.selected_cards.length}c-${this.props.stamps}s`}
-                    data-item-url={`https://thecarddrop.com/api/checkout/yearly-drop/${this.state.totalPriceBox}/${this.props.selected_cards.length}/${this.props.stamps}`}
+                    data-item-id={`carddrop-yearly-drop-${this.props.selected_cards.length}c-${this.props.stamps}s-${this.props.cust_id}`}
+                    data-item-url={`https://thecarddrop.com/api/checkout/yearly-drop/${this.state.totalPriceBox}/${this.props.selected_cards.length}/${this.props.stamps}/${this.props.cust_id}`}
                     data-item-price={`${this.state.totalPriceBox + ((this.props.stamps * 55) / 100)}`}
                     data-item-payment-interval="Year"
                     >

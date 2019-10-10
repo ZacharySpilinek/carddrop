@@ -36,7 +36,7 @@ app.get('/api/cards/categories', cardCtrl.getCategories)
 app.put('/api/card/save', cardCtrl.saveCard)
 app.get('/api/cards/saved/:cust_id', cardCtrl.savedCards)
 
-app.get('/api/checkout/yearly-drop/:total/:cards/:stamps', checkoutCtrl.getYearlyDropTotal)
+app.get('/api/checkout/yearly-drop/:total/:cards/:stamps/:cust_id', checkoutCtrl.getYearlyDropTotal)
 
 app.post('/api/snipcart', snipcartCtrl.snipcartWebhook)
 app.get('/api/snipcart/allorders', snipcartCtrl.getAllOrders)
