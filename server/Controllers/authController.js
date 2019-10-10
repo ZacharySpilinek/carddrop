@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs')
+const axios = require('axios')
 
 module.exports = {
     register: async (req, res, next) => {
@@ -15,7 +16,7 @@ module.exports = {
 
         req.session.user = newUser[0]
         req.session.userid = newUser[0].id
-
+        // axios.post('https://hooks.zapier.com/hooks/catch/5857200/o2jiusk/', {}).then(res => res.data)
         /* newUser[0] is {
             cust_id: 1,
             first_name: 'first name',
@@ -30,11 +31,12 @@ module.exports = {
         const db = req.app.get('db')
         const {email, password} = req.body
         const result = await db.find_user({email})
-        if (!result[0]) return res.status(404).send({message: 'Email incorrect. Please try again.'})
+        if (!result[0]) return res.status(200).send({message: 'Email incorrect. Please try again.'})
         const hashCheck = bcrypt.compareSync(password, result[0].hash)
-        if (!hashCheck) return res.status(403).send({message: 'Password incorrect. Please try again'})
+        if (!hashCheck) return res.status(200).send({message: 'Password incorrect. Please try again'})
         const {cust_id, first_name, last_name, sub_interval, sub_id} = result[0]
         let user = {cust_id, first_name, last_name, email, sub_interval, sub_id}
+        // axios.post('https://hooks.zapier.com/hooks/catch/5857200/o2jiusk/', {message: 'test'}).then(res => res.data)
         req.session.user = user
         /* user is {
             cust_id: 1,

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {handleUserChange, saveUserChange} from '../../../ducks/reducer'
+import axios from 'axios'
 
 class User extends Component {
     state = {
@@ -51,6 +52,17 @@ class User extends Component {
         })
     }
 
+    pauseSubscription = async () => {
+        axios.post('/api/snipcart/subscription/pause', {sub_id: this.props.sub_id}).then(res => {
+            console.log(res)
+        })
+    }
+
+    getAllOrders = async() => {
+        await axios.get('/api/snipcart/allorders').then(res => 
+            console.log(res.data))
+    }
+
     render(){
         let treeMap = this.props.tree.map(el => {
             return(
@@ -94,14 +106,20 @@ class User extends Component {
                         {treeMap}
                     </div>
                 </div>
+                <div className="order-information">
+                    Order Information:
+                    <p onClick={this.getAllOrders}>View Subscription</p>
+                    <p onClick={this.pauseSubscription}>Pause Subscription</p>
+                    <p>Cancel Subscription</p>
+                </div>
             </div>
         )
     }
 }
 
 const mapStateToProps = reduxState => {
-    const {tree, first_name, last_name, email, cust_id} = reduxState
-    return {tree, first_name, last_name, email, cust_id}
+    const {tree, first_name, last_name, email, cust_id, sub_id} = reduxState
+    return {tree, first_name, last_name, email, cust_id, sub_id}
 }
 
 export default connect(mapStateToProps, {handleUserChange, saveUserChange})(User)

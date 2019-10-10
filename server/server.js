@@ -40,6 +40,7 @@ app.get('/api/checkout/yearly-drop/:total/:cards/:stamps/:cust_id', checkoutCtrl
 
 app.post('/api/snipcart', snipcartCtrl.snipcartWebhook)
 app.get('/api/snipcart/allorders', snipcartCtrl.getAllOrders)
+app.post('/api/snipcart/subscription/pause', snipcartCtrl.pauseSubscription)
 
 
 app.get('/session', (req, res, next) => {
