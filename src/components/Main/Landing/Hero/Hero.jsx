@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Hero1 from '../../../../assets/hero1.jpg'
+import Hero1 from '../../../../assets/landing_envelope.jpg'
 import {withRouter} from 'react-router-dom'
 
 class Hero extends Component {
