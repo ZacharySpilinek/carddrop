@@ -101,7 +101,7 @@ massive(CONNECTION_STRING).then(db => {
     app.listen(SERVER_PORT, () => console.log(`${SERVER_PORT} cards in the drop`))
 })
 
-cron.schedule("45 7 * * *", () => {
+cron.schedule("30 13 * * *", () => {
     // The timezone seems to be in daylight savings time. If in summer: set an hour back. If in winter: set for current time.
     // Default for 8:45am send: "45 7 * * *"
     sendGridCtrl.sendMassReminderEmail(massivedb)
