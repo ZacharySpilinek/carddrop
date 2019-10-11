@@ -101,22 +101,22 @@ massive(CONNECTION_STRING).then(db => {
     app.listen(SERVER_PORT, () => console.log(`${SERVER_PORT} cards in the drop`))
 })
 
-// cron.schedule("45 7 * * *", () => {
-//     // The timezone seems to be in daylight savings time. If in summer: set an hour back. If in winter: set for current time.
-//     // Default for 8:45am send: "45 7 * * *"
-//     sendGridCtrl.sendMassReminderEmail(massivedb)
-// }, {
-//     scheduled: true,
-//     timezone: "America/Denver"
-// })
+cron.schedule("45 7 * * *", () => {
+    // The timezone seems to be in daylight savings time. If in summer: set an hour back. If in winter: set for current time.
+    // Default for 8:45am send: "45 7 * * *"
+    sendGridCtrl.sendMassReminderEmail(massivedb)
+}, {
+    scheduled: true,
+    timezone: "America/Denver"
+})
 
 // setTimeout(() => {
 //     sendGridCtrl.sendMassReminderEmail(massivedb)
 // }, 1000 * 2);
 
-cron.schedule("21 13 * * *", () => {
-    console.log('a minute has passed')
-}, {
-    scheduled: true,
-    timezone: "America/Denver"
-})
+// cron.schedule("21 13 * * *", () => {
+//     console.log('a minute has passed')
+// }, {
+//     scheduled: true,
+//     timezone: "America/Denver"
+// })
