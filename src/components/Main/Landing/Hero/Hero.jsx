@@ -16,6 +16,7 @@ class Hero extends Component {
     }
 
     render(){
+        console.log(new Date())
         return(
             <div id="Hero" className="Hero">
                 <div className="hero1" style={{backgroundImage:`url(${this.state.heroImg})`}}>
