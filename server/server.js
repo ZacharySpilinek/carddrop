@@ -4,12 +4,15 @@ const app = express()
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env
 const massive = require('massive')
 const session = require('express-session')
+const moment = require('moment')
+moment().format()
 const authCtrl = require('./Controllers/authController')
 const userCtrl = require('./Controllers/userController')
 const treeCtrl = require('./Controllers/treeController')
 const cardCtrl = require('./Controllers/cardController')
 const checkoutCtrl = require('./Controllers/checkoutController')
 const snipcartCtrl = require('./Controllers/snipcartController')
+const sendGridCtrl = require('./Controllers/sendGridController')
 
 app.use(express.static(`${__dirname}/../build`));
 app.use(express.json())
@@ -52,19 +55,45 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../build/index.html'))
 })
 
+setTimeout(() => {
+    sendGridCtrl.sendMessage()
+}, 1000 * 5);
+
+
+// will definitely want to set up the below to only run once a day at midnight MST.
+/* setInterval(() => {
+    // var now = moment("2013-02-08", "YYYY-MM-DD")
+    // console.log(now)
+    // var month = moment().month()
+    // var date = moment().date()
+    // month++
+    // console.log(`${month}/${date}`) // 10/10
+    var monthSevenDaysFromNow = moment().add(7, 'days').format("MM")
+    var daySevenDaysFromNow = moment().add(7, 'days').format("DD")
+    var bdayMo = 10
+    var bdayDay = 17
+    // if (`${bdayMo}/${bdayDay}` === `${monthSevenDaysFromNow}/${daySevenDaysFromNow}`){
+    //     console.log('YUP')
+    // } else {
+    //     console.log('NOPE')
+    // }
+    var treePersonBDay = moment(`${bdayMo}-${bdayDay}`, "MM-DD")
+    var sevenDaysFromNow = moment(`${monthSevenDaysFromNow}-${daySevenDaysFromNow}`, "MM-DD")
+    console.log(treePersonBDay.diff(sevenDaysFromNow, 'days'))
+}, 1000) */
+
 // using Twilio SendGrid's v3 Node.js Library
 // https://github.com/sendgrid/sendgrid-nodejs
-const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-const msg = {
-  to: 'test@example.com',
-  from: 'test@example.com',
-  subject: 'Sending with Twilio SendGrid is Fun',
-  text: 'and easy to do anywhere, even with Node.js',
-  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-};
-sgMail.send(msg);
-
+// const sgMail = require('@sendgrid/mail');
+// sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+// const msg = {
+//   to: 'test@example.com',
+//   from: 'test@example.com',
+//   subject: 'Sending with Twilio SendGrid is Fun',
+//   text: 'and easy to do anywhere, even with Node.js',
+//   html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+// };
+// sgMail.send(msg);
 
 massive(CONNECTION_STRING).then(db => {
     app.set('db', db)
