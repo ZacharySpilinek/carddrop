@@ -114,7 +114,7 @@ massive(CONNECTION_STRING).then(db => {
 //     sendGridCtrl.sendMassReminderEmail(massivedb)
 // }, 1000 * 2);
 
-cron.schedule("* * * * *", () => {
+cron.schedule("21 13 * * *", () => {
     console.log('a minute has passed')
 }, {
     scheduled: true,
