@@ -57,6 +57,18 @@ class Nav extends Component {
         this.props.history.push('/')
     }
 
+    getStarted = () => {
+        this.props.history.push('/register')
+    }
+
+    signup = () => {
+        this.props.history.push('/register')
+    }
+
+    login = () => {
+        this.props.history.push('/register/login-nav')
+    }
+
     toggleLogin = () => {
         this.setState(prevState => ({
             showLogin: !prevState.showLogin
@@ -95,20 +107,10 @@ class Nav extends Component {
                 <nav>
                     <i onClick={this.dropDownTrigger} className="fas fa-bars fa-2x"></i>
                     <div className="menu">
-                        <button onClick={this.home}>Home</button>
-                        {this.props.cust_id ? 
-                            <><button onClick={this.logout}>Logout</button> <button onClick={this.userProfile}>My Profile</button></> :
-                            <>
-                            <button onClick={this.toggleLogin}>Login</button>
-                                {this.state.showLogin ?
-                                    <div>
-                                        <input autoFocus onChange={e => this.handleChange(e, 'email')} type="text" placeholder="Email"/>
-                                        <input onChange={e => this.handleChange(e, 'password')} onKeyDown={(e) => this.handleKeyPress(e)} type="password" placeholder="Password"/>
-                                        <button onClick={this.login}>Login</button>
-                                    </div>
-                                    : <></>}
-                            </>
-                        }
+                        <h4 onClick={this.home}>Home</h4>
+                        <h4 onClick={this.getStarted}>Get Started</h4>
+                        <h4 onClick={this.signup}>Sign Up</h4>
+                        <h4 onClick={this.login}>Login</h4>
                     </div>
                 </nav>
                 <div id="dropdown" className={this.state.dropdownClass}>

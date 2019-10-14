@@ -15,9 +15,21 @@ class Register extends Component {
     }
 
     componentDidMount = () => {
-        if (this.props.location.pathname.includes('login')){
+        if (this.props.location.pathname.includes('login') || this.props.location.pathname.includes('login-nav')){
             this.setState({
                 showLogin: true
+            })
+        }
+    }
+
+    componentDidUpdate = () => {
+        if (this.props.location.pathname.includes('login-nav') && !this.state.showLogin){
+            this.setState({
+                showLogin: true
+            })
+        } else if (this.props.location.pathname.includes('register') && !this.props.location.pathname.includes('login') && this.state.showLogin){
+            this.setState({
+                showLogin: false
             })
         }
     }

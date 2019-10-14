@@ -32,4 +32,24 @@
             font-size: 2rem;
         }
     }
+    @media (min-width: 1080px){
+        .hero1 {
+            height: 600px;
+            h2 {
+                font-size: 3rem;
+            }
+            button {
+                transform: scale(.8);
+            }
+        }
+    }
+    @media (min-width: 1920px){
+        .hero1 {
+            height: 850px;
+            h2 {
+                margin-bottom: 30px;
+                font-size: 4rem;
+            }
+        }
+    }
 }

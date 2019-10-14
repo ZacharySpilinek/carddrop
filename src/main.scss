@@ -145,4 +145,10 @@ $radioActive: $primaryRed;
             margin: 0px 50px 0px 50px;
         }
     }
+    @media (min-width: 1920px) {
+        .app-container{
+            padding: 0px 30px;
+            margin: 0px 200px 0px 200px;
+        }
+    }
 }

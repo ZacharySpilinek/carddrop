@@ -1,5 +1,5 @@
 import React from 'react'
-/* global Snipcart:false */
+// /* global Snipcart:false */
 
 
 class SnipcartCheckout extends React.Component {
