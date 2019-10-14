@@ -81,7 +81,7 @@ class TreeBuilder extends Component {
                 <div>
                     {/* <button onClick={() => this.props.saveTree(this.props.cust_id, this.props.tree)}>Save All, delete later</button> */}
                     <h2>Build Your Tree</h2>
-                    <p>Start by listing your connections, the people you want to buy cards for. We're constantly adding relationship categories, so if theirs is not on the list, choose "No Selection". You will still get to choose a card for them.</p>
+                    <p className="tree-builder-description">Start by listing your connections, the people you want to buy cards for. We're constantly adding relationship categories, so if theirs is not on the list, choose "No Selection". You will still get to choose a card for them.</p>
                     <div className="tree-list">
                         {treeList}
                         {/* <button >Add</button> */}

@@ -6,7 +6,13 @@ import {deleteTree, handleTreeChange, deleteSelectedCard, deleteStamp, saveTree}
 class TreeItem extends Component {
     state = {
         showMore: false,
-        knowBirth: "dontknow"
+        knowBirth: "dontknow"/* ,
+        list: [
+            { value:'chocolate', label: 'Chocolate'},
+            { value: 'strawberry', label: 'Strawberry' },
+            { value: 'vanilla', label: 'Vanilla' }
+        ],
+        selectedOption: null, */
     }
 
     componentDidMount = () => {
@@ -58,7 +64,7 @@ class TreeItem extends Component {
     }
 
     render(){
-        // console.log(this.props.tree_rel_id)
+        console.log(this.props.categories)
         return(
             <>
             {!this.props.tree[this.props.tree_rel_id_index] ? <></> :
@@ -153,6 +159,23 @@ class TreeItem extends Component {
                                     <option key={i + 1} value={el}>{el}</option>
                                     ))}
                             </select> 
+                            {/* <Select 
+                            // className="react-select-container"
+                            value={his.props.tree[this.props.tree_rel_id_index].rel_relationship}
+                            className="react-select-container"
+                            onChange={this.handleChange}
+                            options={this.props.categories.map(el => (
+                                {value: el, label: el}
+                            ))}
+                            theme={theme => ({
+                                ...theme,
+                                borderRadius: 5,
+                                colors: {
+                                    ...theme.colors,
+                                    primary: 'orange'
+                                }
+                            })}
+                        /> */}
                         </div>
                         <div className="tree-item-bottom">
                             <p>I will give their card:</p>
@@ -167,6 +190,21 @@ class TreeItem extends Component {
                                     </label>
                                 </div>
                         </div>
+                        {/* <Select 
+                            // className="react-select-container"
+                            value={this.state.selectedOption}
+                            className="react-select-container"
+                            onChange={this.handleChange}
+                            options={this.state.list}
+                            theme={theme => ({
+                                ...theme,
+                                borderRadius: 5,
+                                colors: {
+                                    ...theme.colors,
+                                    primary: 'orange'
+                                }
+                            })}
+                        /> */}
                     </div>
                     <i onClick={this.toggleView} className="fas fa-chevron-up"></i>
                     <i onClick={() => this.delete()} className="far fa-times-circle"></i>

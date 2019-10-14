@@ -43,6 +43,18 @@
             }
         }
     }
+    @media (min-width: 1280px){
+        .hero1 {
+            height: 700px;
+            h2 {
+                font-size: 3.5rem;
+                margin-bottom: 20px;
+            }
+            button {
+                transform: scale(.8);
+            }
+        }
+    }
     @media (min-width: 1920px){
         .hero1 {
             height: 850px;

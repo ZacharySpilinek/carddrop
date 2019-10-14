@@ -59,7 +59,7 @@ $radioActive: $primaryRed;
         display: flex;
         align-items: center;
         justify-content: center;
-
+        z-index: 3;
         .loading-icon {
             @include loading-icon;
         }
@@ -143,6 +143,19 @@ $radioActive: $primaryRed;
         .app-container {
             padding: 0px 30px;
             margin: 0px 50px 0px 50px;
+        }
+    }
+    @media (min-width: 1280px) {
+        .app-container {
+            padding: 0px 30px;
+            margin: 0px 100px 0px 100px;
+        }
+        > p {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-size: 0.7rem;
+            color: #00000040;
+            text-align: center;
         }
     }
     @media (min-width: 1920px) {

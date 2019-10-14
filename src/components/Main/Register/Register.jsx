@@ -40,8 +40,10 @@ class Register extends Component {
         })
     }
 
-    register = async () => {
+    register = async (e) => {
+        e.preventDefault()
         let {email, password, first_name, last_name} = this.state
+        if (!email.includes('@') || password.length < 6 || this.state.password2 < 6) return
         let newUser = {email, password, first_name, last_name}
         if (this.state.password !== this.state.password2) return alert("Passwords don't match.")
         this.setState({
@@ -78,6 +80,14 @@ class Register extends Component {
         }))
     }
 
+    goToLogin = () => {
+        this.props.history.push('/register/login-nav')
+    }
+
+    goToSignup = () => {
+        this.props.history.push('/register')
+    }
+
     render(){
         return(
             <>
@@ -94,11 +104,11 @@ class Register extends Component {
                         <h2>Signup To Start Your Tree!</h2>
                         <p>Building your tree is totally free</p>
                             <form>
-                                <input onChange={e => this.handleChange(e, 'email')} placeholder="Email" type="text"/>
+                                <input onChange={e => this.handleChange(e, 'email')} placeholder="Email" type="email"/>
                                 <input onChange={e => this.handleChange(e, 'first_name')} placeholder="First Name"/>
                                 <input onChange={e => this.handleChange(e, 'last_name')} placeholder="Last Name"/>
-                                <input onChange={e => this.handleChange(e, 'password')} placeholder="Create a password" type="password"/>
-                                <input onChange={e => this.handleChange(e, 'password2')} placeholder="Re-type your password" type="password"/>
+                                <input onChange={e => this.handleChange(e, 'password')} minLength="6" placeholder="Create a password" type="password"/>
+                                <input onChange={e => this.handleChange(e, 'password2')} minLength="6" placeholder="Re-type your password" type="password"/>
                                 <button onClick={this.register}>Register</button>
                             </form>
                     </div>
@@ -112,9 +122,9 @@ class Register extends Component {
                             </form>
                     </div>}
                 {!this.state.showLogin ? 
-                    <span onClick={this.toggleLogin}>Or, sign in instead</span>
+                    <span onClick={this.goToLogin}>Or, sign in instead</span>
                 :
-                    <span onClick={this.toggleLogin}>Or, sign up here</span>}
+                    <span onClick={this.goToSignup}>Or, sign up here</span>}
             </div>
             </>
         )

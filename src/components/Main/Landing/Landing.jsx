@@ -23,17 +23,19 @@ class Landing extends Component {
                     </div>
                     <div className="three-steps">
                         <h4>It's simple:</h4>
-                        <div className="step-one">
-                            <h4>1.</h4>
-                            <p>Build your friend + family tree.</p>
-                        </div>
-                        <div className="step-two">
-                            <h4>2.</h4>
-                            <p>Select a card for each tree member.</p>
-                        </div>
-                        <div className="step-three">
-                            <h4>3.</h4>
-                            <p>Get your drop sent every year.</p>
+                        <div className="three-steps-steps">
+                            <div className="step-one">
+                                <h4>1.</h4>
+                                <p>Build your friend + family tree.</p>
+                            </div>
+                            <div className="step-two">
+                                <h4>2.</h4>
+                                <p>Select a card for each tree member.</p>
+                            </div>
+                            <div className="step-three">
+                                <h4>3.</h4>
+                                <p>Get your drop sent every year.</p>
+                            </div>
                         </div>
                     </div>
                     <div className="full-color-section-rush">
@@ -81,6 +83,7 @@ class Landing extends Component {
                         <h3>Get Started</h3>
                         <div className="full-color-section-text">
                             <p>Ready to get started? It's easy. Just click the button below.</p>
+                            <button onClick={this.next}>Get Started</button>
                         </div>
                     </div>
                     <div className="footer">

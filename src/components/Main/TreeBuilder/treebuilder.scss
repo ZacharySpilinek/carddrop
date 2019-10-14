@@ -55,4 +55,23 @@
             max-width: 700px;
         }
     }
+    @media (min-width: 1280px){
+        // div:first-child {
+        //     background: blue;
+        // }
+        h2 {
+            font-size: 2rem;
+        }
+        .tree-builder-description {
+            max-width: 550px;
+            text-align: center;
+            margin: 30px auto;
+            margin-top: 10px;
+        }
+        .tree-list-next-button{
+            button {
+                max-width: 300px;
+            }
+        }
+    }
 }

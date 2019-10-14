@@ -246,7 +246,7 @@ const reducer = (state = initialState, action) => {
                 tree_rel_id: nextId,
                 rel_name: '',
                 rel_relationship: 'neutral',
-                rel_delivery: '',
+                rel_delivery: 'in-person',
                 card_id: null,
                 rel_bday_mo: null,
                 rel_bday_day: null

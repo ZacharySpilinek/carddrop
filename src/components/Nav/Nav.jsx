@@ -109,8 +109,17 @@ class Nav extends Component {
                     <div className="menu">
                         <h4 onClick={this.home}>Home</h4>
                         <h4 onClick={this.getStarted}>Get Started</h4>
-                        <h4 onClick={this.signup}>Sign Up</h4>
-                        <h4 onClick={this.login}>Login</h4>
+                        {this.props.cust_id ?
+                            <>
+                            <h4 onClick={this.userProfile}>Account</h4>
+                            <h4 onClick={this.logout}>Logout</h4>
+                            </>
+                            :
+                            <>
+                            <h4 onClick={this.signup}>Sign Up</h4>
+                            <h4 onClick={this.login}>Login</h4>
+                            </>
+                        }
                     </div>
                 </nav>
                 <div id="dropdown" className={this.state.dropdownClass}>

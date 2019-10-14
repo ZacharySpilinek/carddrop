@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Hero1 from '../../../../assets/landing_envelope.jpg'
 import {withRouter} from 'react-router-dom'
+import {connect} from 'react-redux'
 
 class Hero extends Component {
     state = {
@@ -27,4 +28,9 @@ class Hero extends Component {
     }
 }
 
-export default withRouter(Hero)
+const mapStateToProps = reduxState => {
+    const {cust_id} = reduxState
+    return {cust_id}
+}
+
+export default connect(mapStateToProps)(withRouter(Hero))
