@@ -45,7 +45,7 @@ class Landing extends Component {
                     </div>
                     <div className="left-info-section">
                         <div className="left-info-section-left">
-                            <i className="fas fa-tree fa-3x"></i>
+                            <i className="fas fa-tree fa-10x"></i>
                         </div>
                         <div className="left-info-section-right">
                             <h3>Tree</h3>
@@ -58,12 +58,12 @@ class Landing extends Component {
                             <p>After you build your tree, you can pick the perfect card for each person. Picking for Mom? Picking for a Coworker? We'll show you cards tailored towards their relationship to you, and cards that will work for anybody.</p>
                         </div>
                         <div className="right-info-section-left">
-                            <i className="fas fa-stream fa-3x"></i>
+                            <i className="fas fa-stream fa-10x"></i>
                         </div>
                     </div>
                     <div className="left-info-section">
                         <div className="left-info-section-left">
-                            <i className="fas fa-calendar-day fa-3x"></i>
+                            <i className="fas fa-calendar-day fa-10x"></i>
                         </div>
                         <div className="left-info-section-right">
                             <h3>Yearly Drop</h3>
