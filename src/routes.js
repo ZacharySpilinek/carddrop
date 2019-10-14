@@ -8,6 +8,7 @@ import Cart from './components/Main/Cart/Cart'
 import Checkout from './components/Main/Checkout/Checkout'
 import User from './components/Main/User/User'
 import Stamps from './components/Main/Stamps/Stamps'
+import SnipCartCheckout from './components/Main/Snipcart/SnipcartCheckout'
 
 export default (
     <Switch>
@@ -17,6 +18,7 @@ export default (
         <Route path='/tree' component={TreeBuilder}/>
         <Route path='/cards/:tree_rel_id' component={CardSelect}/>
         <Route path='/cart' component={Cart}/>
+        <Route path='/cart!' component={SnipCartCheckout}/>
         <Route path='/checkout' component={Checkout}/>
         <Route path='/profile' component={User}/>
         <Route path='/stamps' component={Stamps}/>

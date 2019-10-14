@@ -101,7 +101,10 @@ class CardSelect extends Component {
     render(){
         return(
             <div className="cardselect">
-                {this.props.selectedCardLoading === true || !this.props.tree || this.state.loading ? <h1>Loading...</h1>
+                {this.props.selectedCardLoading === true || !this.props.tree || this.state.loading ?
+                <div className="loading">
+                    <i className="loading-icon fas fa-spinner"></i>
+                </div>
                 : 
                 <>
                 <div className="cardselect-name">

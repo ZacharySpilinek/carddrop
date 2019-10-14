@@ -9,11 +9,25 @@
         font-size: 2rem;
         text-align: center;
         margin-top: 20px;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
     @media (min-width: 769px){
         > h2 {
             font-size: 1.5rem;
+        }
+    }
+    .back-to-cards {
+        @include buttonSolid($primaryOrange);
+        width: 100%;
+        transform: scale(.7);
+    }
+    .total {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        p {
+            font-size: 1.5rem;
+            margin-top: 10px;
         }
     }
     .checkout-buttons{
@@ -39,5 +53,59 @@
     }
     .stamps-section {
         display: flex;
+        width: 100%;
+        // align-items: center;
+        justify-content: center;
+        .stamps-section-stamps{
+            display: flex;
+            align-items: center;
+            // justify-content: space-betwee;
+            button {
+                @include buttonSolid($primaryRed);
+                transform: scale(1);
+                font-size: 12px;
+                padding: 10px 23px;
+            }
+            p {
+                font-size: 1.2rem;
+                margin: 13px 0px;
+                margin-right: 7px;
+                span{
+                    font-size: 0.8rem;
+                }
+            }
+        }
+        .stamps-section-stamps-expanded {
+            display: flex;
+            align-items: center;
+            // justify-content: space-betwee;
+            button {
+                @include buttonSolid($primaryRed);
+                transform: scale(1);
+                font-size: 12px;
+                padding: 10px 23px;
+            }
+            button:not(.stamp-save) {
+                @include buttonHollow($primaryRed);
+                transform: scale(1);
+                font-size: 14px;
+                font-weight: bold;
+                padding: 6px 10px;
+            }
+            button:nth-child(2){
+                margin-right: 10px;
+            }
+            button:nth-child(4){
+                margin-right: 14px;
+            }
+            p {
+                font-size: 1.2rem;
+                margin: 13px 0px;
+                margin-right: 7px;
+                span{
+                    font-size: 0.8rem;
+                }
+            }
+        }
     }
 }

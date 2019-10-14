@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import CartItem from './CartItem/CartItem'
 import {deleteAllStamps, getStamps, deleteStamp, addStamps, addStamp} from '../../../ducks/reducer'
 import axios from 'axios'
+// /* global Snipcart:false */
 
 class Cart extends Component {
     state = {
@@ -27,6 +28,10 @@ class Cart extends Component {
         //     this.props.getStamps()
         // }
         this.props.getStamps()
+        // Snipcart.subscribe('order.completed', function(){
+        //     console.log('it did the thing')
+        //     window.location.replace('http://localhost:3000/#/checkout')
+        // })
     }
 
     componentDidUpdate = (prevProps) => {
@@ -108,30 +113,39 @@ class Cart extends Component {
     render(){
         return(
             <div className="cart">
+                {this.props.selectedCardLoading === true ?
+                <div className="loading">
+                    <i className="loading-icon fas fa-spinner"></i>
+                </div>
+                : 
+                <>
                 <h2>Your Cart</h2>
+                <button className="back-to-cards" onClick={() => this.previous()}>Back To Cards</button>
+
+                <hr />
                 {this.mappedCart()}
-                <button onClick={() => this.previous()}>Previous</button>
                 {/* <button onClick={() => this.checkoutPage()}>Checkout</button> */}
                 {/* <button onClick={this.testRequest}>Crazy Test Button</button> */}
-                <div className="total">
-                    <div className="stamps-section">
-                        {!this.state.editStamps ?  
-                        <>
-                            <p>Stamps:</p>
-                            <p>{this.props.stamps} ($0.55/ea)</p>
-                            <button onClick={this.editStamps}>Edit</button>
-                        </>
-                        :
-                        <>
-                            <p>Stamps: </p>
-                            <p onClick={this.minusStamp}>-</p>
-                            <p>{this.props.stamps}</p>
-                            <p onClick={this.addStamp}>+</p>
-                            <button onClick={this.saveStamps}>Save</button>
-                        </>
-                        }
+                <div className="stamps-section">
+                    {!this.state.editStamps ?  
+                    <div className="stamps-section-stamps">
+                        <p>Stamps:</p>
+                        <p>{this.props.stamps} <span>($0.55/ea)</span></p>
+                        <button onClick={this.editStamps}>Edit</button>
                     </div>
-                    <p>Subtotal: ${this.state.totalPriceBox + ((this.props.stamps * 55) / 100)}</p>
+                    :
+                    <div className="stamps-section-stamps-expanded">
+                        <p>Stamps: </p>
+                        <button onClick={this.minusStamp}>-</button>
+                        <p>{this.props.stamps}</p>
+                        <button onClick={this.addStamp}>+</button>
+                        <button className="stamp-save" onClick={this.saveStamps}>Save</button>
+                    </div>
+                    }
+                </div>
+                <hr />
+                <div className="total">
+                    <p>Subtotal: ${((this.state.totalPriceBox * 100) + (this.props.stamps * 55)) / 100}</p>
                 </div>
                 <div className="checkout-buttons">
                     <button 
@@ -155,14 +169,16 @@ class Cart extends Component {
                         Checkout (Just One Box)
                     </button>
                 </div>
+                </>
+                }
             </div>
         )
     }
 }
 
 const mapStateToProps = reduxState => {
-    const {tree, selected_cards, cust_id, stamps} = reduxState
-    return {tree, selected_cards, cust_id, stamps}
+    const {tree, selected_cards, cust_id, stamps, selectedCardLoading} = reduxState
+    return {tree, selected_cards, cust_id, stamps, selectedCardLoading}
 }
 
 export default connect(mapStateToProps, {deleteAllStamps, getStamps, deleteStamp, addStamps, addStamp})(Cart)
