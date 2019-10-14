@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Select from 'react-select'
-import {addStamps} from '../../../ducks/reducer'
+import {addStamps, deleteAllStamps} from '../../../ducks/reducer'
 
 class Stamps extends React.Component{
     state = {
@@ -11,7 +11,8 @@ class Stamps extends React.Component{
             { value: 'strawberry', label: 'Strawberry' },
             { value: 'vanilla', label: 'Vanilla' }
         ],
-        selectedOption: null
+        selectedOption: null,
+        stampTotalPrice: 0
     }
 
     handleChange = selectedOption => {
@@ -32,6 +33,13 @@ class Stamps extends React.Component{
         this.setState({
             mailCount: mailCount
         })
+        var stampTotalPrice = mailCount * 0.55
+        stampTotalPrice=parseFloat(stampTotalPrice);
+        if(!isNaN(stampTotalPrice)) stampTotalPrice=stampTotalPrice.toFixed(2);
+        else stampTotalPrice='0.00'
+        this.setState({
+            stampTotalPrice: stampTotalPrice
+        })
     }
 
     componentDidUpdate = (prevProps) => {
@@ -49,6 +57,7 @@ class Stamps extends React.Component{
     }
 
     noStamps = () => {
+        this.props.deleteAllStamps()
         this.props.history.push('/cart')
     }
 
@@ -62,10 +71,12 @@ class Stamps extends React.Component{
         return(
             <div className="stamps">
                 <i className="fas fa-mail-bulk fa-4x"></i>
-                <h1>We noticed you have {this.state.mailCount} {this.props.selected_cards.length <= 1 ? "cards" : "card"} set to be delivered by mail. Would you like to add {this.state.mailCount} {this.state.mailCount <= 1 ? "stamp" : "stamps"} to your cart for ${this.state.mailCount * 0.55}? They never expire and can go to any US state.</h1>
-                <h2>You can edit your stamps in checkout.</h2>
-                <button onClick={this.yesStamps}>Yes, please!</button> {/* IMPORTANT: this needs to add the right quantity of stamps to their cart. It must also NOT pull up the cart. Then it will send them to the cart page. */}
-                <button onClick={this.noStamps}>No, thank you</button>
+                <h2>We noticed you have {this.state.mailCount} {this.props.selected_cards.length <= 1 ? "cards" : "card"} set to be delivered by mail. Would you like to add {this.state.mailCount} {this.state.mailCount <= 1 ? "stamp" : "stamps"} to your cart for ${this.state.stampTotalPrice}? They never expire and can go to any US state.</h2>
+                <p>You can edit your stamps in checkout.</p>
+                <div className="stamps-buttons">
+                    <button onClick={this.yesStamps}>Yes, please!</button> {/* IMPORTANT: this needs to add the right quantity of stamps to their cart. It must also NOT pull up the snipcart cart. Then it will send them to the cart page. */}
+                    <button onClick={this.noStamps}>No, thank you</button>
+                </div>
                 <Select 
                     // className="react-select-container"
                     value={this.state.selectedOption}
@@ -91,4 +102,4 @@ const mapStateToProps = reduxState => {
     return {tree, selected_cards}
 }
 
-export default connect(mapStateToProps, {addStamps})(Stamps)
+export default connect(mapStateToProps, {addStamps, deleteAllStamps})(Stamps)

@@ -19,6 +19,21 @@ class App extends React.Component {
     } else if (this.props.location.pathname.includes('/tree') || this.props.location.pathname.includes('/cards') || this.props.location.pathname.includes('/cart') || this.props.location.pathname.includes('/checkout')) {
       this.props.history.push('/')
     }
+    // console.log('app loaded')
+  }
+
+  componentDidUpdate = async (prevProps) => {
+    // console.log(this.props.location.pathname)
+    // console.log(this.props.cust_id)
+    if (this.props.location.pathname !== prevProps.location.pathname && !this.props.cust_id) {
+      console.log('this ran')
+      let res = await axios.get('/user')
+      if (res.data.cust_id){
+        this.props.getUser(res.data)
+        this.props.getTree(res.data.cust_id)
+        this.props.getSelectedCards(res.data.cust_id)
+      }
+    }
   }
 
   render(){
@@ -34,4 +49,9 @@ class App extends React.Component {
   }
 }
 
-export default connect(null, {getUser, getTree, getSelectedCards})(withRouter(App));
+const mapStateToProps = reduxState => {
+  const {cust_id} = reduxState
+  return {cust_id}
+}
+
+export default connect(mapStateToProps, {getUser, getTree, getSelectedCards})(withRouter(App));

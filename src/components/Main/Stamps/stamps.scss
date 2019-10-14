@@ -1,6 +1,28 @@
+@import "../../../buttons.scss";
 
 .stamps {
+    padding: 30px 0px;
     display: flex;
     flex-direction: column;
-    
+    i {
+        align-self: center;
+        margin-bottom: 20px;
+    }
+    h2 {
+        line-height: 1.4rem;
+    }
+    p {
+        font-size: .8rem;
+        text-align: center;
+    }
+    .stamps-buttons {
+        display: flex;
+        margin: 20px 0px;
+        button {
+            @include buttonSolid($primaryRed);
+            transform: scale(.7);
+            font-size: 1.4rem;
+            padding: 10px 10px;
+        }
+    }
 }
