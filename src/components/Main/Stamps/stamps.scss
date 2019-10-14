@@ -26,3 +26,18 @@
         }
     }
 }
+
+@media (min-width: 1280px) {
+    .stamps{
+        padding: 40px 150px;
+        p {
+            margin-bottom: 20px;
+        }
+        .stamps-buttons{
+            width: 50vw;
+            display: flex;
+            margin: 0 auto;
+            justify-content: space-between;
+        }
+    }
+}

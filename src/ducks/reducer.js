@@ -254,7 +254,6 @@ const reducer = (state = initialState, action) => {
         case SAVE_TREE + '_FULFILLED':
             return {...state, tree: action.payload}
         case DELETE_TREE + '_FULFILLED':
-            console.log(action.payload)
             return {...state, tree: action.payload}
         case HANDLE_TREE_CHANGE:
             let index = state.tree.findIndex(el => el.tree_rel_id === action.payload.tree_rel_id)

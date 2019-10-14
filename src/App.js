@@ -26,7 +26,6 @@ class App extends React.Component {
     // console.log(this.props.location.pathname)
     // console.log(this.props.cust_id)
     if (this.props.location.pathname !== prevProps.location.pathname && !this.props.cust_id) {
-      console.log('this ran')
       let res = await axios.get('/user')
       if (res.data.cust_id){
         this.props.getUser(res.data)

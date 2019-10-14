@@ -64,7 +64,6 @@ class TreeItem extends Component {
     }
 
     render(){
-        console.log(this.props.categories)
         return(
             <>
             {!this.props.tree[this.props.tree_rel_id_index] ? <></> :

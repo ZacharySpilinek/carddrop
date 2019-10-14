@@ -6,12 +6,12 @@ import {addStamps, deleteAllStamps} from '../../../ducks/reducer'
 class Stamps extends React.Component{
     state = {
         mailCount: 0,
-        list: [
+        /* list: [
             {value:'chocolate', label: 'Chocolate'},
             { value: 'strawberry', label: 'Strawberry' },
             { value: 'vanilla', label: 'Vanilla' }
         ],
-        selectedOption: null,
+        selectedOption: null, */
         stampTotalPrice: 0
     }
 
@@ -67,7 +67,6 @@ class Stamps extends React.Component{
     }
 
     render(){
-        console.log(this.props.tree)
         return(
             <div className="stamps">
                 <i className="fas fa-mail-bulk fa-4x"></i>
@@ -77,7 +76,7 @@ class Stamps extends React.Component{
                     <button onClick={this.yesStamps}>Yes, please!</button> {/* IMPORTANT: this needs to add the right quantity of stamps to their cart. It must also NOT pull up the snipcart cart. Then it will send them to the cart page. */}
                     <button onClick={this.noStamps}>No, thank you</button>
                 </div>
-                <Select 
+                {/* <Select 
                     // className="react-select-container"
                     value={this.state.selectedOption}
                     className="react-select-container"
@@ -91,7 +90,7 @@ class Stamps extends React.Component{
                             primary: 'orange'
                         }
                     })}
-                />
+                /> */}
             </div>
         )
     }

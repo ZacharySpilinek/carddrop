@@ -120,7 +120,7 @@ class Cart extends Component {
                 : 
                 <>
                 <h2>Your Cart</h2>
-                <button className="back-to-cards" onClick={() => this.previous()}>Back To Cards</button>
+                <button className="back-to-cards" onClick={() => this.previous()}>{'< Back To Cards'}</button>
 
                 <hr />
                 {this.mappedCart()}

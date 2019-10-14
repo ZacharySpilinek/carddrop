@@ -12,7 +12,6 @@ module.exports = {
         const db = req.app.get('db')
         const {category} = req.query
         let result = await db.get_cards_by_category(category)
-        console.log(category)
         res.status(200).send(result)
     },
     saveCard: async (req, res, next) => {

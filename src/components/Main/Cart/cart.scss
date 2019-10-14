@@ -5,6 +5,10 @@
     // width: 100%;
     margin: 0 auto;
     max-width: 600px;
+    hr {
+        opacity: .5;
+        width: 80%;
+    }
     > h2 {
         font-size: 2rem;
         text-align: center;
@@ -23,8 +27,8 @@
     }
     .total {
         display: flex;
-        flex-direction: column;
-        align-items: flex-end;
+        flex-direction: row;
+        justify-content: flex-end;
         p {
             font-size: 1.5rem;
             margin-top: 10px;
@@ -37,7 +41,7 @@
         align-items: center;
         flex-direction: column;
         .checkout-yearly-subscription {
-            @include buttonSolid($primaryRed);
+            @include buttonSolid($primaryOrange);
             transform: scale(.7);
             // padding: 10px 5px;
             width: 130%;
@@ -45,7 +49,7 @@
             margin-bottom: 15px;
         }
         .checkout-one-box {
-            @include buttonHollow($primaryRed);
+            @include buttonHollow($primaryOrange);
             transform: scale(.9);
             width: 80%;
             height: 30px;
@@ -106,6 +110,29 @@
                     font-size: 0.8rem;
                 }
             }
+        }
+    }
+}
+
+@media (min-width: 1280px){
+    .cart {
+        .back-to-cards {
+            transform: scale(1);
+            font-size: 14px;
+            padding: 10px 0px;
+            width: 150px
+        }
+        .checkout-buttons {
+            .checkout-yearly-subscription {
+                width: 70%;
+            }
+            .checkout-one-box {
+                width: 40%;
+            }
+        }
+        .total {
+            justify-content: center;
+            font-weight: bold;
         }
     }
 }

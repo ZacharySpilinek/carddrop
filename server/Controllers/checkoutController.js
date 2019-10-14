@@ -13,7 +13,6 @@ module.exports = {
         res.status(200).send(toSend)
     },
     testFn: async (req, res, next) => {
-        console.log(req.body)
         res.sendStatus(200)
     },
     anotherTest: async (req, res, next) => {

@@ -13,12 +13,10 @@ class CartItem extends React.Component{
     }
 
     editItem = () => {
-        // console.log(selected_cards)
         this.props.history.push(`/cards/${this.props.tree_rel_id}`)
     }
 
     render(){
-        // console.log(this.props.relationship)
         return(
             <div className="cartitem" key={this.props.tree_rel_id}>
                 <div className="cartitem-left">

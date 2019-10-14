@@ -12,7 +12,6 @@ class Checkout extends Component {
         //     window.location.replace('/#/cart/')
         // })
         Snipcart.subscribe('cart.closed', function(){
-            console.log('it did the thing')
             window.location.replace('http://localhost:3000/#/checkout')
         })
     }
