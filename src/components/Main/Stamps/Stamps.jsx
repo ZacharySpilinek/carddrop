@@ -98,8 +98,8 @@ class Stamps extends React.Component{
 }
 
 const mapStateToProps = reduxState => {
-    const {tree, selected_cards} = reduxState
-    return {tree, selected_cards}
+    const {tree, selected_cards, stamps} = reduxState
+    return {tree, selected_cards, stamps}
 }
 
 export default connect(mapStateToProps, {addStamps, deleteAllStamps})(Stamps)

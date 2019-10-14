@@ -1,12 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import CartItem from './CartItem/CartItem'
-import {deleteAllStamps} from '../../../ducks/reducer'
+import {deleteAllStamps, getStamps, deleteStamp, addStamps, addStamp} from '../../../ducks/reducer'
 import axios from 'axios'
 
 class Cart extends Component {
     state = {
-        totalPriceBox: 0
+        totalPriceBox: 0,
+        editStamps: false
     }
 
     previous = () => {
@@ -22,6 +23,10 @@ class Cart extends Component {
         this.setState({
             totalPriceBox: total
         })
+        // if (this.props.stamps === 0 && prevProps.location.pathname !== '/stamps') {
+        //     this.props.getStamps()
+        // }
+        this.props.getStamps()
     }
 
     componentDidUpdate = (prevProps) => {
@@ -38,6 +43,9 @@ class Cart extends Component {
                 totalPriceBox: total
             })
         }
+        if (this.props.stamps === 0 && prevProps.location.pathname !== '/stamps') {
+            this.props.getStamps()
+        }
     }
 
     checkoutPage = () => {
@@ -45,7 +53,7 @@ class Cart extends Component {
     }
 
     mappedCart = () => {
-        if (this.props.selected_cards){
+        if (this.props.selected_cards.length >= 1 && this.props.tree.length >= 1){
             let mapArr = []
             this.props.selected_cards.forEach((el, i) => {
                 mapArr.push({
@@ -78,28 +86,75 @@ class Cart extends Component {
             console.log(res.data))
     }
 
+    editStamps = () => {
+        this.setState({
+            editStamps: !this.state.editStamps
+        })
+    }
+
+    saveStamps = async () => {
+        await this.props.addStamps(this.props.stamps)
+        this.editStamps()
+    }
+
+    minusStamp = async () => {
+        await this.props.deleteStamp()
+    }
+
+    addStamp = async () => {
+        await this.props.addStamp()
+    }
+
     render(){
         return(
             <div className="cart">
                 <h2>Your Cart</h2>
-                <h2>{this.state.totalPriceBox}</h2>
                 {this.mappedCart()}
                 <button onClick={() => this.previous()}>Previous</button>
                 {/* <button onClick={() => this.checkoutPage()}>Checkout</button> */}
-                <button 
-                    className="snipcart-add-item"
-                    data-item-name={`CardDrop Yearly Drop (${this.props.selected_cards.length} Cards + ${this.props.stamps} Stamps)`}
-                    data-item-id={`carddrop-yearly-drop-${this.props.selected_cards.length}c-${this.props.stamps}s-${this.props.cust_id}`}
-                    data-item-url={`https://thecarddrop.com/api/checkout/yearly-drop/${this.state.totalPriceBox}/${this.props.selected_cards.length}/${this.props.stamps}/${this.props.cust_id}`}
-                    data-item-price={`${this.state.totalPriceBox + ((this.props.stamps * 55) / 100)}`}
-                    data-item-payment-interval="Year"
-                    >
-                    Checkout Yearly Subscription
-                </button>
                 {/* <button onClick={this.testRequest}>Crazy Test Button</button> */}
-                <p>Stamps: {this.props.stamps}</p>
-                <button onClick={() => this.props.history.push('/stamps')}>Add Stamps</button>
-                <button onClick={this.props.deleteAllStamps}>Delete All Stamps</button>
+                <div className="total">
+                    <div className="stamps-section">
+                        {!this.state.editStamps ?  
+                        <>
+                            <p>Stamps:</p>
+                            <p>{this.props.stamps} ($0.55/ea)</p>
+                            <button onClick={this.editStamps}>Edit</button>
+                        </>
+                        :
+                        <>
+                            <p>Stamps: </p>
+                            <p onClick={this.minusStamp}>-</p>
+                            <p>{this.props.stamps}</p>
+                            <p onClick={this.addStamp}>+</p>
+                            <button onClick={this.saveStamps}>Save</button>
+                        </>
+                        }
+                    </div>
+                    <p>Subtotal: ${this.state.totalPriceBox + ((this.props.stamps * 55) / 100)}</p>
+                </div>
+                <div className="checkout-buttons">
+                    <button 
+                        className="snipcart-add-item checkout-yearly-subscription"
+                        data-item-name={`CardDrop Yearly Drop (${this.props.selected_cards.length} Cards + ${this.props.stamps} Stamps)`}
+                        data-item-id={`carddrop-yearly-drop-${this.props.selected_cards.length}c-${this.props.stamps}s-${this.props.cust_id}`}
+                        data-item-url={`https://thecarddrop.com/api/checkout/yearly-drop/${this.state.totalPriceBox}/${this.props.selected_cards.length}/${this.props.stamps}/${this.props.cust_id}`}
+                        data-item-price={`${this.state.totalPriceBox + ((this.props.stamps * 55) / 100)}`}
+                        data-item-payment-interval="Year"
+                        >
+                        Checkout (Yearly Subscription)
+                    </button>
+                    <button 
+                        className="snipcart-add-item checkout-one-box"
+                        data-item-name={`CardDrop Yearly Drop (${this.props.selected_cards.length} Cards + ${this.props.stamps} Stamps)`}
+                        data-item-id={`carddrop-yearly-drop-${this.props.selected_cards.length}c-${this.props.stamps}s-${this.props.cust_id}`}
+                        data-item-url={`https://thecarddrop.com/api/checkout/yearly-drop/${this.state.totalPriceBox}/${this.props.selected_cards.length}/${this.props.stamps}/${this.props.cust_id}`}
+                        data-item-price={`${this.state.totalPriceBox + ((this.props.stamps * 55) / 100)}`}
+                        data-item-payment-interval="Year"
+                        >
+                        Checkout (Just One Box)
+                    </button>
+                </div>
             </div>
         )
     }
@@ -110,4 +165,4 @@ const mapStateToProps = reduxState => {
     return {tree, selected_cards, cust_id, stamps}
 }
 
-export default connect(mapStateToProps, {deleteAllStamps})(Cart)
+export default connect(mapStateToProps, {deleteAllStamps, getStamps, deleteStamp, addStamps, addStamp})(Cart)

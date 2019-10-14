@@ -33,6 +33,8 @@ const SAVE_USER_CHANGE = "SAVE_USER_CHANGE"
 const ADD_STAMPS = "ADD_STAMPS"
 const DELETE_STAMP = "DELETE_STAMP"
 const DELETE_ALL_STAMPS = "DELETE_ALL_STAMPS"
+const GET_STAMPS = "GET_STAMPS"
+const ADD_STAMP = "ADD_STAMP"
 
 export const setUserId = (userInfo) => {
     return {
@@ -167,15 +169,30 @@ export const saveUserChange = (firstName, lastName, email, cust_id) => {
 }
 
 export const addStamps = (mailCount) => {
+    axios.post('/api/stamps/add', {mailCount}).then(res => res.data)
     return {
         type: ADD_STAMPS,
         payload: mailCount
     }
 }
 
+export const getStamps = () => {
+    let result = axios.get('/api/stamps').then(res => res.data)
+    return {
+        type: GET_STAMPS,
+        payload: result
+    }
+}
+
 export const deleteStamp = () => {
     return {
         type: DELETE_STAMP
+    }
+}
+
+export const addStamp = () => {
+    return {
+        type: ADD_STAMP
     }
 }
 
@@ -294,6 +311,10 @@ const reducer = (state = initialState, action) => {
             }
         case DELETE_ALL_STAMPS:
             return {...state, stamps: 0}
+        case ADD_STAMP:
+            return {...state, stamps: 1 + state.stamps}
+        case GET_STAMPS + '_FULFILLED':
+            return {...state, stamps: action.payload.stamps}
         default:
             return state
     }

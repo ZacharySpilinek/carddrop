@@ -18,5 +18,17 @@ module.exports = {
     },
     getSession: (req, res, next) => {
         res.status(200).send(req.session.user)
+    },
+    addStamps: (req, res, next) => {
+        const {mailCount} = req.body
+        req.session.user.stamps = mailCount
+        res.sendStatus(200)
+    },
+    getStamps: (req, res, next) => {
+        // if (req.session.user)
+        // console.log(req.session.user.stamps)
+        // res.sendStatus(200)
+
+        res.status(200).send(req.session.user)
     }
 }
