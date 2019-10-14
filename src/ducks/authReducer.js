@@ -9,7 +9,7 @@ const initialState = {
 
 const SET_USER_ID = "SET_USER_ID"
 const GET_USER = "GET_USER"
-const CLEAR_STATE = "CLEAR_STATE"
+const CLEAR_USER_STATE = "CLEAR_USER_STATE"
 
 export const setUserId = (userInfo) => {
     return {
@@ -25,7 +25,7 @@ export const getUser = (userInfo) => {
     }
 }
 
-export const clearState = () => {
+export const clearUserState = () => {
     return {
         type: CLEAR_STATE
     }
@@ -49,7 +49,7 @@ const reducer = (state = initialState, action) => {
                     last_name: action.payload.last_name,
                     sub_id: action.payload.sub_id,
                     sub_interval: action.payload.sub_interval}
-        case CLEAR_STATE:
+        case CLEAR_USER_STATE:
                 return {...state,
                     cust_id: null,
                     email: '',

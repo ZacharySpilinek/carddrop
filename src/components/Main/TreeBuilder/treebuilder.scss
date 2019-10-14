@@ -1,9 +1,26 @@
 @import "../../../colors.scss";
+@import "../../../buttons.scss";
 
 .tree-builder{
     h2{
         font-size: 1.5rem;
+        margin-top: 30px;
+        margin-bottom: 10px;
         text-align: center;
+    }
+    p {
+        margin-bottom: 20px;
+        line-height: 1.3rem;
+    }
+    .tree-list-next-button{
+        margin: 20px 0;
+        display: flex;
+        justify-content: center;
+        button {
+            @include buttonSolid($primaryRed);
+            transform: scale(0.8);
+            width: 80%
+        }
     }
     .tree-list{
         // background: #cccccc;
@@ -21,14 +38,13 @@
             font-size: 1.5rem;
             margin: 10px 0px 4px 0px;
             color: darkgray;
+            opacity: .3;
         }
         .fa-plus-circle {
-            display: flex;
-            justify-content: center;
             font-size: 4rem;
             color: $primaryRed;
             cursor: pointer;
-            margin: 10px 0 20px 0;
+            margin: 10px auto 20px auto;
             &:hover {
                 color: white;
             }

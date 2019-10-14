@@ -24,10 +24,11 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
+        <Nav />
         <div className="app-container">
-          <Nav />
           {routes}
         </div>
+        <p>Copyright ©CardDrop LLC, 2019</p>
       </div>
     );
   }

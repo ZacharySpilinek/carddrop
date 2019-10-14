@@ -90,7 +90,6 @@ class Nav extends Component {
 
     render(){
         return(
-            <>
             <header>
                 <img onClick={this.home} alt="Card Drop Company Logo. A box of envelopes against orange. The words 'Card Drop' in black to the right." src={Logo}/>
                 <nav>
@@ -124,7 +123,6 @@ class Nav extends Component {
                     </div>
                 </div>
             </header>
-            </>
         )
     }
 }

@@ -59,7 +59,8 @@ module.exports = {
 //         {
 //             to: [{email: "zachary.spilinek@gmail.com"}],
 //             dynamic_template_data: {
-//                 name: "mckayicus"
+//                 name: "mckayicus",
+//                 customer: "Jarrad"
 //             }
 //         },
 //         {

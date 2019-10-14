@@ -60,8 +60,9 @@ class Stamps extends React.Component{
     render(){
         console.log(this.props.tree)
         return(
-            <div className="Stamps">
-                <h1>We noticed you have {this.state.mailCount} cards set to be delivered by mail. Would you like to add {this.state.mailCount} stamps to your cart for ${this.state.mailCount * 0.55}? They never expire and can go to any US state.</h1>
+            <div className="stamps">
+                <i className="fas fa-mail-bulk fa-4x"></i>
+                <h1>We noticed you have {this.state.mailCount} {this.props.selected_cards.length <= 1 ? "cards" : "card"} set to be delivered by mail. Would you like to add {this.state.mailCount} {this.state.mailCount <= 1 ? "stamp" : "stamps"} to your cart for ${this.state.mailCount * 0.55}? They never expire and can go to any US state.</h1>
                 <h2>You can edit your stamps in checkout.</h2>
                 <button onClick={this.yesStamps}>Yes, please!</button> {/* IMPORTANT: this needs to add the right quantity of stamps to their cart. It must also NOT pull up the cart. Then it will send them to the cart page. */}
                 <button onClick={this.noStamps}>No, thank you</button>
@@ -86,8 +87,8 @@ class Stamps extends React.Component{
 }
 
 const mapStateToProps = reduxState => {
-    const {tree} = reduxState
-    return {tree}
+    const {tree, selected_cards} = reduxState
+    return {tree, selected_cards}
 }
 
 export default connect(mapStateToProps, {addStamps})(Stamps)

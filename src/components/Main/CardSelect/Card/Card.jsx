@@ -93,7 +93,7 @@ class Card extends React.Component{
                                 <input onClick={() => this.cardSelect()}
                                     type="radio"
                                     name="same"
-                                    checked={this.props.selected_cards[this.state.ind].card_id === this.props.card_id}                     
+                                    defaultChecked={this.props.selected_cards[this.state.ind].card_id === this.props.card_id}                     
                                     />
                                 <span></span>
                             </label>

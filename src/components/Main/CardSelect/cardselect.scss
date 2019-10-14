@@ -1,5 +1,23 @@
+@import "../../../buttons.scss";
+@import "../../../colors.scss";
+
 .cardselect {
     width: 100%;
+    .cardselect-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0;
+        button {
+            @include buttonSolid($primaryRed);
+            transform: scale(.7);
+            width: 100%;
+        }
+        .finish {
+            @include buttonSolid($primaryOrange);
+            transform: scale(.7);
+            width: 100%;
+        }
+    }
 }
 
 .cardselect-map {
@@ -16,6 +34,9 @@
 .cardselect-name {
     display: flex;
     justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
     h3 {
         margin-right: 6px;
     }
