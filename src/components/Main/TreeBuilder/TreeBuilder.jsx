@@ -39,8 +39,8 @@ class TreeBuilder extends Component {
     }
 
     next = async () => {
+        await this.props.getSelectedCards(this.props.cust_id)
         await this.props.saveTree(this.props.cust_id, this.props.tree)
-        this.props.getSelectedCards(this.props.cust_id)
         this.props.history.push(`/cards/${this.props.tree[0].tree_rel_id}`)
     }
 
@@ -85,7 +85,11 @@ class TreeBuilder extends Component {
                     <div className="tree-list">
                         {treeList}
                         {/* <button >Add</button> */}
+                        {this.props.treeItemLoading ? 
+                        <i ref={this.myRef} className="fas fa-plus-circle"></i>
+                            :
                         <i ref={this.myRef} onClick={this.add} className="fas fa-plus-circle"></i>
+                        }
                     </div>
                     <div className="tree-list-next-button">
                         <button disabled={this.props.tree.length === 0} onClick={() => this.next()}>Next</button>
@@ -98,8 +102,8 @@ class TreeBuilder extends Component {
 }
 
 const mapStateToProps = reduxState => {
-    const {cust_id, treeLoading, tree} = reduxState
-    return {cust_id, treeLoading, tree}
+    const {cust_id, treeLoading, tree, treeItemLoading} = reduxState
+    return {cust_id, treeLoading, tree, treeItemLoading}
 }
 
 export default connect(mapStateToProps, {getTree, getCategories, addTreeItem, saveTree, getSelectedCards})(TreeBuilder)

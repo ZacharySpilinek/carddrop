@@ -41,3 +41,19 @@
         }
     }
 }
+
+@media (min-width: 1920px) {
+    .stamps {
+        width: 80%;
+        display: flex;
+        align-items: center;
+        margin: 0 auto;
+        padding: 60px 0px;
+        h2 {
+            text-align: center;
+        }
+        p {
+            margin-top: 20px;
+        }
+    }
+}

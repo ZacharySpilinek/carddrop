@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import Select from 'react-select'
+// import Select from 'react-select'
 import {addStamps, deleteAllStamps} from '../../../ducks/reducer'
 
 class Stamps extends React.Component{

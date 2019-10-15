@@ -83,3 +83,11 @@
         }
     }
 }
+
+@media (min-width: 1920px) {
+    .cardselect-map {
+        width: 80%;
+        margin: 0 auto;
+        grid-row-gap: 20px;
+    }
+}

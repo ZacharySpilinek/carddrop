@@ -86,6 +86,7 @@ class CardSelect extends Component {
             this.props.saveSelectedCard(this.props.cust_id, this.props.selected_cards[+this.props.match.params.tree_rel_id], +this.props.match.params.tree_rel_id)
             this.props.history.push(`/cards/${this.props.tree[+this.props.match.params.tree_rel_id - 1].tree_rel_id}`)
         } else {
+            this.props.saveSelectedCard(this.props.cust_id, this.props.selected_cards[+this.props.match.params.tree_rel_id], +this.props.match.params.tree_rel_id)
             this.props.history.push(`/tree`)
         }
         this.setState({

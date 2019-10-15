@@ -14,11 +14,6 @@ class Card extends React.Component{
     }
 
     componentDidMount = () => {
-        let ind = this.props.selected_cards.findIndex(el => el.tree_rel_id === +this.props.tree_rel_id)
-        if (ind === -1) return
-        this.setState({
-            ind: ind
-        })
         if (this.props.card_relationship === 'neutral'){
             this.setState({
                 tagName: 'ANYONE'
@@ -29,6 +24,13 @@ class Card extends React.Component{
                 tagName: this.props.card_relationship
             })
         }
+        let ind = this.props.selected_cards.findIndex(el => el.tree_rel_id === +this.props.tree_rel_id)
+        if (ind === -1) return
+        // else this.setState({ind: ind})
+        this.setState({
+            ind: ind
+        })
+        console.log('mounted')
         if (this.props.selected_cards[ind].card_id === this.props.card_id){
             this.setState({
                 backgroundColor: {backgroundColor: "#FEA3AC"}
@@ -37,6 +39,7 @@ class Card extends React.Component{
     }
 
     componentDidUpdate = (prevProps) => {
+        console.log('updated')
         let ind = this.props.selected_cards.findIndex(el => el.tree_rel_id === +this.props.tree_rel_id)
         if (prevProps.selected_cards[ind] !== this.props.selected_cards[ind]){
             if (this.props.selected_cards[ind].card_id === this.props.card_id){
@@ -85,7 +88,7 @@ class Card extends React.Component{
                                 <input onClick={() => this.cardSelect()}
                                     type="radio"
                                     name="same"
-                                    />
+                                />
                                 <span></span>
                             </label>
                             :

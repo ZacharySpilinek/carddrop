@@ -66,6 +66,7 @@ class TreeItem extends Component {
     render(){
         return(
             <>
+            
             {!this.props.tree[this.props.tree_rel_id_index] ? <></> :
                 !this.state.showMore ?
                 <div className="tree-item-mobile-small">
@@ -206,7 +207,11 @@ class TreeItem extends Component {
                         /> */}
                     </div>
                     <i onClick={this.toggleView} className="fas fa-chevron-up"></i>
+                    {this.props.treeItemLoading ? 
+                    <i className="far fa-times-circle"></i>
+                    :
                     <i onClick={() => this.delete()} className="far fa-times-circle"></i>
+                    }
                 </div>
         }
             <i className="fas fa-ellipsis-v"></i>
@@ -216,8 +221,8 @@ class TreeItem extends Component {
 }
 
 const mapStateToProps = reduxState => {
-    const {categories, tree, cust_id, selected_cards, treeLoading} = reduxState
-    return {categories, tree, cust_id, selected_cards, treeLoading}
+    const {categories, tree, cust_id, selected_cards, treeLoading, treeItemLoading} = reduxState
+    return {categories, tree, cust_id, selected_cards, treeLoading, treeItemLoading}
 }
 
 export default connect(mapStateToProps, {deleteTree, handleTreeChange, deleteSelectedCard, deleteStamp, saveTree})(TreeItem)

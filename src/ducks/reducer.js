@@ -12,6 +12,7 @@ const initialState = {
     tree: [],
     stamps: 0,
     treeLoading: false,
+    treeItemLoading: false,
     selectedCardLoading: true
 }
 
@@ -251,10 +252,14 @@ const reducer = (state = initialState, action) => {
                 rel_bday_mo: null,
                 rel_bday_day: null
             }]}
+        case SAVE_TREE + '_PENDING':
+            return {...state, treeItemLoading: true}
         case SAVE_TREE + '_FULFILLED':
-            return {...state, tree: action.payload}
+            return {...state, tree: action.payload, treeItemLoading: false}
+        case DELETE_TREE + '_PENDING':
+            return {...state, treeItemLoading: true}
         case DELETE_TREE + '_FULFILLED':
-            return {...state, tree: action.payload}
+            return {...state, tree: action.payload, treeItemLoading: false}
         case HANDLE_TREE_CHANGE:
             let index = state.tree.findIndex(el => el.tree_rel_id === action.payload.tree_rel_id)
             let oldTree = [...state.tree]
