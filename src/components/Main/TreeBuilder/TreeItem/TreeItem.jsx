@@ -155,8 +155,9 @@ class TreeItem extends Component {
                             <p>They are my:</p>
                             <select onChange={(e) => this.props.handleTreeChange(e.target.value, 'rel_relationship', this.props.tree_rel_id)} value={this.props.tree[this.props.tree_rel_id_index].rel_relationship}>
                                     <option key={0} value="neutral">No Selection</option>
+                                    <option key={1} value="friend">Friend</option>
                                 {this.props.categories.filter((el) => el !== 'neutral').map((el, i) => (
-                                    <option key={i + 1} value={el}>{el}</option>
+                                    <option key={i + 2} value={el}>{el}</option>
                                     ))}
                             </select> 
                             {/* <Select 

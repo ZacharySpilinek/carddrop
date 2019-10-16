@@ -106,12 +106,12 @@ class User extends Component {
                         {treeMap}
                     </div>
                 </div>
-                <div className="order-information">
+                {/* <div className="order-information">
                     Order Information:
                     <p onClick={this.getAllOrders}>View Subscription</p>
                     <p onClick={this.pauseSubscription}>Pause Subscription</p>
                     <p>Cancel Subscription</p>
-                </div>
+                </div> */}
             </div>
         )
     }
