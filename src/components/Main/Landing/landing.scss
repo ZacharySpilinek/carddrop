@@ -164,6 +164,11 @@
                 width: 200px;
                 align-self: center;
             }
+            a {
+                color: $primaryDarkGrey;
+                opacity: .8;
+                text-align: center;
+            }
         }
     }
     @media (min-width: 1280px) {
@@ -197,8 +202,8 @@
             }
             .left-info-section {
                 flex-direction: row;
-                align-items: flex-start;
-                padding: 20vh 150px;
+                align-items: center;
+                padding: 5vh 150px;
                 > div {
                     width: 50%;
                 }
@@ -209,8 +214,8 @@
             }
             .right-info-section {
                 flex-direction: row;
-                align-items: flex-start;
-                padding: 20vh 150px;
+                align-items: center;
+                padding: 5vh 150px;
                 text-align: right;
                 > div {
                     width: 50%;

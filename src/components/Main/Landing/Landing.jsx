@@ -2,6 +2,10 @@ import React, {Component} from 'react'
 import Hero from './Hero/Hero'
 import {connect} from 'react-redux'
 import FooterLogo from '../../../assets/CardDrop-Logo2-850px.png'
+import TreeImg from '../../../assets/tree_img.jpg';
+import CardSelectImg from '../../../assets/cardselect_img.jpg';
+import YearlyDropImg from '../../../assets/yearlydrop_img.jpg';
+import {Link} from 'react-router-dom'
 
 class Landing extends Component {
 
@@ -47,7 +51,7 @@ class Landing extends Component {
                     </div>
                     <div className="left-info-section">
                         <div className="left-info-section-left">
-                            <i className="fas fa-tree fa-10x"></i>
+                            <img alt="CardDrop Tree Builder Abstract" src={TreeImg}/>
                         </div>
                         <div className="left-info-section-right">
                             <h3>Tree</h3>
@@ -60,12 +64,12 @@ class Landing extends Component {
                             <p>After you build your tree, you can pick the perfect card for each person. Picking for Mom? Picking for a Coworker? We'll show you cards tailored towards their relationship to you, and cards that will work for anybody.</p>
                         </div>
                         <div className="right-info-section-left">
-                            <i className="fas fa-stream fa-10x"></i>
+                            <img alt="CardDrop Tree Builder Abstract" src={CardSelectImg}/>
                         </div>
                     </div>
                     <div className="left-info-section">
                         <div className="left-info-section-left">
-                            <i className="fas fa-calendar-day fa-10x"></i>
+                            <img alt="CardDrop Tree Builder Abstract" src={YearlyDropImg}/>
                         </div>
                         <div className="left-info-section-right">
                             <h3>Yearly Drop</h3>
@@ -89,6 +93,9 @@ class Landing extends Component {
                     <div className="footer">
                         <img src={FooterLogo} alt="The Card Drop Logo"/>
                         <p>Contact Us: <a href="info@thecarddrop.com">info@thecarddrop.com</a></p>
+                        <Link to='/tos'>
+                            Terms of Service
+                        </Link>
                     </div>
                 </div>
             </div>

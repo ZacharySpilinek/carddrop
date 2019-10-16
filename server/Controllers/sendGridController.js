@@ -42,7 +42,10 @@ module.exports = {
         })
     })
     const msg = {
-        from: "info@thecarddrop.com",
+        from: {
+            email: "info@thecarddrop.com",
+            name: "CardDrop"
+        },
         template_id: "d-7eed81ee3483482982edeb3bcb698425",
         personalizations:
         persArr

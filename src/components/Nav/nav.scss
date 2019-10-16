@@ -28,7 +28,7 @@ header {
         width: 100vw;
         z-index: 1;
         h2 {
-            position: fixed;
+            position: absolute;
             top: 15px;
             right: 25px;
         }
@@ -48,11 +48,18 @@ header {
         max-width: 850px;
         margin: 0 auto;
         .menu {
-            display: inline-block;
+            display: flex;
             button {
                 font-family: Montserrat, Georgia, 'Times New Roman', Times, serif;
                 text-transform: uppercase;
             }
+        }
+        h4 {
+            margin-right: 20px;
+            cursor: pointer;
+        }
+        h4:hover {
+            color: $primaryRed;
         }
         .fa-bars {
             display: none;

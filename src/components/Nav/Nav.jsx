@@ -28,16 +28,19 @@ class Nav extends Component {
         }
     }
 
-    login = async () => {
-        const {email, password} = this.state
-        let res = await axios.post('/auth/login', {email, password})
-        if (!res.data.cust_id) return alert(res.data.message)
-        await this.props.setUserId(res.data)
-        await this.props.getTree(res.data.cust_id)
-        await this.props.getSelectedCards(res.data.cust_id)
-    }
+    // login = async () => {
+    //     const {email, password} = this.state
+    //     let res = await axios.post('/auth/login', {email, password})
+    //     if (!res.data.cust_id) return alert(res.data.message)
+    //     await this.props.setUserId(res.data)
+    //     await this.props.getTree(res.data.cust_id)
+    //     await this.props.getSelectedCards(res.data.cust_id)
+    // }
 
     logout = async () => {
+        this.setState({
+            dropdownClass: 'dropdown hide'
+        })
         this.props.history.push('/')
         this.setState({
             showLogin: false
@@ -47,6 +50,9 @@ class Nav extends Component {
     }
 
     userProfile = () => {
+        this.setState({
+            dropdownClass: 'dropdown hide'
+        })
         this.props.history.push('/profile')
     }
 
@@ -58,14 +64,23 @@ class Nav extends Component {
     }
 
     getStarted = () => {
+        this.setState({
+            dropdownClass: 'dropdown hide'
+        })
         this.props.history.push('/register')
     }
 
     signup = () => {
+        this.setState({
+            dropdownClass: 'dropdown hide'
+        })
         this.props.history.push('/register')
     }
 
     login = () => {
+        this.setState({
+            dropdownClass: 'dropdown hide'
+        })
         this.props.history.push('/register/login-nav')
     }
 
@@ -126,11 +141,18 @@ class Nav extends Component {
                     <div className="container">
                         <h2 onClick={this.dropDownTrigger}>X</h2>
                         <h1 onClick={() => this.home()}>Home</h1>
-                        <h1 onClick={() => this.mobileLogin()}>Login</h1>
-                        <h1>Profile</h1>
-                        <h1>Tree Builder</h1>
-                        <h1>Card Selector</h1>
-                        <h1>Cart</h1>
+                        <h1 onClick={() => this.getStarted()}>Get Started</h1>
+                        {!this.props.cust_id ? 
+                        <>
+                            <h1 onClick={() => this.getStarted()}>Sign Up</h1>
+                            <h1 onClick={() => this.mobileLogin()}>Login</h1>
+                        </>
+                        :
+                        <>
+                            <h1 onClick={() => this.userProfile()}>Account</h1>
+                            <h1 onClick={() => this.logout()}>Logout</h1>
+                        </>
+                        }
                     </div>
                 </div>
             </header>

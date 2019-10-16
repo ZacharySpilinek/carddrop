@@ -44,7 +44,7 @@
 
 @media (min-width: 1920px) {
     .stamps {
-        width: 80%;
+        width: 50%;
         display: flex;
         align-items: center;
         margin: 0 auto;
@@ -53,7 +53,10 @@
             text-align: center;
         }
         p {
-            margin-top: 20px;
+            margin-top: 10px;
+        }
+        .stamps-buttons {
+            width: 100%;
         }
     }
 }

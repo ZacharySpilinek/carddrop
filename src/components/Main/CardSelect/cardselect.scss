@@ -30,7 +30,7 @@
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-row-gap: 30px;
     justify-items: center;
     margin-bottom: 30px;
@@ -50,12 +50,24 @@
     }
 }
 
+@media (min-width: 675px) {
+    .cardselect-map {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-row-gap: 15px;
+        justify-items: center;
+        margin-bottom: 30px;
+    }
+}
+
 @media (min-width: 769px) {
     .cardselect-map {
         width: 100%;
         height: 100%;
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
         grid-row-gap: 15px;
         justify-items: center;
         margin-bottom: 30px;
@@ -68,7 +80,7 @@
         height: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-row-gap: 0px;
+        grid-row-gap: 20px;
         justify-items: center;
         margin-bottom: 30px;
     }

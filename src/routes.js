@@ -9,6 +9,7 @@ import Checkout from './components/Main/Checkout/Checkout'
 import User from './components/Main/User/User'
 import Stamps from './components/Main/Stamps/Stamps'
 import SnipCartCheckout from './components/Main/Snipcart/SnipcartCheckout'
+import TermsOfService from './components/Main/Policies/TermsOfService'
 
 export default (
     <Switch>
@@ -22,5 +23,6 @@ export default (
         <Route path='/checkout' component={Checkout}/>
         <Route path='/profile' component={User}/>
         <Route path='/stamps' component={Stamps}/>
+        <Route path='/tos' component={TermsOfService}/>
     </Switch> 
 )
