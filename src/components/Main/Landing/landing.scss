@@ -152,7 +152,11 @@
             p {
                 font-size: 1.2rem;
                 margin-bottom: 20px;
-                margin-left: 10px;
+                text-align: center;
+                a {
+                    color: $primaryDarkGrey;
+                    opacity: .8;
+                }
             }
             img {
                 opacity: .5;

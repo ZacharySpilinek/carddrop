@@ -88,8 +88,7 @@ class Landing extends Component {
                     </div>
                     <div className="footer">
                         <img src={FooterLogo} alt="The Card Drop Logo"/>
-                        <p>About Us</p>
-                        <p>Contact</p>
+                        <p>Contact Us: <a href="info@thecarddrop.com">info@thecarddrop.com</a></p>
                     </div>
                 </div>
             </div>

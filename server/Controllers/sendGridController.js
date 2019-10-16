@@ -36,8 +36,8 @@ module.exports = {
         {
             to: [{email: el.email}],
             dynamic_template_data: {
-                customer: el.customer,
-                name: el.name
+                customer: el.customer || "Friend",
+                name: el.name || "Your Connection"
             }
         })
     })
