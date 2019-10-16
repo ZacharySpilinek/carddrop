@@ -77,6 +77,10 @@
             flex-direction: column;
             .left-info-section-left {
                 margin-bottom: 40px;
+                img {
+                    height: 300px;
+                    width: 300px;
+                }
             }
             .left-info-section-right {
                 margin: 0px 30px;
@@ -94,6 +98,10 @@
             flex-direction: column-reverse;
             .right-info-section-left {
                 margin-bottom: 40px;
+                img {
+                    height: 300px;
+                    width: 300px;
+                }
             }
             .right-info-section-right {
                 margin: 0 30px;
@@ -171,6 +179,26 @@
             }
         }
     }
+    @media (min-width: 675px) {
+        .landing-main {
+            .left-info-section {
+                .left-info-section-left {
+                    img {
+                        height: 480px;
+                        width: 480px;
+                    }
+                }
+            }
+            .right-info-section {
+                .right-info-section-left{
+                    img {
+                        height: 480px;
+                        width: 480px;
+                    }
+                }
+            }
+        }
+    }
     @media (min-width: 1280px) {
         .landing-main {
             .what-is-carddrop {
@@ -210,6 +238,10 @@
                 .left-info-section-left {
                     display: flex;
                     justify-content: center;
+                    img {
+                        height: auto;
+                        width: auto;
+                    }
                 }
             }
             .right-info-section {
@@ -219,6 +251,9 @@
                 text-align: right;
                 > div {
                     width: 50%;
+                }
+                img {
+                    margin-left: 50px;
                 }
                 .right-info-section-left {
                     display: flex;
