@@ -28,7 +28,7 @@ app.use(session({
 
 app.post('/auth/login', authCtrl.login)
 app.post('/auth/register', authCtrl.register)
-app.post('/auth/logout', authCtrl.logout)
+app.delete('/auth/logout', authCtrl.logout)
 
 app.get('/user', userCtrl.getUser)
 app.put('/user/save', userCtrl.saveUser)
