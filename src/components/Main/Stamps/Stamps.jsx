@@ -57,7 +57,8 @@ class Stamps extends React.Component{
     }
 
     noStamps = () => {
-        this.props.deleteAllStamps()
+        // this.props.deleteAllStamps()
+        this.props.addStamps(0)
         this.props.history.push('/cart')
     }
 

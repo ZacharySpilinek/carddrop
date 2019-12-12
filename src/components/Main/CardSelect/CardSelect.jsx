@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import axios from 'axios'
 import Card from './Card/Card'
-import {cardSelected, saveSelectedCard, getSelectedCards} from '../../../ducks/reducer'
+import {cardSelected, saveSelectedCard, getSelectedCards, addStamps} from '../../../ducks/reducer'
 import {withRouter} from 'react-router-dom'
 
 class CardSelect extends Component {
@@ -96,7 +96,14 @@ class CardSelect extends Component {
 
     finish = () => {
         this.props.saveSelectedCard(this.props.cust_id, this.props.selected_cards[+this.props.match.params.tree_rel_id], +this.props.match.params.tree_rel_id)
-        this.props.history.push(`/stamps`)
+        let anyMail = this.props.tree.findIndex(el => el.rel_delivery === "mail")
+        console.log(anyMail)
+        if (anyMail === -1) {
+            this.props.addStamps(0)
+            this.props.history.push('/cart')
+        } else {
+            this.props.history.push(`/stamps`)
+        }
     }
 
     render(){
@@ -132,4 +139,4 @@ const mapStateToProps = reduxState => {
     return {cust_id, tree, selected_cards, selectedCardLoading, treeLoading}
 }
 
-export default connect(mapStateToProps, {cardSelected, saveSelectedCard, getSelectedCards})(withRouter(CardSelect))
+export default connect(mapStateToProps, {cardSelected, saveSelectedCard, getSelectedCards, addStamps})(withRouter(CardSelect))

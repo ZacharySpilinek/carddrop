@@ -111,6 +111,7 @@ class Cart extends Component {
     }
 
     render(){
+        console.log(this.props.stamps)
         return(
             <div className="cart">
                 {this.props.selectedCardLoading === true ?
