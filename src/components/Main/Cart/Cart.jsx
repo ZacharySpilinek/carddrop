@@ -18,7 +18,9 @@ class Cart extends Component {
     componentDidMount = () => {
         let total = 0
         this.props.selected_cards.forEach(el => {
-            total = el.price + total
+            if (el.bought !== true) {
+                total = el.price + total
+            }
         })
         total = total / 100
         this.setState({
@@ -35,13 +37,16 @@ class Cart extends Component {
     }
 
     componentDidUpdate = (prevProps) => {
+        // console.log(this.props.selected_cards)
         if (prevProps.selected_cards !== this.props.selected_cards) {
             this.mappedCart()
         }
         if (this.props.selected_cards.length !== 0 && this.props.selected_cards.length !== prevProps.selected_cards.length){
             let total = 0
             this.props.selected_cards.forEach(el => {
-                total = el.price + total
+                if (el.bought !== true) {
+                    total = el.price + total
+                }
             })
             total = total / 100
             this.setState({
@@ -61,28 +66,34 @@ class Cart extends Component {
         if (this.props.selected_cards.length >= 1 && this.props.tree.length >= 1){
             let mapArr = []
             this.props.selected_cards.forEach((el, i) => {
-                mapArr.push({
-                    ...el,
-                    rel_name: this.props.tree[i].rel_name,
-                    rel_relationship: this.props.tree[i].rel_relationship,
-                    rel_delivery: this.props.tree[i].rel_delivery
-                })
+                if (el.bought !== true) {
+                    mapArr.push({
+                        ...el,
+                        rel_name: this.props.tree[i].rel_name,
+                        rel_relationship: this.props.tree[i].rel_relationship,
+                        rel_delivery: this.props.tree[i].rel_delivery
+                    })
+                }
             })
 
-            return mapArr.map(el => {
-                return (
-                    <CartItem
-                        key={el.tree_rel_id}
-                        rel_name={el.rel_name}
-                        rel_delivery={el.rel_delivery}
-                        img_out={el.img_out}
-                        price={el.price}
-                        card_id={el.card_id}
-                        relationship={el.rel_relationship}
-                        tree_rel_id={el.tree_rel_id}
-                    />
-                )
-            })
+            if (mapArr.length !== 0) {
+                return mapArr.map(el => {
+                    return (
+                        <CartItem
+                            key={el.tree_rel_id}
+                            rel_name={el.rel_name}
+                            rel_delivery={el.rel_delivery}
+                            img_out={el.img_out}
+                            price={el.price}
+                            card_id={el.card_id}
+                            relationship={el.rel_relationship}
+                            tree_rel_id={el.tree_rel_id}
+                        />
+                    )
+                })
+            } else {
+                return "No Cards Selected!"
+            }
         }
     }
 
@@ -151,9 +162,9 @@ class Cart extends Component {
                 <div className="checkout-buttons">
                     <button 
                         className="snipcart-add-item checkout-yearly-subscription"
-                        data-item-name={`CardDrop Yearly Drop (${this.props.selected_cards.length} Cards + ${this.props.stamps} Stamps)`}
-                        data-item-id={`carddrop-yearly-drop-${this.props.selected_cards.length}c-${this.props.stamps}s-${this.props.cust_id}`}
-                        data-item-url={`https://thecarddrop.com/api/checkout/yearly-drop/${this.state.totalPriceBox}/${this.props.selected_cards.length}/${this.props.stamps}/${this.props.cust_id}`}
+                        data-item-name={`CardDrop Yearly Drop (${this.props.selected_cards.filter(el => el.bought !== true).length} Cards + ${this.props.stamps} Stamps)`}
+                        data-item-id={`carddrop-yearly-drop-${this.props.selected_cards.filter(el => el.bought !== true).length}c-${this.props.stamps}s-${this.props.cust_id}`}
+                        data-item-url={`https://thecarddrop.com/api/checkout/yearly-drop/${this.state.totalPriceBox}/${this.props.selected_cards.filter(el => el.bought !== true).length}/${this.props.stamps}/${this.props.cust_id}`}
                         data-item-price={`${this.state.totalPriceBox + ((this.props.stamps * 55) / 100)}`}
                         data-item-payment-interval="Year"
                         >
