@@ -31,12 +31,12 @@ class Checkout extends Component {
             confetti: false
         })
     }
-    // componentDidUpdate = (prevProps) => {
-    //     if (!prevProps.location.pathname.includes('/cart!/orders')){
-    //         this.props.history.push('/cart')
-    //     }
-    //     console.log(this.props.location.pathname)
-    // }
+    componentDidUpdate = (prevProps) => {
+        if (prevProps.location.pathname.includes('/cart!/orders')){
+            console.log('you bought the cards!')
+        }
+        // console.log(this.props.location.pathname)
+    }
     render(){
         return(
             <div className="checkout">
