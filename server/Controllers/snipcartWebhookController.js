@@ -1,6 +1,8 @@
 module.exports = {
     updateSubId: async (db, webhook) => {
         let {email} = webhook.content.user
+        // if the webhook isn't related to a subscription being created, then stop
+        if (webhook.eventName !== "subscription.created") return res.sendStatus(200)
         const result = await db.find_user_by_email(email)
         
         if (result[0]) {
@@ -13,32 +15,16 @@ module.exports = {
             // splitUserDefinedId[splitUserDefinedId.length - 1] = cust_id
             // interval = "yearly"
             // webhook.content.id = subscription id
-
-            const currentSubscriptions = await db.get_current_subscriptions(splitUserDefinedId[splitUserDefinedId.length - 1])
-            if (currentSubscriptions === 'null') {
-                currentSubscriptions = []
-            } else {
-                currentSubscriptions = JSON.parse(currentSubscriptions)
-            }
-            const userCards = await db.get_selected_cards(splitUserDefinedId[splitUserDefinedId.length - 1])
-            const unboughtCards = userCards.filter(el => el.bought !== true)
-            let cardsBought = []
-            unboughtCards.forEach(el => {
-                cardsBought.push({tree_rel_id: el.tree_rel_id, card_id: el.card_id})
-            })
-            let newSub = {
-                cust_id: splitUserDefinedId[splitUserDefinedId.length - 1],
-                sub_id: webhook.content.id,
-                interval: interval,
-                cards_bought: cardsBought
-            }
-            currentSubscriptions.push(newSub)
-            let stringAllSubscriptions = JSON.stringify(currentSubscriptions)
-            await db.add_alter_subscriptions([splitUserDefinedId[splitUserDefinedId.length - 1], stringAllSubscriptions])
-
-            // mark cards as bought
-            await db.set_cards_as_bought(splitUserDefinedId[splitUserDefinedId.length - 1])
-
+            // ex startDate = "2019-12-05"
+            let startDate = webhook.content.schedule.startsOn.slice(0, 10);
+            // converts startDate to an actual javascript recognized date
+            var parsedStartDate = new Date(startDate)
+            // adds one year to that date
+            parsedStartDate.setFullYear(parsedStartDate.getFullYear() + 1)
+            // converts back to ISO string and cuts off time, keeping year, month, and day
+            // ex renewDate = "2020-12-05"
+            let renewDate = parsedStartDate.toISOString().slice(0, 10)
+            await db.set_subscription_id([splitUserDefinedId[splitUserDefinedId.length - 1], webhook.content.id, interval, startDate, renewDate])
             console.log(`Subscription for ${email} updated!`)
 
         } else {

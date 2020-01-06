@@ -35,6 +35,15 @@ CREATE TABLE cards(
  weight_oz INT
 );
 
+create table subscription(
+    id SERIAL PRIMARY KEY,
+    cust_id INT references customer (cust_id),
+    sub_id varchar(60),
+    interval varchar(30),
+    start_date varchar(12),
+    renew_date varchar(12)
+)
+
 INSERT INTO customer(first_name, last_name, email, sub_interval)
 VALUES('Zachary', 'Spilinek', 'zach@thecarddrop.com', null);
 
