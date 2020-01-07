@@ -3,6 +3,10 @@ const axios = require('axios')
 
 module.exports = {
     snipcartWebhook: (req, res, next) => {
+        // url: https://thecarddrop.com/api/snipcart
+        // ngrok url: https://320dcd94.ngrok.io/api/snipcart
+        axios.post('https://320dcd94.ngrok.io/api/snipcart', req.body)
+        console.log('this was hit')
         const db = req.app.get('db')
         if (req.body.eventName === "subscription.created" || req.body.eventName === "order.completed"){
             snipcartWebhookCtrl.updateSubId(db, req.body)
