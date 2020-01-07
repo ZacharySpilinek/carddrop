@@ -5,9 +5,11 @@ module.exports = {
         // if the webhook isn't related to a subscription being created, then stop
         if (eventName !== "subscription.created" && eventName !== "order.completed") return
         const result = await db.find_user_by_email(email)
-        
+
         if (result[0]) {
             if (eventName === "subscription.created"){
+                const checkSubId = await db.check_sub_id(webhook.content.id)
+                if (checkSubId[0]) return
                 let interval = ''
                 if (webhook.content.schedule.interval === "Year"){
                     interval = 'yearly'
@@ -29,6 +31,8 @@ module.exports = {
                 await db.set_subscription_id([splitUserDefinedId[splitUserDefinedId.length - 1], webhook.content.id, interval, startDate, renewDate])
                 console.log(`Subscription for ${email} updated!`)
             } else if (eventName === "order.completed"){
+                const checkSubId = await db.check_sub_id(webhook.content.items[0].uniqueId)
+                if (checkSubId[0]) return
                 let interval = ''
                 if (webhook.content.items[0].paymentSchedule.interval === "Year"){
                     interval = 'yearly'
@@ -37,7 +41,7 @@ module.exports = {
                 // await db.set_subscription_id([webhook.content.id, splitUserDefinedId[splitUserDefinedId.length - 1], interval])
                 // splitUserDefinedId[splitUserDefinedId.length - 1] = cust_id
                 // interval = "yearly"
-                // webhook.content.id = subscription id
+                // webhook.content.items[0].uniqueId = subscription id
                 // ex startDate = "2019-12-05"
                 let startDate = webhook.content.items[0].paymentSchedule.startsOn.slice(0, 10);
                 // converts startDate to an actual javascript recognized date
