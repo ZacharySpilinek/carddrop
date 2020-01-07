@@ -4,7 +4,7 @@ const axios = require('axios')
 module.exports = {
     snipcartWebhook: (req, res, next) => {
         const db = req.app.get('db')
-        if (req.body.eventName === "subscription.created"){
+        if (req.body.eventName === "subscription.created" || req.body.eventName === "order.completed"){
             snipcartWebhookCtrl.updateSubId(db, req.body)
         }
         res.sendStatus(200)
