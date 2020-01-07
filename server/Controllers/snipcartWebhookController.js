@@ -3,7 +3,7 @@ module.exports = {
         let {email} = webhook.content.user
         let {eventName} = webhook
         // if the webhook isn't related to a subscription being created, then stop
-        if (eventName !== "subscription.created" || eventName !== "order.completed") return res.sendStatus(200)
+        if (eventName !== "subscription.created" || eventName !== "order.completed") return
         const result = await db.find_user_by_email(email)
         
         if (result[0]) {
