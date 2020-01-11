@@ -154,10 +154,25 @@ class TreeItem extends Component {
                         <div className="tree-item-middle2">
                             <p>They are my:</p>
                             <select onChange={(e) => this.props.handleTreeChange(e.target.value, 'rel_relationship', this.props.tree_rel_id)} value={this.props.tree[this.props.tree_rel_id_index].rel_relationship}>
-                                    <option key={0} value="neutral">No Selection</option>
+                                    <option key={0} value="neutral">No Selection/Neutral</option>
                                     <option key={1} value="friend">Friend</option>
+                                    {/* Delete the below options when the cards are made in the DB  */}
+                                    <option key={2} value="uncle">Uncle</option>
+                                    <option key={3} value="aunt">Aunt</option>
+                                    <option key={4} value="grandma">Grandma</option>
+                                    <option key={5} value="grandpa">Grandpa</option>
+                                    <option key={6} value="husband">Husband</option>
+                                    <option key={7} value="wife">Wife</option>
+                                    <option key={8} value="partner">Partner</option>
+                                    <option key={9} value="romantic-interest">Romantic Interest</option>
+                                    <option key={10} value="cousin">Cousin</option>
+                                    <option key={11} value="niece">Niece</option>
+                                    <option key={12} value="nephew">Nephew</option>
+                                    <option key={13} value="male-friend-family">Male Friend/Family</option>
+                                    <option key={14} value="female-friend-family">Female Friend/Family</option>
+                                    {/* Delete the above options when the cards are made in the DB */}
                                 {this.props.categories.filter((el) => el !== 'neutral').map((el, i) => (
-                                    <option key={i + 2} value={el}>{el}</option>
+                                    <option key={i + 15} value={el}>{el}</option>
                                     ))}
                             </select> 
                             {/* <Select 
