@@ -77,6 +77,13 @@ class Nav extends Component {
         this.props.history.push('/register')
     }
 
+    cart = () => {
+        this.setState({
+            dropdownClass: 'dropdown hide'
+        })
+        this.props.history.push('/cart')
+    }
+
     login = () => {
         this.setState({
             dropdownClass: 'dropdown hide'
@@ -128,6 +135,7 @@ class Nav extends Component {
                             <>
                             <h4 onClick={this.userProfile}>Account</h4>
                             <h4 onClick={this.logout}>Logout</h4>
+                            <h4 onClick={this.cart}>Cart</h4>
                             </>
                             :
                             <>
@@ -151,6 +159,7 @@ class Nav extends Component {
                         <>
                             <h1 onClick={() => this.userProfile()}>Account</h1>
                             <h1 onClick={() => this.logout()}>Logout</h1>
+                            <h1 onClick={() => this.logout()}>Cart</h1>
                         </>
                         }
                     </div>

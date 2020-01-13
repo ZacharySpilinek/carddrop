@@ -318,7 +318,6 @@ const reducer = (state = initialState, action) => {
         case ADD_STAMP:
             return {...state, stamps: 1 + state.stamps}
         case GET_STAMPS + '_FULFILLED':
-            console.log(action.payload.stamps)
             return {...state, stamps: action.payload.stamps}
         default:
             return state
