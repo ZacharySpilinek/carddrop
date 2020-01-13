@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import CartItem from './CartItem/CartItem'
-import {deleteAllStamps, getStamps, deleteStamp, addStamps, addStamp} from '../../../ducks/reducer'
+import {deleteAllStamps, getStamps, deleteStamp, addStamps, addStamp, getSelectedCards} from '../../../ducks/reducer'
 import axios from 'axios'
 // /* global Snipcart:false */
 
@@ -29,6 +29,9 @@ class Cart extends Component {
         // if (this.props.stamps === 0 && prevProps.location.pathname !== '/stamps') {
         //     this.props.getStamps()
         // }
+        if (this.props.selected_cards.length === 0 && this.props.tree.length > 0) {
+            this.props.getSelectedCards(this.props.cust_id)
+        }
         this.props.getStamps()
         // Snipcart.subscribe('order.completed', function(){
         //     console.log('it did the thing')
@@ -37,7 +40,6 @@ class Cart extends Component {
     }
 
     componentDidUpdate = (prevProps) => {
-        // console.log(this.props.selected_cards)
         if (prevProps.selected_cards !== this.props.selected_cards) {
             this.mappedCart()
         }
@@ -193,4 +195,4 @@ const mapStateToProps = reduxState => {
     return {tree, selected_cards, cust_id, stamps, selectedCardLoading}
 }
 
-export default connect(mapStateToProps, {deleteAllStamps, getStamps, deleteStamp, addStamps, addStamp})(Cart)
+export default connect(mapStateToProps, {deleteAllStamps, getStamps, deleteStamp, addStamps, addStamp, getSelectedCards})(Cart)

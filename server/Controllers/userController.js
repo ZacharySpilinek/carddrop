@@ -25,10 +25,8 @@ module.exports = {
         res.sendStatus(200)
     },
     getStamps: (req, res, next) => {
-        // if (req.session.user)
-        // console.log(req.session.user.stamps)
-        // res.sendStatus(200)
-
-        res.status(200).send(req.session.user)
+        if (req.session.user.stamps !== undefined) return res.status(200).send(req.session.user.stamps)
+        let stamps = {stamps: 0}
+        res.status(200).send(stamps)
     }
 }
